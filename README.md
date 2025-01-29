@@ -5,6 +5,9 @@
 - ¿Dónde se pueden obtener?
 - ¿Con qué frecuencia se actualizan?
 - ¿Cuántas tuplas y cuántos atributos tiene el set de datos?
+Crashes: 2.01 millones
+Vehicles: 1.86 millones
+Persons: 914 mil
 - ¿Qué significa cada atributo del set?
 - ¿Qué atributos son numéricos?
 - ¿Qué atributos son categóricos?
