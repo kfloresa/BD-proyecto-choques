@@ -7,7 +7,7 @@ CREATE SCHEMA raw;
 CREATE TABLE raw.vehicles (
 	crash_unit_id BIGINT,
 	crash_record_id TEXT,
-	crash_date TIME,
+	crash_date TIMESTAMP,
 	unit_no BIGINT,
 	unit_type TEXT,
 	num_passengers BIGINT,
@@ -79,3 +79,92 @@ CREATE TABLE raw.vehicles (
 );
 
 \copy raw.vehicles (crash_unit_id,crash_record_id,crash_date,unit_no,unit_type,num_passengers,vehicle_id,cmrc_veh_i,make,model,lic_plate_state,vehicle_year,vehicle_defect,vehicle_type,vehicle_use,travel_direction,maneuver,towed_i,fire_i,occupant_cnt,exceed_speed_limit_i,towed_by,towed_to,area_00_i,area_01_i,area_02_i,area_03_i,area_04_i,area_05_i,area_06_i,area_07_i,area_08_i,area_09_i,area_10_i,area_11_i,area_12_i,area_99_i,first_contact_point,cmv_id,usdot_no,ccmc_no,ilcc_no,commercial_src,gvwr,carrier_name,carrier_state,carrier_city,hazmat_placards_i,hazmat_name,un_no,hazmat_present_i,hazmat_report_i,hazmat_report_no,mcs_report_i,mcs_report_no,hazmat_vio_cause_crash_i,mcs_vio_cause_crash_i,idot_permit_no,wide_load_i,trailer1_width,trailer2_width,trailer1_length,trailer2_length,total_vehicle_length,axle_cnt,vehicle_config,cargo_body_type,load_type,hazmat_out_of_service_i,mcs_out_of_service_i,hazmat_class) FROM 'D:\Traffic_Crashes_-_Vehicles_20250129.csv'  WITH (FORMAT CSV, HEADER true, DELIMITER ',');
+
+--DROP TABLE IF EXISTS raw.people;
+CREATE TABLE raw.people (
+	person_id TEXT,
+	person_type TEXT,
+	crash_record_id TEXT,
+	vehicle_id BIGINT,
+	crash_date TIMESTAMP,
+	seat_no BIGINT,
+	city TEXT,
+	"state" TEXT,
+	zipcode TEXT, --Hay unos con guion
+	sex TEXT,
+	age BIGINT,
+	drivers_license_state TEXT,
+	drivers_license_class TEXT,
+	safety_equipment TEXT,
+	airbag_deployed TEXT,
+	ejection TEXT,
+	injury_classification TEXT,
+	hospital TEXT,
+	ems_agency TEXT,
+	ems_run_no TEXT,
+	driver_action TEXT,
+	driver_vision TEXT,
+	physical_condition TEXT,
+	pedpedal_action TEXT,
+	pedpedal_visibility TEXT,
+	pedpedal_location TEXT,
+	bac_result TEXT,
+	bac_result_value TEXT,
+	cell_phone_use TEXT
+);
+
+\copy raw.people(person_id,person_type,crash_record_id,vehicle_id,crash_date,seat_no,city,"state",zipcode,sex,age,drivers_license_state,drivers_license_class,safety_equipment,airbag_deployed,ejection,injury_classification,hospital,ems_agency,ems_run_no,driver_action,driver_vision,physical_condition,pedpedal_action,pedpedal_visibility,pedpedal_location,bac_result,bac_result_value,cell_phone_use) FROM 'D:\Traffic_Crashes_-_People_20250129.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');
+
+--DROP TABLE IF EXISTS raw.crashes;
+CREATE TABLE raw.crashes(
+	crash_record_id TEXT,
+	crash_date_est_i TEXT, --No encontré datos en búsqueda preliminar del archivo
+	crash_date TIMESTAMP,
+	posted_speed_limit BIGINT,
+	traffic_control_device TEXT,
+	device_condition TEXT,
+	weather_condition TEXT,
+	lighting_condition TEXT,
+	first_crash_type TEXT,
+	trafficway_type TEXT,
+	lane_cnt TEXT,
+	alignment TEXT,
+	roadway_surface_cond TEXT,
+	road_defect TEXT,
+	report_type TEXT,
+	crash_type TEXT,
+	intersection_related_i TEXT,
+	not_right_of_way_i TEXT,
+	hit_and_run_i TEXT,
+	damage TEXT,
+	date_police_notified TIMESTAMP,
+	prim_contributory_cause TEXT,
+	sec_contributory_cause TEXT,
+	street_no BIGINT,
+	street_direction TEXT,
+	street_name TEXT,
+	beat_of_occurrence BIGINT,
+	photos_taken_i TEXT,
+	statements_taken_i TEXT,
+	dooring_i TEXT,
+	work_zone_i TEXT,
+	work_zone_type TEXT,
+	workers_present_i TEXT,
+	num_units BIGINT,
+	most_severe_injury TEXT,
+	injuries_total BIGINT,
+	injuries_fatal BIGINT,
+	injuries_incapacitating BIGINT,
+	injuries_non_incapacitating BIGINT,
+	injuries_reported_not_evident BIGINT,
+	injuries_no_indication BIGINT,
+	injuries_unknown BIGINT,
+	crash_hour BIGINT,
+	crash_day_of_week BIGINT,
+	crash_month BIGINT,
+	latitude DOUBLE PRECISION,
+	longitude DOUBLE PRECISION,
+	location TEXT --latitude y longitude determinan location
+);
+
+\copy raw.crashes(crash_record_id,crash_date_est_i,crash_date,posted_speed_limit,traffic_control_device,device_condition,weather_condition,lighting_condition,first_crash_type,trafficway_type,lane_cnt,alignment,roadway_surface_cond,road_defect,report_type,crash_type,intersection_related_i,not_right_of_way_i,hit_and_run_i,damage,date_police_notified,prim_contributory_cause,sec_contributory_cause,street_no,street_direction,street_name,beat_of_occurrence,photos_taken_i,statements_taken_i,dooring_i,work_zone_i,work_zone_type,workers_present_i,num_units,most_severe_injury,injuries_total,injuries_fatal,injuries_incapacitating,injuries_non_incapacitating,injuries_reported_not_evident,injuries_no_indication,injuries_unknown,crash_hour,crash_day_of_week,crash_month,latitude,longitude,location) FROM 'D:\Traffic_Crashes_-_Crashes_20250129.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');
