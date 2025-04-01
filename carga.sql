@@ -1,6 +1,8 @@
 --DROP DATABASE choques;
 CREATE DATABASE choques;
 
+\c choques
+
 CREATE SCHEMA raw;
 
 --DROP TABLE IF EXISTS raw.vehicles;
