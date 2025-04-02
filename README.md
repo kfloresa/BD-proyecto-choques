@@ -52,9 +52,9 @@ Choque: descripción de las circunstancias del choque, las características de l
 |              | Tipo_calle                | Direccion       | Alcohol       |
 |              | Condicion_carretera       | Modelo          | Ciudad        |
 |              | Danhos                    | Marca           | Sexo          |
-|              | Causa                     |                 | Tipo_herida   |
+|              | Causa                     | Placas_estado   | Tipo_herida   |
 |--------------|---------------------------|-----------------|---------------|
-| Texto        | Choque_id                 | Placas          | Accion        |
+| Texto        | Choque_id                 |                 | Accion        |
 |              | Calle                     |                 | Persona_id    |
 |--------------|---------------------------|-----------------|---------------|
 | Fecha        | Fecha_choque              |                 |               |
