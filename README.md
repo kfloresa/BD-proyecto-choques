@@ -17,6 +17,7 @@ D). Analizar el impacto de diferentes factores como clima, velocidad, iluminaci�
 E). Facilitar estudios académicos y gubernamentales sobre seguridad vial. 
 
 Los datos están disponibles públicamente en el Chicago Data Portal, bajo estas direcciones oficiales: 
+
 •	Crashes (Accidentes): https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if/about_data
 •	Vehicles (Vehículos): https://data.cityofchicago.org/Transportation/Traffic-Crashes-Vehicles/68nd-jvt3/about_data
 •	Persons (Personas): https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d/about_data
