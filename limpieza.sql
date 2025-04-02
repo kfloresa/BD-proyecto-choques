@@ -1,120 +1,58 @@
-CREATE SCHEMA cleaning;
+CREATE SCHEMA limpieza;
+
+CREATE TABLE limpieza.vehicles AS
+SELECT 
+    crash_unit_id,
+    crash_record_id,
+    unit_type,
+    num_passengers,
+    vehicle_id,
+    make,
+    model,
+    lic_plate_state,
+    vehicle_year,
+    travel_direction,
+    towed_i,
+    fire_i,
+    exceed_speed_limit_i
+FROM raw.vehicles;
 
 
+CREATE TABLE limpieza.people AS
+SELECT 
+    person_id,
+    person_type,
+    crash_record_id,
+    vehicle_id,
+    seat_no,
+    city,
+    sex,
+    age,
+    airbag_deployed,
+    injury_classification
+FROM raw.people;
 
-
-
-
-
-
-
---Eliminar columnas innecesarias
- 
- ALTER TABLE raw.people 
- DROP COLUMN zipcode,
- DROP COLUMN "state",
- DROP COLUMN drivers_license_state,
- DROP COLUMN drivers_license_class,
- DROP COLUMN safety_equipment,
- DROP COLUMN ejection,
- DROP COLUMN hospital,
- DROP COLUMN ems_run_no,
- DROP COLUMN ems_agency,
- DROP COLUMN driver_vision,
- DROP COLUMN physical_condition,
- DROP COLUMN pedpedal_action,
- DROP COLUMN pedpedal_location,
- DROP COLUMN pedpedal_visibility,
- DROP COLUMN bac_result,
- DROP COLUMN bac_result_value,
- DROP COLUMN cell_phone_use,
- DROP COLUMN driver_action,
- DROP COLUMN crash_date; 
-
-ALTER TABLE raw.vehicles 
-DROP COLUMN crash_date,
-DROP COLUMN unit_no,
-DROP COLUMN cmrc_veh_i,
-DROP COLUMN vehicle_defect,
-DROP COLUMN vehicle_use,
-DROP COLUMN maneuver,
-DROP COLUMN occupant_cnt,
-DROP COLUMN towed_by,
-DROP COLUMN towed_to,
-DROP COLUMN area_00_i,
-DROP COLUMN area_01_i,
-DROP COLUMN area_02_i,
-DROP COLUMN area_03_i,
-DROP COLUMN area_04_i,
-DROP COLUMN area_05_i,
-DROP COLUMN area_06_i,
-DROP COLUMN area_07_i,
-DROP COLUMN area_08_i,
-DROP COLUMN area_09_i,
-DROP COLUMN area_10_i,
-DROP COLUMN area_11_i,
-DROP COLUMN area_12_i,
-DROP COLUMN area_99_i,
-DROP COLUMN first_contact_point,
-DROP COLUMN cmv_id,
-DROP COLUMN usdot_no,
-DROP COLUMN ccmc_no,
-DROP COLUMN ilcc_no,
-DROP COLUMN commercial_src,
-DROP COLUMN gvwr,
-DROP COLUMN carrier_name,
-DROP COLUMN carrier_state,
-DROP COLUMN carrier_city,
-DROP COLUMN hazmat_placards_i,
-DROP COLUMN hazmat_name,
-DROP COLUMN un_no,
-DROP COLUMN hazmat_present_i,
-DROP COLUMN hazmat_report_i,
-DROP COLUMN hazmat_report_no,
-DROP COLUMN mcs_report_i,
-DROP COLUMN mcs_report_no,
-DROP COLUMN hazmat_vio_cause_crash_i,
-DROP COLUMN mcs_vio_cause_crash_i,
-DROP COLUMN idot_permit_no,
-DROP COLUMN wide_load_i,
-DROP COLUMN trailer1_width,
-DROP COLUMN trailer2_width,
-DROP COLUMN trailer1_length,
-DROP COLUMN trailer2_length,
-DROP COLUMN total_vehicle_length,
-DROP COLUMN axle_cnt,
-DROP COLUMN vehicle_config,
-DROP COLUMN cargo_body_type,
-DROP COLUMN load_type,
-DROP COLUMN hazmat_out_of_service_i,
-DROP COLUMN mcs_out_of_service_i,
-DROP COLUMN hazmat_class;
-
-ALTER TABLE raw.crashes
-DROP COLUMN crash_date_est_i,
-DROP COLUMN traffic_control_device,
-DROP COLUMN device_condition,
-DROP COLUMN lane_cnt,
-DROP COLUMN alignment,
-DROP COLUMN report_type,
-DROP COLUMN intersection_related_i,
-DROP COLUMN not_right_of_way_i,
-DROP COLUMN hit_and_run_i,
-DROP COLUMN beat_of_occurrence,
-DROP COLUMN photos_taken_i,
-DROP COLUMN statements_taken_i,
-DROP COLUMN dooring_i,
-DROP COLUMN work_zone_i,
-DROP COLUMN work_zone_type,
-DROP COLUMN workers_present_i,
-DROP COLUMN most_severe_injury,
-DROP COLUMN injuries_incapacitating,
-DROP COLUMN injuries_non_incapacitating,
-DROP COLUMN injuries_reported_not_evident,
-DROP COLUMN injuries_no_indication,
-DROP COLUMN injuries_unknown,
-DROP COLUMN crash_hour,
-DROP COLUMN crash_month,
-DROP COLUMN latitude,
-DROP COLUMN longitude,
-DROP COLUMN "location";
+CREATE TABLE limpieza.crashes AS
+SELECT 
+    crash_record_id,
+    crash_date,
+    posted_speed_limit,
+    weather_condition,
+    lighting_condition,
+    first_crash_type,
+    trafficway_type,
+    roadway_surface_cond,
+    road_defect,
+    crash_type,
+    damage,
+    date_police_notified,
+    prim_contributory_cause,
+    sec_contributory_cause,
+    street_no,
+    street_direction,
+    street_name,
+    num_units,
+    injuries_total,
+    injuries_fatal,
+    crash_day_of_week
+FROM raw.crashes;
