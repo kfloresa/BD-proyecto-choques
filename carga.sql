@@ -170,3 +170,27 @@ CREATE TABLE raw.crashes(
 );
 
 \copy raw.crashes(crash_record_id,crash_date_est_i,crash_date,posted_speed_limit,traffic_control_device,device_condition,weather_condition,lighting_condition,first_crash_type,trafficway_type,lane_cnt,alignment,roadway_surface_cond,road_defect,report_type,crash_type,intersection_related_i,not_right_of_way_i,hit_and_run_i,damage,date_police_notified,prim_contributory_cause,sec_contributory_cause,street_no,street_direction,street_name,beat_of_occurrence,photos_taken_i,statements_taken_i,dooring_i,work_zone_i,work_zone_type,workers_present_i,num_units,most_severe_injury,injuries_total,injuries_fatal,injuries_incapacitating,injuries_non_incapacitating,injuries_reported_not_evident,injuries_no_indication,injuries_unknown,crash_hour,crash_day_of_week,crash_month,latitude,longitude,location) FROM 'D:\Traffic_Crashes_-_Crashes_20250129.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');
+
+--Eliminar columnas innecesarias
+ 
+ ALTER TABLE raw.people 
+ DROP COLUMN zipcode,
+ DROP COLUMN "state",
+ DROP COLUMN drivers_license_state,
+ DROP COLUMN drivers_license_class,
+ DROP COLUMN safety_equipment,
+ DROP COLUMN ejection,
+ DROP COLUMN hospital,
+ DROP COLUMN ems_run_no,
+ DROP COLUMN ems_agency,
+ DROP COLUMN driver_vision,
+ DROP COLUMN physical_condition,
+ DROP COLUMN pedpedal_action,
+ DROP COLUMN pedpedal_location,
+ DROP COLUMN pedpedal_visibility,
+ DROP COLUMN bac_result,
+ DROP COLUMN bac_result_value,
+ DROP COLUMN cell_phone_use,
+ DROP COLUMN driver_action,
+ DROP COLUMN crash_date; 
+
