@@ -133,5 +133,92 @@ FROM limpieza.people
 GROUP BY person_id
 HAVING COUNT(*) > 1;
 
+--Analisis vehicles
+-- Contar valores únicos por columna
+SELECT 'crash_unit_id' AS atributos, COUNT(DISTINCT crash_unit_id) AS unique_values FROM limpieza.vehicles
+UNION ALL
+SELECT 'crash_record_id', COUNT(DISTINCT crash_record_id) FROM limpieza.vehicles
+UNION ALL
+SELECT 'unit_type', COUNT(DISTINCT unit_type) FROM limpieza.vehicles
+UNION ALL
+SELECT 'num_passengers', COUNT(DISTINCT num_passengers) FROM limpieza.vehicles
+UNION ALL
+SELECT 'vehicle_id', COUNT(DISTINCT vehicle_id) FROM limpieza.vehicles
+UNION ALL
+SELECT 'make', COUNT(DISTINCT make) FROM limpieza.vehicles
+UNION ALL
+SELECT 'model', COUNT(DISTINCT model) FROM limpieza.vehicles
+UNION ALL
+SELECT 'lic_plate_state', COUNT(DISTINCT lic_plate_state) FROM limpieza.vehicles
+UNION ALL
+SELECT 'vehicle_year', COUNT(DISTINCT vehicle_year) FROM limpieza.vehicles
+UNION ALL
+SELECT 'travel_direction', COUNT(DISTINCT travel_direction) FROM limpieza.vehicles
+UNION ALL
+SELECT 'towed_i', COUNT(DISTINCT towed_i) FROM limpieza.vehicles
+UNION ALL
+SELECT 'fire_i', COUNT(DISTINCT fire_i) FROM limpieza.vehicles
+UNION ALL
+SELECT 'exceed_speed_limit_i', COUNT(DISTINCT exceed_speed_limit_i) FROM limpieza.vehicles;
 
+
+-- Mínimos, máximos y promedios de valores numéricos
+SELECT 
+    MIN(vehicle_year) AS min_vehicle_year, 
+    MAX(vehicle_year) AS max_vehicle_year, 
+    AVG(vehicle_year) AS avg_vehicle_year,
+    MIN(num_passengers) AS min_passengers, 
+    MAX(num_passengers) AS max_passengers, 
+    AVG(num_passengers) AS avg_passengers
+FROM limpieza.vehicles;
+
+-- Conteo de tuplas por cada categoría
+SELECT make, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY make;
+
+SELECT model, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY model;
+
+SELECT lic_plate_state, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY lic_plate_state;
+
+SELECT travel_direction, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY travel_direction;
+
+-- Conteo de valores nulos
+SELECT 'crash_unit_id' AS atributo, COUNT(*) - COUNT(crash_unit_id) AS null_values FROM limpieza.vehicles
+UNION ALL
+SELECT 'crash_record_id', COUNT(*) - COUNT(crash_record_id) FROM limpieza.vehicles
+UNION ALL
+SELECT 'unit_type', COUNT(*) - COUNT(unit_type) FROM limpieza.vehicles
+UNION ALL
+SELECT 'num_passengers', COUNT(*) - COUNT(num_passengers) FROM limpieza.vehicles
+UNION ALL
+SELECT 'vehicle_id', COUNT(*) - COUNT(vehicle_id) FROM limpieza.vehicles
+UNION ALL
+SELECT 'make', COUNT(*) - COUNT(make) FROM limpieza.vehicles
+UNION ALL
+SELECT 'model', COUNT(*) - COUNT(model) FROM limpieza.vehicles
+UNION ALL
+SELECT 'lic_plate_state', COUNT(*) - COUNT(lic_plate_state) FROM limpieza.vehicles
+UNION ALL
+SELECT 'vehicle_year', COUNT(*) - COUNT(vehicle_year) FROM limpieza.vehicles
+UNION ALL
+SELECT 'travel_direction', COUNT(*) - COUNT(travel_direction) FROM limpieza.vehicles
+UNION ALL
+SELECT 'towed_i', COUNT(*) - COUNT(towed_i) FROM limpieza.vehicles
+UNION ALL
+SELECT 'fire_i', COUNT(*) - COUNT(fire_i) FROM limpieza.vehicles
+UNION ALL
+SELECT 'exceed_speed_limit_i', COUNT(*) - COUNT(exceed_speed_limit_i) FROM limpieza.vehicles;
+
+-- Verificar si hay registros duplicados
+SELECT vehicle_id, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY vehicle_id
+HAVING COUNT(*) > 1;
 
