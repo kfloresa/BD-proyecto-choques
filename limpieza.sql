@@ -222,3 +222,113 @@ FROM limpieza.vehicles
 GROUP BY vehicle_id
 HAVING COUNT(*) > 1;
 
+--Analisis crashes
+-- Contar valores únicos por columna
+SELECT 'crash_record_id' AS column_name, COUNT(DISTINCT crash_record_id) AS unique_values FROM limpieza.crashes
+UNION ALL
+SELECT 'crash_date', COUNT(DISTINCT crash_date) FROM limpieza.crashes
+UNION ALL
+SELECT 'posted_speed_limit', COUNT(DISTINCT posted_speed_limit) FROM limpieza.crashes
+UNION ALL
+SELECT 'weather_condition', COUNT(DISTINCT weather_condition) FROM limpieza.crashes
+UNION ALL
+SELECT 'lighting_condition', COUNT(DISTINCT lighting_condition) FROM limpieza.crashes
+UNION ALL
+SELECT 'first_crash_type', COUNT(DISTINCT first_crash_type) FROM limpieza.crashes
+UNION ALL
+SELECT 'trafficway_type', COUNT(DISTINCT trafficway_type) FROM limpieza.crashes
+UNION ALL
+SELECT 'roadway_surface_cond', COUNT(DISTINCT roadway_surface_cond) FROM limpieza.crashes
+UNION ALL
+SELECT 'road_defect', COUNT(DISTINCT road_defect) FROM limpieza.crashes
+UNION ALL
+SELECT 'crash_type', COUNT(DISTINCT crash_type) FROM limpieza.crashes
+UNION ALL
+SELECT 'damage', COUNT(DISTINCT damage) FROM limpieza.crashes;
+
+-- Conteo de valores nulos
+SELECT 'crash_record_id' AS atributo, COUNT(*) - COUNT(crash_record_id) AS null_values FROM limpieza.crashes
+UNION ALL
+SELECT 'crash_date', COUNT(*) - COUNT(crash_date) FROM limpieza.crashes
+UNION ALL
+SELECT 'posted_speed_limit', COUNT(*) - COUNT(posted_speed_limit) FROM limpieza.crashes
+UNION ALL
+SELECT 'weather_condition', COUNT(*) - COUNT(weather_condition) FROM limpieza.crashes
+UNION ALL
+SELECT 'lighting_condition', COUNT(*) - COUNT(lighting_condition) FROM limpieza.crashes
+UNION ALL
+SELECT 'first_crash_type', COUNT(*) - COUNT(first_crash_type) FROM limpieza.crashes
+UNION ALL
+SELECT 'trafficway_type', COUNT(*) - COUNT(trafficway_type) FROM limpieza.crashes
+UNION ALL
+SELECT 'roadway_surface_cond', COUNT(*) - COUNT(roadway_surface_cond) FROM limpieza.crashes
+UNION ALL
+SELECT 'road_defect', COUNT(*) - COUNT(road_defect) FROM limpieza.crashes
+UNION ALL
+SELECT 'crash_type', COUNT(*) - COUNT(crash_type) FROM limpieza.crashes
+UNION ALL
+SELECT 'damage', COUNT(*) - COUNT(damage) FROM limpieza.crashes
+UNION ALL
+SELECT 'date_police_notified', COUNT(*) - COUNT(date_police_notified) FROM limpieza.crashes
+UNION ALL
+SELECT 'prim_contributory_cause', COUNT(*) - COUNT(prim_contributory_cause) FROM limpieza.crashes
+UNION ALL
+SELECT 'sec_contributory_cause', COUNT(*) - COUNT(sec_contributory_cause) FROM limpieza.crashes
+UNION ALL
+SELECT 'street_no', COUNT(*) - COUNT(street_no) FROM limpieza.crashes
+UNION ALL
+SELECT 'street_direction', COUNT(*) - COUNT(street_direction) FROM limpieza.crashes
+UNION ALL
+SELECT 'street_name', COUNT(*) - COUNT(street_name) FROM limpieza.crashes
+UNION ALL
+SELECT 'num_units', COUNT(*) - COUNT(num_units) FROM limpieza.crashes
+UNION ALL
+SELECT 'injuries_total', COUNT(*) - COUNT(injuries_total) FROM limpieza.crashes
+UNION ALL
+SELECT 'injuries_fatal', COUNT(*) - COUNT(injuries_fatal) FROM limpieza.crashes
+UNION ALL
+SELECT 'crash_day_of_week', COUNT(*) - COUNT(crash_day_of_week) FROM limpieza.crashes;
+
+-- Mínimos y máximos de fechas
+SELECT 'crash_date' AS column_name, MIN(crash_date) AS min_value, MAX(crash_date) AS max_value FROM limpieza.crashes;
+
+-- Mínimos, máximos y promedios de valores numéricos
+SELECT 'posted_speed_limit' AS column_name, MIN(posted_speed_limit) AS min_value, MAX(posted_speed_limit) AS max_value, AVG(posted_speed_limit) AS avg_value FROM limpieza.crashes
+UNION ALL
+SELECT 'num_units', MIN(num_units), MAX(num_units), AVG(num_units) FROM limpieza.crashes
+UNION ALL
+SELECT 'injuries_total', MIN(injuries_total), MAX(injuries_total), AVG(injuries_total) FROM limpieza.crashes
+UNION ALL
+SELECT 'injuries_fatal', MIN(injuries_fatal), MAX(injuries_fatal), AVG(injuries_fatal) FROM limpieza.crashes;
+
+-- Conteo de tuplas por cada categoría
+SELECT weather_condition, COUNT(*)
+FROM limpieza.crashes
+GROUP BY weather_condition;
+
+SELECT lighting_condition, COUNT(*)
+FROM limpieza.crashes
+GROUP BY lighting_condition;
+
+SELECT first_crash_type, COUNT(*)
+FROM limpieza.crashes
+GROUP BY first_crash_type;
+
+SELECT trafficway_type, COUNT(*)
+FROM limpieza.crashes
+GROUP BY trafficway_type;
+
+-- Verificar si hay registros duplicados
+SELECT crash_record_id, COUNT(*)
+FROM limpieza.crashes
+GROUP BY crash_record_id
+HAVING COUNT(*) > 1;
+
+-- Identificación de inconsistencias en los datos
+SELECT 'injuries_fatal > injuries_total' AS inconsistency_check, COUNT(*) FROM limpieza.crashes WHERE injuries_fatal > injuries_total
+UNION ALL
+SELECT 'date_police_notified < crash_date', COUNT(*) FROM limpieza.crashes WHERE date_police_notified < crash_date
+UNION ALL
+SELECT 'posted_speed_limit = 0', COUNT(*) FROM limpieza.crashes WHERE posted_speed_limit = 0;
+
+
