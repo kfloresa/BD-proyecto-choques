@@ -84,3 +84,25 @@ SELECT 'injury_classification', COUNT(DISTINCT injury_classification) FROM limpi
 SELECT 
     MIN(age) AS min_age, MAX(age) AS max_age, AVG(age) AS avg_age
 FROM limpieza.people;
+
+-- Conteo de tuplas por cada categoría
+SELECT person_type, COUNT(*)
+FROM limpieza.people
+GROUP BY person_type;
+
+SELECT city, COUNT(*)
+FROM limpieza.people
+GROUP BY city;
+
+SELECT sex, COUNT(*)
+FROM limpieza.people
+GROUP BY sex;
+
+SELECT airbag_deployed, COUNT(*)
+FROM limpieza.people
+GROUP BY airbag_deployed;
+
+SELECT injury_classification, COUNT(*)
+FROM limpieza.people
+GROUP BY injury_classification;
+
