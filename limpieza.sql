@@ -79,3 +79,8 @@ SELECT 'airbag_deployed', COUNT(DISTINCT airbag_deployed) FROM limpieza.people
 UNION ALL
 SELECT 'injury_classification', COUNT(DISTINCT injury_classification) FROM limpieza.people;
 
+
+-- Mínimos, máximos y promedios de valores numéricos
+SELECT 
+    MIN(age) AS min_age, MAX(age) AS max_age, AVG(age) AS avg_age
+FROM limpieza.people;
