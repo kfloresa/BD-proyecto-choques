@@ -56,3 +56,26 @@ SELECT
     injuries_fatal,
     crash_day_of_week
 FROM raw.crashes;
+
+-- Analisis People
+-- Contar valores únicos por columna
+SELECT 'person_id' AS column_name, COUNT(DISTINCT person_id) AS unique_values FROM limpieza.people
+UNION ALL
+SELECT 'person_type', COUNT(DISTINCT person_type) FROM limpieza.people
+UNION ALL
+SELECT 'crash_record_id', COUNT(DISTINCT crash_record_id) FROM limpieza.people
+UNION ALL
+SELECT 'vehicle_id', COUNT(DISTINCT vehicle_id) FROM limpieza.people
+UNION ALL
+SELECT 'seat_no', COUNT(DISTINCT seat_no) FROM limpieza.people
+UNION ALL
+SELECT 'city', COUNT(DISTINCT city) FROM limpieza.people
+UNION ALL
+SELECT 'sex', COUNT(DISTINCT sex) FROM limpieza.people
+UNION ALL
+SELECT 'age', COUNT(DISTINCT age) FROM limpieza.people
+UNION ALL
+SELECT 'airbag_deployed', COUNT(DISTINCT airbag_deployed) FROM limpieza.people
+UNION ALL
+SELECT 'injury_classification', COUNT(DISTINCT injury_classification) FROM limpieza.people;
+
