@@ -133,6 +133,11 @@ FROM limpieza.people
 GROUP BY person_id
 HAVING COUNT(*) > 1;
 
+-- Verificar inconsistencias
+SELECT COUNT(*) AS total_menores_igual_cero
+FROM limpieza.people
+WHERE age <= 0;
+
 --Analisis vehicles
 -- Contar valores únicos por columna
 SELECT 'crash_unit_id' AS atributos, COUNT(DISTINCT crash_unit_id) AS unique_values FROM limpieza.vehicles
