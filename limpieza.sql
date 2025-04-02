@@ -59,7 +59,7 @@ FROM raw.crashes;
 
 -- Analisis People
 -- Contar valores únicos por columna
-SELECT 'person_id' AS column_name, COUNT(DISTINCT person_id) AS unique_values FROM limpieza.people
+SELECT 'person_id' AS atributo, COUNT(DISTINCT person_id) AS unique_values FROM limpieza.people
 UNION ALL
 SELECT 'person_type', COUNT(DISTINCT person_type) FROM limpieza.people
 UNION ALL
@@ -105,4 +105,33 @@ GROUP BY airbag_deployed;
 SELECT injury_classification, COUNT(*)
 FROM limpieza.people
 GROUP BY injury_classification;
+
+-- Conteo de valores nulos
+SELECT 'person_id' AS atributo, COUNT(*) - COUNT(person_id) AS null_values FROM limpieza.people
+UNION ALL
+SELECT 'person_type', COUNT(*) - COUNT(person_type) FROM limpieza.people
+UNION ALL
+SELECT 'crash_record_id', COUNT(*) - COUNT(crash_record_id) FROM limpieza.people
+UNION ALL
+SELECT 'vehicle_id', COUNT(*) - COUNT(vehicle_id) FROM limpieza.people
+UNION ALL
+SELECT 'seat_no', COUNT(*) - COUNT(seat_no) FROM limpieza.people
+UNION ALL
+SELECT 'city', COUNT(*) - COUNT(city) FROM limpieza.people
+UNION ALL
+SELECT 'sex', COUNT(*) - COUNT(sex) FROM limpieza.people
+UNION ALL
+SELECT 'age', COUNT(*) - COUNT(age) FROM limpieza.people
+UNION ALL
+SELECT 'airbag_deployed', COUNT(*) - COUNT(airbag_deployed) FROM limpieza.people
+UNION ALL
+SELECT 'injury_classification', COUNT(*) - COUNT(injury_classification) FROM limpieza.people;
+
+-- Verificar si hay registros duplicados
+SELECT person_id, COUNT(*)
+FROM limpieza.people
+GROUP BY person_id
+HAVING COUNT(*) > 1;
+
+
 
