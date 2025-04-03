@@ -131,9 +131,17 @@ AND NOT EXISTS (
 
 --Limpieza de sexo en people
 
--- Reemplazar valores NULL o vacíos por 'UNKNOWN' en la columna sex
+-- Reemplazar valores NULL o vacíos por 'X' en la columna sex
 UPDATE limpieza.people
 SET sex = 'X'
 WHERE sex IS NULL
    OR TRIM(sex) = '';
+
+
+-- Reemplazamos los valores nulos en la columna airbag_deployed por 'DEPLOYMENT UNKNOWN'
+
+UPDATE limpieza.people
+SET airbag_deployed = 'DEPLOYMENT UNKNOWN'
+WHERE airbag_deployed IS NULL;
+
 
