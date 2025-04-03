@@ -57,3 +57,18 @@ SELECT
     crash_day_of_week
 FROM raw.crashes;
 
+
+
+-- Limpieza de la columna 'age' 
+-- 1. Reemplazar NULLs por 0
+-- 2. Reemplazar valores irreales (-177, -1) por 0
+-- 3. Convertir negativos restantes a positivos
+
+UPDATE limpieza.people
+SET age = 0
+WHERE age IS NULL OR age IN (-177, -1);
+
+UPDATE limpieza.people
+SET age = ABS(age)
+WHERE age < 0;
+
