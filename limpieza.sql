@@ -185,13 +185,14 @@ WHERE seat_no IS NULL;
 
 
 -- 1. Limpieza de vehicle_year
--- Reemplazamos valores irreales del año del vehículo.
--- Se asume que no hay autos del futuro (año > 2025) ni modelos tan antiguos (año < 1950).
--- Reemplazamos ambos por NULL para indicar datos faltantes o erróneos.
+-- Reemplazamos valores irreales (año > 2025 o año <= 1950) y valores NULL por -1
+-- para indicar que el dato es desconocido o no confiable.
 
 UPDATE limpieza.vehicles
-SET vehicle_year = NULL
-WHERE vehicle_year > 2025 OR vehicle_year <= 1950;
+SET vehicle_year = -1
+WHERE vehicle_year IS NULL 
+   OR vehicle_year > 2025 
+   OR vehicle_year <= 1950;
 
 -- 2. Limpieza de num_passengers
 
