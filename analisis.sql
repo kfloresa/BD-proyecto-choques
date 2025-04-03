@@ -31,6 +31,14 @@ SELECT person_type, COUNT(*)
 FROM limpieza.people
 GROUP BY person_type;
 
+SELECT vehicle_id, COUNT(*)
+FROM limpieza.people
+GROUP BY vehicle_id;
+
+SELECT seat_no, COUNT(*)
+FROM limpieza.people
+GROUP BY seat_no;
+
 SELECT city, COUNT(*)
 FROM limpieza.people
 GROUP BY city;
