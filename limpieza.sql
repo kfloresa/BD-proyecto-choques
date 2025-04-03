@@ -272,3 +272,12 @@ UPDATE limpieza.vehicles
 SET exceed_speed_limit_i = 'UNKNOWN'
 WHERE exceed_speed_limit_i IS NULL OR TRIM(exceed_speed_limit_i) = '';
 
+
+------------------------------------------
+
+\*
+    Limpieza de la tabla limpieza.crashes
+*\
+
+
+
