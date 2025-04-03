@@ -62,10 +62,10 @@ FROM raw.crashes;
     Limpieza de la tabla limpieza.people
 *\
     
--- Limpieza de la columna 'age' 
--- 1. Reemplazar NULLs por 0
--- 2. Reemplazar valores irreales (-177, -1) por 0
--- 3. Convertir negativos restantes a positivos
+-- 1. Limpieza de la columna 'age' 
+-- a. Reemplazar NULLs por 0
+-- b. Reemplazar valores irreales (-177, -1) por 0
+-- c. Convertir negativos restantes a positivos
 
 UPDATE limpieza.people
 SET age = 0
@@ -76,7 +76,7 @@ SET age = ABS(age)
 WHERE age < 0;
 
 
---Limpieza de ciudades en people
+-- 2. Limpieza de ciudades en people
 
 \*
 En la linea de comando se ejecuta lo siguiente:
@@ -99,17 +99,17 @@ En la linea de comando se ejecuta lo siguiente:
 
 CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
 
--- 1. Reemplazar NULLs o vacíos por 'UNKNOWN'
+-- a. Reemplazar NULLs o vacíos por 'UNKNOWN'
 UPDATE limpieza.people
 SET city = 'UNKNOWN'
 WHERE city IS NULL OR TRIM(city) = '';
 
--- 2. Unificar variantes de 'UNKNOWN' mal escritas
+-- b. Unificar variantes de 'UNKNOWN' mal escritas
 UPDATE limpieza.people
 SET city = 'UNKNOWN'
 WHERE levenshtein(UPPER(city), 'UNKNOWN') <= 3;
 
--- 3. Corregir errores ortográficos comparando con ciudades válidas
+-- c. Corregir errores ortográficos comparando con ciudades válidas
 -- Solo cambiar si la ciudad actual no está en la tabla de válidas
 -- y si hay una ciudad parecida con distancia Levenshtein baja, ignora los espacios
 UPDATE limpieza.people p
@@ -119,7 +119,7 @@ WHERE levenshtein(UPPER(TRIM(p.city)), UPPER(TRIM(v.nombre))) <= 4
   AND TRIM(p.city) IS NOT NULL
   AND UPPER(TRIM(p.city)) != UPPER(TRIM(v.nombre));
 
--- 4. Marcar como 'INDEFINIDA' las ciudades que no coinciden con ninguna válida ni con 'UNKNOWN'
+-- d. Marcar como 'INDEFINIDA' las ciudades que no coinciden con ninguna válida ni con 'UNKNOWN'
 UPDATE limpieza.people
 SET city = 'INDEFINIDA'
 WHERE city NOT IN (
@@ -132,7 +132,7 @@ AND NOT EXISTS (
     WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 5
 );
 
---Limpieza de sexo en people
+-- 3. Limpieza de sexo en people
 
 -- Reemplazar valores NULL o vacíos por 'X' en la columna sex
 UPDATE limpieza.people
@@ -142,7 +142,7 @@ WHERE sex IS NULL
 
 
 
---Limpieza de airbag_deployed en people
+-- 4. Limpieza de airbag_deployed en people
 -- Reemplazamos los valores nulos en la columna airbag_deployed por 'DEPLOYMENT UNKNOWN'
 
 UPDATE limpieza.people
@@ -150,14 +150,14 @@ SET airbag_deployed = 'DEPLOYMENT UNKNOWN'
 WHERE airbag_deployed IS NULL;
 
 
---Limpieza de injury_classification en people
+-- 5. Limpieza de injury_classification en people
 -- Reemplazamos los valores NULL en la columna injury_classification por 'UNKNOWN'
 UPDATE limpieza.people
 SET injury_classification = 'UNKNOWN'
 WHERE injury_classification IS NULL;
 
 
---Limpieza de vehicle_id en people
+-- 6. Limpieza de vehicle_id en people
 -- Reemplazamos los valores NULL en vehicle_id por -1
 -- Esto indica que no se tiene información del vehículo relacionado.
 -- Es preferible a dejar NULL para facilitar agrupaciones y evitar errores en joins.
@@ -167,7 +167,7 @@ SET vehicle_id = -1
 WHERE vehicle_id IS NULL;
 
 
---Limpieza de seat_no en people
+-- 7. Limpieza de seat_no en people
 -- Reemplazamos los valores NULL en seat_no por -1
 -- Esto representa una posición de asiento desconocida o no registrada.
 -- Usamos -1 porque seat_no es una columna numérica de código, no texto.
@@ -201,6 +201,12 @@ UPDATE limpieza.vehicles
 SET num_passengers = 0
 WHERE num_passengers > 50 OR num_passengers IS NULL;
 
+-- 3. Limpieza de unit_type
+-- Reemplazamos valores NULL por 'UNKNOWN' para asegurar que todos los registros tengan una categoría asignada.
+
+UPDATE limpieza.vehicles
+SET unit_type = 'UNKNOWN'
+WHERE unit_type IS NULL;
 
 
 
