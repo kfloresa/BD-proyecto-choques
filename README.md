@@ -123,6 +123,8 @@ Esta limpieza fue necesaria para evitar duplicados, reducir la dispersión de ca
 Todas estas acciones fueron documentadas y ejecutadas mediante un script SQL incluido en el repositorio (`scripts/limpieza.sql`), cumpliendo con el requisito de contar con un mecanismo reproducible para aplicar la limpieza sobre los datos crudos.
 
 
+---
+
 ## b) Limpieza aplicada a la tabla `vehicles`
 
 Con el fin de garantizar la calidad de los datos relacionados con los vehículos involucrados en accidentes, se realizaron diversas transformaciones para corregir valores faltantes, inconsistentes o fuera de rango. A continuación se detallan las acciones aplicadas a cada columna seleccionada del set:
@@ -184,6 +186,9 @@ Con el fin de garantizar la calidad de los datos relacionados con los vehículos
 ---
 
 Todas estas transformaciones se encuentran implementadas y comentadas en el script `scripts/limpieza.sql`, lo que garantiza la trazabilidad y replicabilidad del proceso de limpieza.
+
+
+---
 
 ### c) Limpieza aplicada a la tabla `crashes`
 
