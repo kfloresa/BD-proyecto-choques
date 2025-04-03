@@ -280,10 +280,17 @@ WHERE exceed_speed_limit_i IS NULL OR TRIM(exceed_speed_limit_i) = '';
 *\
 
 -- 1. Limpieza de weather_condition
--- Unificamos 'OTHER' en 'UNKNOWN' para consolidar categorías imprecisas
+-- Unificamos 'UNKNOWN' en 'OTHER' para consolidar categorías imprecisas
 UPDATE limpieza.crashes
-SET weather_condition = 'UNKNOWN'
-WHERE weather_condition = 'OTHER';
+SET weather_condition = 'OTHER'
+WHERE weather_condition = 'UNKNOWN';
+
+
+-- 2. Limpieza de trafficway_type
+-- Unificamos 'UNKNOWN' dentro de 'OTHER' para simplificar categorías generales
+UPDATE limpieza.crashes
+SET trafficway_type = 'OTHER'
+WHERE trafficway_type = 'UNKNOWN';
 
 
 
