@@ -57,10 +57,11 @@ SELECT
     crash_day_of_week
 FROM raw.crashes;
 
-
+---------------------------------------------------
 \*
-    Limpieza para la tabla people
+    Limpieza de la tabla limpieza.people
 *\
+    
 -- Limpieza de la columna 'age' 
 -- 1. Reemplazar NULLs por 0
 -- 2. Reemplazar valores irreales (-177, -1) por 0
@@ -174,6 +175,31 @@ WHERE vehicle_id IS NULL;
 UPDATE limpieza.people
 SET seat_no = -1
 WHERE seat_no IS NULL;
+
+
+-------------------------------------
+
+\*
+    Limpieza de la tabla limpieza.vehicles
+*\
+
+
+-- 1. Limpieza de vehicle_year
+-- Reemplazamos valores irreales del año del vehículo.
+-- Se asume que no hay autos del futuro (año > 2025) ni modelos tan antiguos (año < 1950).
+-- Reemplazamos ambos por NULL para indicar datos faltantes o erróneos.
+
+UPDATE limpieza.vehicles
+SET vehicle_year = NULL
+WHERE vehicle_year > 2025 OR vehicle_year <= 1950;
+
+-- 2. Limpieza de num_passengers
+
+-- Reemplazamos valores extremadamente altos (mayores a 50) o NULL por 0
+
+UPDATE limpieza.vehicles
+SET num_passengers = 0
+WHERE num_passengers > 50 OR num_passengers IS NULL;
 
 
 
