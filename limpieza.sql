@@ -58,7 +58,9 @@ SELECT
 FROM raw.crashes;
 
 
-
+\*
+    Limpieza para la tabla people
+*\
 -- Limpieza de la columna 'age' 
 -- 1. Reemplazar NULLs por 0
 -- 2. Reemplazar valores irreales (-177, -1) por 0
@@ -152,6 +154,28 @@ WHERE airbag_deployed IS NULL;
 UPDATE limpieza.people
 SET injury_classification = 'UNKNOWN'
 WHERE injury_classification IS NULL;
+
+
+--Limpieza de vehicle_id en people
+-- Reemplazamos los valores NULL en vehicle_id por -1
+-- Esto indica que no se tiene información del vehículo relacionado.
+-- Es preferible a dejar NULL para facilitar agrupaciones y evitar errores en joins.
+
+UPDATE limpieza.people
+SET vehicle_id = -1
+WHERE vehicle_id IS NULL;
+
+
+--Limpieza de seat_no en people
+-- Reemplazamos los valores NULL en seat_no por -1
+-- Esto representa una posición de asiento desconocida o no registrada.
+-- Usamos -1 porque seat_no es una columna numérica de código, no texto.
+
+UPDATE limpieza.people
+SET seat_no = -1
+WHERE seat_no IS NULL;
+
+
 
 
 
