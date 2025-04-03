@@ -138,6 +138,8 @@ WHERE sex IS NULL
    OR TRIM(sex) = '';
 
 
+
+--Limpieza de airbag_deployed en people
 -- Reemplazamos los valores nulos en la columna airbag_deployed por 'DEPLOYMENT UNKNOWN'
 
 UPDATE limpieza.people
