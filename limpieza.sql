@@ -134,9 +134,9 @@ AND NOT EXISTS (
 
 -- 3. Limpieza de sexo en people
 
--- Reemplazar valores NULL o vacíos por 'X' en la columna sex
+-- Reemplazar valores NULL o vacíos por 'UNKNOWN' en la columna sex
 UPDATE limpieza.people
-SET sex = 'X'
+SET sex = 'UNKNOWN'
 WHERE sex IS NULL
    OR TRIM(sex) = '';
 
