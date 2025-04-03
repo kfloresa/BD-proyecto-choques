@@ -292,6 +292,10 @@ UPDATE limpieza.crashes
 SET trafficway_type = 'OTHER'
 WHERE trafficway_type = 'UNKNOWN';
 
-
+-- 3. Limpieza de road_defect
+-- Unificamos 'UNKNOWN' dentro de 'OTHER' para reducir ambigüedad
+UPDATE limpieza.crashes
+SET road_defect = 'OTHER'
+WHERE road_defect = 'UNKNOWN';
 
 
