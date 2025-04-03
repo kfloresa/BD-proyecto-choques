@@ -330,3 +330,18 @@ UPDATE limpieza.crashes
 SET street_name = 'UNKNOWN'
 WHERE street_name IS NULL OR TRIM(street_name) = '';
 
+
+-- 9. Limpieza de injuries_total
+-- Reemplazar valores NULL por 0 en la columna injuries_total, permite análisis más fáciles (promedios, sumas, etc.) sin ignorar esos casos
+
+UPDATE limpieza.crashes
+SET injuries_total = 0
+WHERE injuries_total IS NULL;
+
+-- 10. Limpieza de injuries_fatal
+-- Reemplazar valores NULL por 0 en la columna injuries_fatal, esto permite análisis sin problemas por valores faltantes
+UPDATE limpieza.crashes
+SET injuries_fatal = 0
+WHERE injuries_fatal IS NULL;
+
+
