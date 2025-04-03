@@ -1,8 +1,8 @@
 # Bases de datos
  
- # Equipo 2 😸
+  # Equipo 2 😸
  
- #Instituto Tecnológico Autónomo de México
+ ## Instituto Tecnológico Autónomo de México
  
  Drive: https://drive.google.com/drive/folders/1cOAGPZ9cnVfjYAWl28TsU2sv7cazKgo3?usp=sharing
 
