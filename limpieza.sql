@@ -210,6 +210,48 @@ SET unit_type = 'UNKNOWN'
 WHERE unit_type IS NULL;
 
 
+-- 4. Limpieza de travel_direction
+-- Reemplazamos los valores NULL por 'UNKNOWN'
+-- para asegurar que todos los registros tengan una categoría válida.
+
+UPDATE limpieza.vehicles
+SET travel_direction = 'UNKNOWN'
+WHERE travel_direction IS NULL OR TRIM(travel_direction) = '';
 
 
+
+-- 5. Limpieza de lic_plate_state
+-- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
+-- para estandarizar los estados que emiten placas.
+
+UPDATE limpieza.vehicles
+SET lic_plate_state = 'UNKNOWN'
+WHERE lic_plate_state IS NULL OR TRIM(lic_plate_state) = '';
+
+
+-- 6. Limpieza de model
+-- Reemplazamos los valores NULL o vacíos por 'UNKNOWN'
+-- para asegurar que todos los registros tengan información consistente sobre el modelo del vehículo.
+
+UPDATE limpieza.vehicles
+SET model = 'UNKNOWN'
+WHERE model IS NULL OR TRIM(model) = '';
+
+
+-- 7. Limpieza de make
+-- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
+-- para asegurar que todos los registros tengan una marca asignada.
+
+UPDATE limpieza.vehicles
+SET make = 'UNKNOWN'
+WHERE make IS NULL OR TRIM(make) = '';
+
+
+-- 8. Limpieza de towed_i
+-- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
+-- para identificar de forma clara los casos donde no se sabe si el vehículo fue remolcado.
+
+UPDATE limpieza.vehicles
+SET towed_i = 'UNKNOWN'
+WHERE towed_i IS NULL OR TRIM(towed_i) = '';
 
