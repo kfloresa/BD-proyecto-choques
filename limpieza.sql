@@ -72,3 +72,48 @@ UPDATE limpieza.people
 SET age = ABS(age)
 WHERE age < 0;
 
+
+--Limpieza de ciudades en people
+
+
+-- Activamos la extensión fuzzystrmatch, que proporciona funciones para comparar cadenas de texto
+-- mediante medidas de similitud como la distancia de Levenshtein.
+-- Esta herramienta es esencial para detectar errores ortográficos en los nombres de ciudades
+-- y poder corregirlos automáticamente comparando con una lista de nombres válidos.
+-- Solo se necesita ejecutar una vez por base de datos.
+
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+
+-- 1. Reemplazar NULLs o vacíos por 'UNKNOWN'
+UPDATE limpieza.people
+SET city = 'UNKNOWN'
+WHERE city IS NULL OR TRIM(city) = '';
+
+-- 2. Unificar variantes de 'UNKNOWN' mal escritas
+UPDATE limpieza.people
+SET city = 'UNKNOWN'
+WHERE levenshtein(UPPER(city), 'UNKNOWN') <= 3;
+
+-- 3. Corregir errores ortográficos comparando con ciudades válidas
+-- Solo cambiar si la ciudad actual no está en la tabla de válidas
+-- y si hay una ciudad parecida con distancia Levenshtein baja, ignora los espacios
+UPDATE limpieza.people p
+SET city = v.nombre
+FROM ciudades_validas v
+WHERE levenshtein(UPPER(TRIM(p.city)), UPPER(TRIM(v.nombre))) <= 4
+  AND TRIM(p.city) IS NOT NULL
+  AND UPPER(TRIM(p.city)) != UPPER(TRIM(v.nombre));
+
+-- 4. Marcar como 'INDEFINIDA' las ciudades que no coinciden con ninguna válida ni con 'UNKNOWN'
+UPDATE limpieza.people
+SET city = 'INDEFINIDA'
+WHERE city NOT IN (
+    SELECT nombre FROM ciudades_validas
+)
+AND levenshtein(UPPER(TRIM(city)), 'UNKNOWN') > 3
+AND NOT EXISTS (
+    SELECT 1
+    FROM ciudades_validas v
+    WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 4
+);
+
