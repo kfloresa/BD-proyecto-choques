@@ -127,21 +127,56 @@ SELECT
 FROM limpieza.vehicles;
 
 -- Conteo de tuplas por cada categoría
+
+SELECT unit_type, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY unit_type
+ORDER BY COUNT(*) DESC;
+
+SELECT num_passengers, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY num_passengers
+ORDER BY COUNT(*) DESC;
+
 SELECT make, COUNT(*)
 FROM limpieza.vehicles
-GROUP BY make;
+GROUP BY make
+ORDER BY COUNT(*) DESC;
 
 SELECT model, COUNT(*)
 FROM limpieza.vehicles
-GROUP BY model;
+GROUP BY model
+ORDER BY COUNT(*) DESC;
 
 SELECT lic_plate_state, COUNT(*)
 FROM limpieza.vehicles
-GROUP BY lic_plate_state;
+GROUP BY lic_plate_state
+ORDER BY COUNT(*) DESC;
+
+SELECT vehicle_year, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY vehicle_year
+ORDER BY COUNT(*) DESC;
 
 SELECT travel_direction, COUNT(*)
 FROM limpieza.vehicles
-GROUP BY travel_direction;
+GROUP BY travel_direction
+ORDER BY COUNT(*) DESC;
+
+SELECT towed_i, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY towed_i
+ORDER BY COUNT(*) DESC;
+
+SELECT fire_i, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY fire_i
+ORDER BY COUNT(*) DESC;
+
+SELECT exceed_speed_limit_i, COUNT(*)
+FROM limpieza.vehicles
+GROUP BY exceed_speed_limit_i
+ORDER BY COUNT(*) DESC;
 
 -- Conteo de valores nulos
 SELECT 'crash_unit_id' AS atributo, COUNT(*) - COUNT(crash_unit_id) AS null_values FROM limpieza.vehicles
