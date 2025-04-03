@@ -120,5 +120,68 @@ Esta limpieza fue necesaria para evitar duplicados, reducir la dispersión de ca
 
 ---
 
-Todas estas acciones fueron documentadas y ejecutadas mediante un script SQL incluido en el repositorio (`scripts/limpieza_people.sql`), cumpliendo con el requisito de contar con un mecanismo reproducible para aplicar la limpieza sobre los datos crudos.
+Todas estas acciones fueron documentadas y ejecutadas mediante un script SQL incluido en el repositorio (`scripts/limpieza.sql`), cumpliendo con el requisito de contar con un mecanismo reproducible para aplicar la limpieza sobre los datos crudos.
+
+--
+## b) Limpieza aplicada a la tabla `vehicles`
+
+Con el fin de garantizar la calidad de los datos relacionados con los vehículos involucrados en accidentes, se realizaron diversas transformaciones para corregir valores faltantes, inconsistentes o fuera de rango. A continuación se detallan las acciones aplicadas a cada columna seleccionada del set:
+
+---
+
+### 1. Año del vehículo (`vehicle_year`)
+- Se reemplazaron valores fuera de rango (años mayores a 2025 o menores o iguales a 1950), así como valores `NULL`, por `-1`.
+- Esto permite conservar la columna como numérica y a la vez identificar los casos con datos inválidos o faltantes.
+
+---
+
+### 2. Número de pasajeros (`num_passengers`)
+- Se reemplazaron los valores `NULL` y los mayores a 50 por `0`, considerando que probablemente corresponden a errores de captura o datos desconocidos.
+- Así se garantiza que todos los registros contengan un valor coherente para análisis cuantitativos.
+
+---
+
+### 3. Tipo de unidad (`unit_type`)
+- Se reemplazaron los valores `NULL` por `'UNKNOWN'`, para asegurar que todos los vehículos tengan una categoría asignada.
+
+---
+
+### 4. Dirección de viaje (`travel_direction`)
+- Los valores `NULL` o vacíos fueron reemplazados por `'UNKNOWN'`.
+- Esto permite estandarizar los registros y agruparlos de forma clara.
+
+---
+
+### 5. Estado emisor de la placa (`lic_plate_state`)
+- Se reemplazaron los valores `NULL` o vacíos por `'UNKNOWN'` para evitar campos en blanco o mal definidos en esta variable categórica.
+
+---
+
+### 6. Modelo del vehículo (`model`)
+- Se asignó `'UNKNOWN'` a los valores `NULL` o vacíos, permitiendo así una mejor agrupación y filtrado de modelos en los análisis.
+
+---
+
+### 7. Marca del vehículo (`make`)
+- Se normalizó la información sustituyendo valores nulos o vacíos por `'UNKNOWN'`, para evitar categorías sueltas.
+
+---
+
+### 8. Remolque (`towed_i`)
+- Se estandarizó el dato reemplazando valores `NULL` o vacíos por `'UNKNOWN'`.
+- Esto facilita distinguir entre los casos registrados correctamente y los que carecen de información.
+
+---
+
+### 9. Incendio del vehículo (`fire_i`)
+- Los casos donde no se registró si el vehículo se incendió se etiquetaron como `'UNKNOWN'`.
+
+---
+
+### 10. Exceso de velocidad (`exceed_speed_limit_i`)
+- Se agruparon todos los registros sin información (vacíos o `NULL`) bajo la categoría `'UNKNOWN'`.
+
+---
+
+Todas estas transformaciones se encuentran implementadas y comentadas en el script `scripts/limpieza.sql`, lo que garantiza la trazabilidad y replicabilidad del proceso de limpieza.
 
