@@ -298,4 +298,16 @@ UPDATE limpieza.crashes
 SET road_defect = 'OTHER'
 WHERE road_defect = 'UNKNOWN';
 
+-- 4. Limpieza de roadway_surface_cond
+-- Unificamos 'UNKNOWN' en 'OTHER'
+UPDATE limpieza.crashes
+SET roadway_surface_cond = 'OTHER'
+WHERE roadway_surface_cond = 'UNKNOWN';
+
+
+-- 5. Limpieza de prim_contributory_cause
+-- Unificar causas no determinadas o no aplicables
+UPDATE limpieza.crashes
+SET prim_contributory_cause = 'UNDETERMINED/NOT APPLICABLE'
+WHERE prim_contributory_cause IN ('UNABLE TO DETERMINE', 'NOT APPLICABLE');
 
