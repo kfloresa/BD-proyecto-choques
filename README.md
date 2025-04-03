@@ -185,3 +185,38 @@ Con el fin de garantizar la calidad de los datos relacionados con los vehículos
 
 Todas estas transformaciones se encuentran implementadas y comentadas en el script `scripts/limpieza.sql`, lo que garantiza la trazabilidad y replicabilidad del proceso de limpieza.
 
+
+### c) Limpieza aplicada a la tabla `crashes`
+
+Para asegurar la calidad y consistencia de los datos relacionados con los accidentes, se aplicaron transformaciones para corregir valores nulos, categorías ambiguas o mal categorizadas, y para facilitar el análisis posterior. A continuación se detallan las acciones de limpieza aplicadas a columnas clave de esta tabla:
+
+**1. Condición climática** (`weather_condition`)  
+• Se unificaron los valores `'UNKNOWN'` dentro de `'OTHER'` para reducir ambigüedad en categorías poco informativas.
+
+**2. Tipo de vialidad** (`trafficway_type`)  
+• El valor `'UNKNOWN'` fue agrupado con `'OTHER'` para simplificar la clasificación general de las vías.
+
+**3. Defecto en la carretera** (`road_defect`)  
+• Se reemplazó `'UNKNOWN'` por `'OTHER'`, con el objetivo de consolidar categorías genéricas y evitar dispersión.
+
+**4. Condición de la superficie vial** (`roadway_surface_cond`)  
+• Los valores `'UNKNOWN'` fueron sustituidos por `'OTHER'` por razones similares de claridad semántica.
+
+**5. Causa principal del choque** (`prim_contributory_cause`)  
+• Se agruparon las causas `'UNABLE TO DETERMINE'` y `'NOT APPLICABLE'` en una sola categoría llamada `'UNDETERMINED/NOT APPLICABLE'`.
+
+**6. Causa secundaria del choque** (`sec_contributory_cause`)  
+• Se aplicó el mismo criterio que en la causa principal para reducir dispersión en valores similares.
+
+**7. Dirección de la calle** (`street_direction`)  
+• Se reemplazaron los valores nulos o vacíos por `'UNKNOWN'` para indicar dirección no registrada.
+
+**8. Nombre de la calle** (`street_name`)  
+• Los registros sin nombre se estandarizaron asignando `'UNKNOWN'`.
+
+**9. Total de heridos** (`injuries_total`)  
+• Los valores nulos fueron reemplazados por `0` para evitar errores al calcular promedios o totales.
+
+**10. Total de heridos fatales** (`injuries_fatal`)  
+• También se reemplazaron los valores nulos por `0` para facilitar el análisis.
+
