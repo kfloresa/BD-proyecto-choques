@@ -1,6 +1,6 @@
 # Bases de datos
  
- Equipo 2
+ # Equipo 2 😸
  
  Instituto Tecnológico Autónomo de México
  
