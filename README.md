@@ -185,38 +185,69 @@ Con el fin de garantizar la calidad de los datos relacionados con los vehículos
 
 Todas estas transformaciones se encuentran implementadas y comentadas en el script `scripts/limpieza.sql`, lo que garantiza la trazabilidad y replicabilidad del proceso de limpieza.
 
-
 ### c) Limpieza aplicada a la tabla `crashes`
 
-Para asegurar la calidad y consistencia de los datos relacionados con los accidentes, se aplicaron transformaciones para corregir valores nulos, categorías ambiguas o mal categorizadas, y para facilitar el análisis posterior. A continuación se detallan las acciones de limpieza aplicadas a columnas clave de esta tabla:
+Para asegurar la calidad y consistencia de los registros relacionados con los accidentes, se realizaron múltiples transformaciones que permiten el análisis sin ambigüedades y con categorías estandarizadas. A continuación se describen las acciones aplicadas sobre la tabla `limpieza.crashes`:
 
-**1. Condición climática** (`weather_condition`)  
-• Se unificaron los valores `'UNKNOWN'` dentro de `'OTHER'` para reducir ambigüedad en categorías poco informativas.
+---
 
-**2. Tipo de vialidad** (`trafficway_type`)  
-• El valor `'UNKNOWN'` fue agrupado con `'OTHER'` para simplificar la clasificación general de las vías.
+### **1. Condición climática** (`weather_condition`)
+- Se unificaron las categorías `'UNKNOWN'` y `'OTHER'` en una sola categoría: `'OTHER'`.
+- Esto permite consolidar los registros con condiciones no especificadas o no clasificables y reducir la dispersión de categorías.
 
-**3. Defecto en la carretera** (`road_defect`)  
-• Se reemplazó `'UNKNOWN'` por `'OTHER'`, con el objetivo de consolidar categorías genéricas y evitar dispersión.
+---
 
-**4. Condición de la superficie vial** (`roadway_surface_cond`)  
-• Los valores `'UNKNOWN'` fueron sustituidos por `'OTHER'` por razones similares de claridad semántica.
+### **2. Tipo de vía** (`trafficway_type`)
+- Se reasignaron todos los valores `'UNKNOWN'` a la categoría `'OTHER'`.
+- Esta limpieza busca reducir la ambigüedad de los registros y agrupar los casos que no pertenecen a una categoría clara.
 
-**5. Causa principal del choque** (`prim_contributory_cause`)  
-• Se agruparon las causas `'UNABLE TO DETERMINE'` y `'NOT APPLICABLE'` en una sola categoría llamada `'UNDETERMINED/NOT APPLICABLE'`.
+---
 
-**6. Causa secundaria del choque** (`sec_contributory_cause`)  
-• Se aplicó el mismo criterio que en la causa principal para reducir dispersión en valores similares.
+### **3. Defecto en la vía** (`road_defect`)
+- Se unificaron los valores `'UNKNOWN'` en `'OTHER'`.
+- Esto mejora la categorización de los defectos, agrupando aquellos sin información en una etiqueta común.
 
-**7. Dirección de la calle** (`street_direction`)  
-• Se reemplazaron los valores nulos o vacíos por `'UNKNOWN'` para indicar dirección no registrada.
+---
 
-**8. Nombre de la calle** (`street_name`)  
-• Los registros sin nombre se estandarizaron asignando `'UNKNOWN'`.
+### **4. Condición de la superficie** (`roadway_surface_cond`)
+- Los valores `'UNKNOWN'` fueron reemplazados por `'OTHER'` para simplificar y estandarizar la información.
+- Permite que las condiciones desconocidas no queden como categoría aislada.
 
-**9. Total de heridos** (`injuries_total`)  
-• Los valores nulos fueron reemplazados por `0` para evitar errores al calcular promedios o totales.
+---
 
-**10. Total de heridos fatales** (`injuries_fatal`)  
-• También se reemplazaron los valores nulos por `0` para facilitar el análisis.
+### **5. Causa primaria del accidente** (`prim_contributory_cause`)
+- Se fusionaron las categorías `'UNABLE TO DETERMINE'` y `'NOT APPLICABLE'` bajo la nueva etiqueta `'UNDETERMINED/NOT APPLICABLE'`.
+- Esto permite una mejor lectura en los análisis y evita dispersión entre causas imprecisas.
 
+---
+
+### **6. Causa secundaria del accidente** (`sec_contributory_cause`)
+- Igual que en la causa primaria, se unificaron `'UNABLE TO DETERMINE'` y `'NOT APPLICABLE'` como `'UNDETERMINED/NOT APPLICABLE'`.
+
+---
+
+### **7. Dirección de la calle** (`street_direction`)
+- Se reemplazaron los valores `NULL` o vacíos por `'UNKNOWN'`.
+- Esto garantiza que todos los registros contengan una dirección definida, incluso si es genérica.
+
+---
+
+### **8. Nombre de la calle** (`street_name`)
+- Se asignó `'UNKNOWN'` a los valores vacíos o nulos.
+- De esta forma se evita perder datos por falta de nombre de vía, permitiendo mantener consistencia en todos los registros.
+
+---
+
+### **9. Total de personas heridas** (`injuries_total`)
+- Los valores `NULL` fueron sustituidos por `0`.
+- Esto permite sumar y promediar correctamente el número de heridos sin excluir registros por datos faltantes.
+
+---
+
+### **10. Personas fallecidas** (`injuries_fatal`)
+- Los registros con valores `NULL` se reemplazaron por `0`.
+- Esta acción es esencial para análisis de gravedad sin sesgo por omisión de datos.
+
+---
+
+Todas estas modificaciones fueron implementadas mediante sentencias `UPDATE` en el archivo de limpieza `scripts/limpieza.sql`, garantizando la reproducibilidad y trazabilidad del proceso.
