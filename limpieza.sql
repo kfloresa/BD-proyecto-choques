@@ -126,6 +126,6 @@ AND levenshtein(UPPER(TRIM(city)), 'UNKNOWN') > 3
 AND NOT EXISTS (
     SELECT 1
     FROM ciudades_validas v
-    WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 4
+    WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 5
 );
 
