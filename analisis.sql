@@ -291,27 +291,92 @@ UNION ALL
 SELECT 'injuries_fatal', MIN(injuries_fatal), MAX(injuries_fatal), AVG(injuries_fatal) FROM limpieza.crashes;
 
 -- Conteo de tuplas por cada categoría
+
 SELECT weather_condition, COUNT(*)
 FROM limpieza.crashes
-GROUP BY weather_condition;
+GROUP BY weather_condition
+ORDER BY COUNT(*) DESC;
 
 SELECT lighting_condition, COUNT(*)
 FROM limpieza.crashes
-GROUP BY lighting_condition;
+GROUP BY lighting_condition
+ORDER BY COUNT(*) DESC;
 
 SELECT first_crash_type, COUNT(*)
 FROM limpieza.crashes
-GROUP BY first_crash_type;
+GROUP BY first_crash_type
+ORDER BY COUNT(*) DESC;
 
 SELECT trafficway_type, COUNT(*)
 FROM limpieza.crashes
-GROUP BY trafficway_type;
+GROUP BY trafficway_type
+ORDER BY COUNT(*) DESC;
 
--- Verificar si hay registros duplicados
-SELECT crash_record_id, COUNT(*)
+SELECT roadway_surface_cond, COUNT(*)
 FROM limpieza.crashes
-GROUP BY crash_record_id
-HAVING COUNT(*) > 1;
+GROUP BY roadway_surface_cond
+ORDER BY COUNT(*) DESC;
+
+SELECT road_defect, COUNT(*)
+FROM limpieza.crashes
+GROUP BY road_defect
+ORDER BY COUNT(*) DESC;
+
+SELECT crash_type, COUNT(*)
+FROM limpieza.crashes
+GROUP BY crash_type
+ORDER BY COUNT(*) DESC;
+
+SELECT damage, COUNT(*)
+FROM limpieza.crashes
+GROUP BY damage
+ORDER BY COUNT(*) DESC;
+
+SELECT prim_contributory_cause, COUNT(*)
+FROM limpieza.crashes
+GROUP BY prim_contributory_cause
+ORDER BY COUNT(*) DESC;
+
+SELECT sec_contributory_cause, COUNT(*)
+FROM limpieza.crashes
+GROUP BY sec_contributory_cause
+ORDER BY COUNT(*) DESC;
+
+SELECT street_direction, COUNT(*)
+FROM limpieza.crashes
+GROUP BY street_direction
+ORDER BY COUNT(*) DESC;
+
+SELECT street_name, COUNT(*)
+FROM limpieza.crashes
+GROUP BY street_name
+ORDER BY COUNT(*) DESC;
+
+SELECT posted_speed_limit, COUNT(*)
+FROM limpieza.crashes
+GROUP BY posted_speed_limit
+ORDER BY posted_speed_limit;
+
+SELECT num_units, COUNT(*)
+FROM limpieza.crashes
+GROUP BY num_units
+ORDER BY num_units;
+
+SELECT injuries_total, COUNT(*)
+FROM limpieza.crashes
+GROUP BY injuries_total
+ORDER BY injuries_total;
+
+SELECT injuries_fatal, COUNT(*)
+FROM limpieza.crashes
+GROUP BY injuries_fatal
+ORDER BY injuries_fatal;
+
+SELECT crash_day_of_week, COUNT(*)
+FROM limpieza.crashes
+GROUP BY crash_day_of_week
+ORDER BY crash_day_of_week;
+
 
 -- Identificación de inconsistencias en los datos
 SELECT 'injuries_fatal > injuries_total' AS inconsistency_check, COUNT(*) FROM limpieza.crashes WHERE injuries_fatal > injuries_total
