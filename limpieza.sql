@@ -129,3 +129,10 @@ AND NOT EXISTS (
     WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 5
 );
 
+--Limpieza de sexo en people
+
+-- Reemplazar valores NULL o vacíos por 'UNKNOWN' en la columna sex
+UPDATE limpieza.people
+SET sex = 'UNKNOWN'
+WHERE sex IS NULL OR TRIM(sex) = '';
+
