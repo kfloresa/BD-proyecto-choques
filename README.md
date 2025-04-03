@@ -68,7 +68,7 @@ Es necesario tomar en cuenta la naturaleza de los datos que se están utilizando
 
 ## Limpieza de datos
 
-### Limpieza aplicada a la tabla `people`
+### a) Limpieza aplicada a la tabla `people`
 
 Con base en el objetivo del proyecto, se identificaron inconsistencias, errores y valores faltantes en los registros relacionados con personas involucradas en accidentes. Para garantizar que el análisis posterior sea confiable y coherente, se realizaron las siguientes actividades de limpieza sobre la tabla `limpieza.people`:
 
