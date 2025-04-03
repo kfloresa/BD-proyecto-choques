@@ -133,6 +133,7 @@ AND NOT EXISTS (
 
 -- Reemplazar valores NULL o vacíos por 'UNKNOWN' en la columna sex
 UPDATE limpieza.people
-SET sex = 'UNKNOWN'
-WHERE sex IS NULL OR TRIM(sex) = '';
+SET sex = 'X'
+WHERE sex IS NULL
+   OR TRIM(sex) = '';
 
