@@ -311,3 +311,22 @@ UPDATE limpieza.crashes
 SET prim_contributory_cause = 'UNDETERMINED/NOT APPLICABLE'
 WHERE prim_contributory_cause IN ('UNABLE TO DETERMINE', 'NOT APPLICABLE');
 
+-- 6. Limpieza de sec_contributory_cause
+-- Unificar causas secundarias no determinadas o no aplicables
+UPDATE limpieza.crashes
+SET sec_contributory_cause = 'UNDETERMINED/NOT APPLICABLE'
+WHERE sec_contributory_cause IN ('UNABLE TO DETERMINE', 'NOT APPLICABLE');
+
+
+-- 7. Limpieza de street_direction
+-- Reemplazamos valores NULL o vacíos por 'UNKNOWN' para indicar cuando no se tiene dirección registrada de la calle.
+UPDATE limpieza.crashes
+SET street_direction = 'UNKNOWN'
+WHERE street_direction IS NULL OR TRIM(street_direction) = '';
+
+-- 8. Limpieza de street_name
+-- Reemplazamos valores NULL o vacíos por 'UNKNOWN' para estandarizar registros sin nombre de calle disponible.
+UPDATE limpieza.crashes
+SET street_name = 'UNKNOWN'
+WHERE street_name IS NULL OR TRIM(street_name) = '';
+
