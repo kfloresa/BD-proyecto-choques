@@ -75,6 +75,18 @@ WHERE age < 0;
 
 --Limpieza de ciudades en people
 
+\*
+En la linea de comando se ejecuta lo siguiente:
+
+
+    CREATE TABLE ciudades_validas (
+    nombre TEXT
+);
+
+\copy ciudades_validas(nombre) FROM 'ruta/areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true);
+
+ *\   
+
 
 -- Activamos la extensión fuzzystrmatch, que proporciona funciones para comparar cadenas de texto
 -- mediante medidas de similitud como la distancia de Levenshtein.
