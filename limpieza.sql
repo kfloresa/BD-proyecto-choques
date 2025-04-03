@@ -255,3 +255,20 @@ UPDATE limpieza.vehicles
 SET towed_i = 'UNKNOWN'
 WHERE towed_i IS NULL OR TRIM(towed_i) = '';
 
+-- 9. Limpieza de fire_i
+-- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
+-- para marcar explícitamente los casos donde no se sabe si el vehículo se incendió.
+
+UPDATE limpieza.vehicles
+SET fire_i = 'UNKNOWN'
+WHERE fire_i IS NULL OR TRIM(fire_i) = '';
+
+
+-- 10. Limpieza de exceed_speed_limit_i
+-- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
+-- para estandarizar los registros donde no se sabe si se excedió el límite de velocidad.
+
+UPDATE limpieza.vehicles
+SET exceed_speed_limit_i = 'UNKNOWN'
+WHERE exceed_speed_limit_i IS NULL OR TRIM(exceed_speed_limit_i) = '';
+
