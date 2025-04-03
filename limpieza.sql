@@ -147,3 +147,12 @@ SET airbag_deployed = 'DEPLOYMENT UNKNOWN'
 WHERE airbag_deployed IS NULL;
 
 
+--Limpieza de injury_classification en people
+-- Reemplazamos los valores NULL en la columna injury_classification por 'UNKNOWN'
+UPDATE limpieza.people
+SET injury_classification = 'UNKNOWN'
+WHERE injury_classification IS NULL;
+
+
+
+
