@@ -65,3 +65,60 @@ El objetivo del set de datos es analizar la relación entre autos, personas y ac
 
 Es necesario tomar en cuenta la naturaleza de los datos que se están utilizando, dado que estos son registros de situaciones desafortunadas para un gran número de personas, el manejo y manipulación de estos datos conlleva una responsabilidad ética. Dicha responsabilidad incluye, pero no se limita a las siguientes pautas: utilizar los datos de manera objetiva, sin intención de fomentar discriminación o perpetuar estereotipos de cualquier índole; hacer un acto de balance entre las opiniones y puntos de vista personales de los integrantes del equipo con las realidades y hechos observados; el manejo respetuoso y profesional de la información.
 
+
+## Limpieza de datos
+
+### Limpieza aplicada a la tabla `people`
+
+Con base en el objetivo del proyecto, se identificaron inconsistencias, errores y valores faltantes en los registros relacionados con personas involucradas en accidentes. Para garantizar que el análisis posterior sea confiable y coherente, se realizaron las siguientes actividades de limpieza sobre la tabla `limpieza.people`:
+
+---
+
+### 1. Edad (`age`)
+- Se reemplazaron los valores `NULL` y valores imposibles (como `-177` y `-1`) por `0`.
+- Todos los valores negativos restantes fueron transformados a positivos usando `ABS()`.
+- Esto fue necesario para evitar distorsiones en el análisis demográfico y asegurar que todas las edades tuvieran sentido dentro del contexto.
+
+---
+
+### 2. Ciudad (`city`)
+- Se identificaron múltiples errores ortográficos, variantes y nombres mal escritos de ciudades.
+- Se creó una tabla auxiliar `ciudades_validas` que contiene nombres oficiales de **vecindarios y áreas comunitarias de Chicago**.
+- Se activó la extensión `fuzzystrmatch` y se utilizó la función `levenshtein()` para comparar y corregir nombres similares automáticamente (tolerancia ≤ 4).
+- Las ciudades sin correspondencia fueron clasificadas como `'INDEFINIDA'` y los valores nulos o vacíos fueron marcados como `'UNKNOWN'`.
+
+Esta limpieza fue necesaria para evitar duplicados, reducir la dispersión de categorías y lograr una georreferenciación precisa.
+
+---
+
+### 3. Sexo (`sex`)
+- Se reemplazaron los valores nulos, vacíos y etiquetas mal escritas (`UNKNOWN`, etc.) por `'X'`, para unificar todos los casos donde no se pudo determinar el sexo.
+- Esta categoría se usa como marcador de información ausente o no binaria.
+
+---
+
+### 4. Relación con vehículo (`vehicle_id`)
+- Los valores nulos fueron reemplazados por `-1`, lo cual permite identificar registros sin asociación con un vehículo y previene errores en consultas relacionales.
+- Esta práctica evita ambigüedad en los análisis sin eliminar datos.
+
+---
+
+### 5. Posición en el vehículo (`seat_no`)
+- También se estandarizaron los valores nulos con `-1` para representar una posición desconocida.
+- Esto garantiza que todos los registros tengan una referencia numérica válida.
+
+---
+
+### 6. Bolsa de aire (`airbag_deployed`)
+- Se reemplazaron los valores nulos por `'DEPLOYMENT UNKNOWN'` para mantener la integridad de la categoría y asegurar que todos los registros sean legibles en análisis categóricos.
+- Esto ayuda a visualizar de manera más clara los casos con datos faltantes.
+
+---
+
+### 7. Clasificación de lesión (`injury_classification`)
+- Los valores nulos fueron reemplazados por `'UNKNOWN'` para asegurar que todos los registros tuvieran una categoría asignada, lo cual es fundamental para análisis de gravedad.
+
+---
+
+Todas estas acciones fueron documentadas y ejecutadas mediante un script SQL incluido en el repositorio (`scripts/limpieza_people.sql`), cumpliendo con el requisito de contar con un mecanismo reproducible para aplicar la limpieza sobre los datos crudos.
+
