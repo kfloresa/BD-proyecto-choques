@@ -58,9 +58,7 @@ SELECT
 FROM raw.crashes;
 
 ---------------------------------------------------
-\*
-    Limpieza de la tabla limpieza.people
-*\
+--Limpieza de la tabla limpieza.people
     
 -- 1. Limpieza de la columna 'age' 
 -- a. Reemplazar NULLs por 0
@@ -78,18 +76,11 @@ WHERE age < 0;
 
 -- 2. Limpieza de ciudades en people
 
-\*
-En la linea de comando se ejecuta lo siguiente:
-
-
-    CREATE TABLE ciudades_validas (
+CREATE TABLE ciudades_validas (
     nombre TEXT
 );
 
-\copy ciudades_validas(nombre) FROM 'ruta/areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true);
-
- *\   
-
+COPY ciudades_validas(nombre) FROM 'ruta/areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true); 
 
 -- Activamos la extensión fuzzystrmatch, que proporciona funciones para comparar cadenas de texto
 -- mediante medidas de similitud como la distancia de Levenshtein.
@@ -178,11 +169,7 @@ WHERE seat_no IS NULL;
 
 
 -------------------------------------
-
-\*
-    Limpieza de la tabla limpieza.vehicles
-*\
-
+--Limpieza de la tabla limpieza.vehicles
 
 -- 1. Limpieza de vehicle_year
 -- Reemplazamos valores irreales (año > 2025 o año <= 1950) y valores NULL por -1
@@ -274,10 +261,7 @@ WHERE exceed_speed_limit_i IS NULL OR TRIM(exceed_speed_limit_i) = '';
 
 
 ------------------------------------------
-
-\*
-    Limpieza de la tabla limpieza.crashes
-*\
+--Limpieza de la tabla limpieza.crashes
 
 -- 1. Limpieza de weather_condition
 -- Unificamos 'UNKNOWN' en 'OTHER' para consolidar categorías imprecisas
