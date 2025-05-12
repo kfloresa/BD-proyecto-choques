@@ -1,11 +1,35 @@
 # Bases de datos
  
-  # Equipo 2 😸
+ # Equipo 2 😸
  
  ## Instituto Tecnológico Autónomo de México
- 
- Drive: https://drive.google.com/drive/folders/1cOAGPZ9cnVfjYAWl28TsU2sv7cazKgo3?usp=sharing
 
+ # Instructivo para la carga de datos.
+ ## Requisitos básicos para la carga.
+ - PostgreSQL instalado y accesible desde la línea de comandos ('psql');
+ - Un usuario de PostgreSQL con permisos para crear bases de datos y ejecutar scripts.
+
+ ## Archivos necesarios.
+ Descargar los siguientes archivos desde la [URL](https://drive.google.com/drive/folders/1cOAGPZ9cnVfjYAWl28TsU2sv7cazKgo3?usp=sharing) proporcionada:
+ - 'Traffic_Crashes_-_Vehicles.csv'
+ - 'Traffic_Crashes_-_People.csv'
+ - 'Traffic_Crashes_-_Crashes.csv'
+   
+ ES MUY IMPORTANTE colocarlos en el mismo directorio en el que se encuentran los archivos 'carga.sql', 'limpieza.sql'
+
+ ## Pasos a seguir para la carga de datos.
+ 1. Abrir una terminal e ingresar a 'psql':
+
+      psql -U usuario
+ 3. Crear la base de datos y conectarse a ella.
+   CREATE DATABASE choques;
+
+      \c choques
+ 5. Ejecutar el script de carga.
+
+      \i carga.sql
+
+# Explicación general de los datos.
 Este conjunto de datos contiene información detallada sobre los accidentes de tráfico ocurridos en Chicago. Está compuesto por tres archivos principales que registran diferentes aspectos del mismo evento:
 1. Crashes (Accidentes) → Registra cada accidente con información sobre la fecha, lugar, condiciones del entorno y la gravedad del incidente. 
 2. Vehicles (Vehículos) → Contiene detalles sobre los vehículos involucrados en cada accidente, como tipo, marca, año y características adicionales.
