@@ -76,11 +76,11 @@ WHERE age < 0;
 
 -- 2. Limpieza de ciudades en people
 
-CREATE TABLE ciudades_validas (
+CREATE TABLE limpieza.ciudades_validas (
     nombre TEXT
 );
 
-COPY ciudades_validas(nombre) FROM 'ruta/areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true); 
+COPY limpieza.ciudades_validas(nombre) FROM 'ruta/areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true); 
 
 -- Activamos la extensión fuzzystrmatch, que proporciona funciones para comparar cadenas de texto
 -- mediante medidas de similitud como la distancia de Levenshtein.
@@ -105,7 +105,7 @@ WHERE levenshtein(UPPER(city), 'UNKNOWN') <= 3;
 -- y si hay una ciudad parecida con distancia Levenshtein baja, ignora los espacios
 UPDATE limpieza.people p
 SET city = v.nombre
-FROM ciudades_validas v
+FROM limpieza.ciudades_validas v
 WHERE levenshtein(UPPER(TRIM(p.city)), UPPER(TRIM(v.nombre))) <= 4
   AND TRIM(p.city) IS NOT NULL
   AND UPPER(TRIM(p.city)) != UPPER(TRIM(v.nombre));
@@ -114,12 +114,12 @@ WHERE levenshtein(UPPER(TRIM(p.city)), UPPER(TRIM(v.nombre))) <= 4
 UPDATE limpieza.people
 SET city = 'INDEFINIDA'
 WHERE city NOT IN (
-    SELECT nombre FROM ciudades_validas
+    SELECT nombre FROM limpieza.ciudades_validas
 )
 AND levenshtein(UPPER(TRIM(city)), 'UNKNOWN') > 3
 AND NOT EXISTS (
     SELECT 1
-    FROM ciudades_validas v
+    FROM limpieza.ciudades_validas v
     WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 5
 );
 
