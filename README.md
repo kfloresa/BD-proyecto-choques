@@ -1,15 +1,15 @@
-# Bases de datos
+# Instituto Tecnológico Autónomo de México - Bases de datos (COM-12101)
  
- # Equipo 2 😸
+ ### Equipo 2 😸 
  
- ## Instituto Tecnológico Autónomo de México
+ 
 
  # Instructivo para la carga de datos.
- ## Requisitos básicos para la carga.
+ ### Requisitos básicos para la carga.
  - PostgreSQL instalado y accesible desde la línea de comandos ('psql');
  - Un usuario de PostgreSQL con permisos para crear bases de datos y ejecutar scripts.
 
- ## Archivos necesarios.
+ ### Archivos necesarios.
  Descargar los siguientes archivos desde la [URL](https://drive.google.com/drive/folders/1cOAGPZ9cnVfjYAWl28TsU2sv7cazKgo3?usp=sharing) proporcionada:
  - 'Traffic_Crashes_-_Vehicles.csv'
  - 'Traffic_Crashes_-_People.csv'
@@ -17,7 +17,7 @@
    
  ES MUY IMPORTANTE colocarlos en el mismo directorio en el que se encuentran los archivos 'carga.sql', 'limpieza.sql'
 
- ## Pasos a seguir para la carga de datos.
+ ### Pasos a seguir para la carga de datos.
  1. Abrir una terminal e ingresar a 'psql':
 
       psql -U usuario
