@@ -1,7 +1,3 @@
---DROP DATABASE choques;
-CREATE DATABASE choques;
-
-\c choques
 
 CREATE SCHEMA raw;
 
