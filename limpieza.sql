@@ -80,7 +80,7 @@ CREATE TABLE limpieza.ciudades_validas (
     nombre TEXT
 );
 
-COPY limpieza.ciudades_validas(nombre) FROM 'ruta/areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true); 
+\copy limpieza.ciudades_validas(nombre) FROM 'areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true); 
 
 -- Activamos la extensión fuzzystrmatch, que proporciona funciones para comparar cadenas de texto
 -- mediante medidas de similitud como la distancia de Levenshtein.
