@@ -312,6 +312,21 @@ Para asegurar la calidad y consistencia de los registros relacionados con los ac
 
 ---
 
+### d) Eliminación y/o omisión de columnas 
+| Columna | Descripcion | Razón |
+| --- | --- |--- |
+| `police_notified` | Indica si las autoridades locales fueron notificadas | La mayoría tuplas carecían de información (`UNKNOWN`) |
+| `street_direction` | Orientación (sentido) de la calle | Demasiadas tuplas carecían de información (`UNKNOWN`) |
+| `street_no` | Número de la calle | Demasiadas tuplas carecían de información (`UNKNOWN`) | 
+| `sex` | Sexo de la persona involucrada | Demasiadas tuplas carecían de información (`UNKNOWN`) |
+| `exceed_speed_limit_i` | Establece si hubo un exceso sobre el límite de velocidad al momento del accidente | Demasiadas tuplas carecían de información (`UNKNOWN`) |
+| `lic_plate_state` | Estado donde se emitieron las placas del vehículo | Demasiadas tuplas carecían de información (`UNKNOWN`), además de esto consideramos que no es información relevante para el objetivo del proyecto |
+| `travel_direction` | Dirección del viaje | Demasiadas tuplas carecían de información (`UNKNOWN`) |
+| `towed_1` | Indica si fue necesario remolcar el vehículo | Demasiadas tuplas carecían de información (`UNKNOWN`) |
+| `fire_i` | Indica si hubo un incendio | Demasiadas tuplas carecían de información (`UNKNOWN`) |
+
+
+
 Todas estas modificaciones fueron implementadas mediante sentencias `UPDATE` en el archivo de limpieza `scripts/limpieza.sql`, garantizando la reproducibilidad y trazabilidad del proceso.
 
 # Normalización hasta cuarta forma normal
