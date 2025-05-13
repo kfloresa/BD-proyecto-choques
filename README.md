@@ -45,9 +45,9 @@ E). Facilitar estudios académicos y gubernamentales sobre seguridad vial.
 
 Los datos están disponibles públicamente en el Chicago Data Portal, bajo estas direcciones oficiales: 
 
-Crashes (Accidentes): https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if/about_data
-Vehicles (Vehículos): https://data.cityofchicago.org/Transportation/Traffic-Crashes-Vehicles/68nd-jvt3/about_data
-Persons (Personas): https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d/about_data
+- Crashes (Accidentes): https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if/about_data
+- Vehicles (Vehículos): https://data.cityofchicago.org/Transportation/Traffic-Crashes-Vehicles/68nd-jvt3/about_data
+- Persons (Personas): https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d/about_data
 
 Además, ahora están alojados en nuestro Google Drive para facilitar su acceso dentro del equipo y evitar tener datos diferentes dadas las constantes actualizaciones. 
 Los datos se actualizan diariamente con nuevos registros de accidentes reportados por el Departamento de Policía de Chicago (CPD). Cada día se agregan incidentes recientes, lo que permite realizar análisis en tiempo real sobre el estado de la seguridad vial en la ciudad. 
@@ -62,28 +62,37 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 |  Atributos  |  48             |  71            |  29         |
 
 
-| Tipo de dato | Choques                   | Vehiculos       | Personas      |
-|--------------|---------------------------|-----------------|---------------|
-| Numerico     | Id                        | Id              | Id            |
-|              | Limite_velocidad          | Numero_pasajeros| Edad          |
-|              | Numero_unidades           | Anho            |               |
-|              | Numero_heridas            |                 |               | 
-|              | Numero_heridas_fatales    |                 |               |
-|--------------|---------------------------|-----------------|---------------|
-| Categorico/  | Tipo                      | Tipo            | Tipo          |
-| Booleano     | Clima                     | Fuego           | Asiento       |
-|              | Iluminacion               | Remolcado       | Bolsa_aire    |
-|              | Tipo_calle                | Direccion       | Alcohol       |
-|              | Condicion_carretera       | Modelo          | Ciudad        |
-|              | Danhos                    | Marca           | Sexo          |
-|              | Causa                     | Placas_estado   | Tipo_herida   |
-|--------------|---------------------------|-----------------|---------------|
-| Texto        | Choque_id                 |                 | Accion        |
-|              | Calle                     |                 | Persona_id    |
-|--------------|---------------------------|-----------------|---------------|
-| Fecha        | Fecha_choque              |                 |               |
-|              | Fecha_notificacion_policia|                 |               |
-|--------------|---------------------------|-----------------|---------------|
+| Set       | Nombre                    | Descripcion                            | Tipo                |
+|-----------|---------------------------|----------------------------------------|---------------------|
+| Choques   | Choque_Id                 | Identificador de choque                | Text                |
+| Choques   | Limite_velocidad          | Limite de velocidad en la calle        | Numerico            |
+| Choques   | Numero_unidades           | Numero de autos involucrados           | Numerico            |
+| Choques   | Numero_heridas            | Numero de heridas totales              | Numerico            |
+| Choques   | Numero_heridas_fatales    | Numero de heridas fatales              | Numerico            |
+| Choques   | Tipo                      | Con heridas / Si requirio grua         | Categorico/booleano |
+| Choques   | Clima                     | Clima                                  | Categorico/booleano |
+| Choques   | Iluminacion               | Iluminacion                            | Categorico/booleano |
+| Choques   | Tipo_calle                | Tipo de calle                          | Categorico/booleano |
+| Choques   | Condicion_carretera       | Condicion de la superficie de la calle | Categorico/booleano |
+| Choques   | Danhos                    | Daños totales en dinero                | Categorico/booleano |
+| Choques   | Causa                     | Causa del choque                       | Categorico/booleano |
+| Choques   | Calle_nombre              | Nombre de la calle                     | Text                |
+| Choques   | Fecha_choque              | Fecha del choque                       | Timestamp           |
+| Vehiculo  | Vehiculo_id               | Identificador de vhiculo               | Text                |
+| Vehiculo  | Numero_pasajeros          | Numero de pasajeros en el vehiculo     | Numerico            | 
+| Vehiculo  | Anho                      | Año del vehiculo                       | Numerico            |
+| Vehiculo  | Vehiculo_tipo             | Tipo de vehiculo                       | Categorico/booleano |
+| Vehiculo  | Modelo                    | Modelo del vehiculo                    | Categorico/booleano |
+| Vehiculo  | Marca                     | Marca del vehiculo                     | Categorico/booleano |
+| Persona   | Persona_id                | Identificador de persona               | Text                |
+| Persona   | Edad                      | Edad de la persona                     | Numerico            | 
+| Persona   | Persona_tipo              | Si es peaaton, conductor o paasajero   | Categorico/booleano |
+| Persona   | Bolsa_aire                | Si se activo la bolsa de aire          | Categorico/booleano |
+| Persona   | Tipo_herida               | Tipo de herida de la persona           | Categorico/booleano |
+| Persona   | Ciudad                    | Ciudad de la que proviene la persona   | Categorico/booleano |
+| Persona   | Accion                    | Accion que realizo la persona          | Text                |
+
+
 
 El objetivo del set de datos es analizar la relación entre autos, personas y accidentes automovilísticos en Chicago, con el fin de identificar patrones, factores de riesgo y posibles estrategias de prevención. Usaremos el conjunto de datos para realizar análisis estadísticos y visualizaciones que permitan comprender mejor la frecuencia y gravedad de los accidentes, así como la influencia de variables como tipo de vehículo, condiciones del conductor, ubicación y factores ambientales. Como objetivo de la materia, el equipo pretende reforzar las habilidades de manipulación de datos mediante el uso extensivo de operaciones CRUD; entender cómo utilizar herramientas externas (e.g. API’s, implementaciones con otros lenguajes) de manera eficaz y aplicar este conocimiento para implementarlas en este proyecto. 
 
