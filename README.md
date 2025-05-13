@@ -64,20 +64,20 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 
 | Set       | Nombre                    | Descripcion                            | Tipo                |
 |-----------|---------------------------|----------------------------------------|---------------------|
-| Choques   | Choque_Id                 | Identificador de choque                | Text                |
-| Choques   | Limite_velocidad          | Limite de velocidad en la calle        | Numerico            |
-| Choques   | Numero_unidades           | Numero de autos involucrados           | Numerico            |
-| Choques   | Numero_heridas            | Numero de heridas totales              | Numerico            |
-| Choques   | Numero_heridas_fatales    | Numero de heridas fatales              | Numerico            |
-| Choques   | Tipo                      | Con heridas / Si requirio grua         | Categorico/booleano |
-| Choques   | Clima                     | Clima                                  | Categorico/booleano |
-| Choques   | Iluminacion               | Iluminacion                            | Categorico/booleano |
-| Choques   | Tipo_calle                | Tipo de calle                          | Categorico/booleano |
-| Choques   | Condicion_carretera       | Condicion de la superficie de la calle | Categorico/booleano |
-| Choques   | Danhos                    | Daños totales en dinero                | Categorico/booleano |
-| Choques   | Causa                     | Causa del choque                       | Categorico/booleano |
-| Choques   | Calle_nombre              | Nombre de la calle                     | Text                |
-| Choques   | Fecha_choque              | Fecha del choque                       | Timestamp           |
+| Choque    | Choque_Id                 | Identificador de choque                | Text                |
+| Choque    | Limite_velocidad          | Limite de velocidad en la calle        | Numerico            |
+| Choque    | Numero_unidades           | Numero de autos involucrados           | Numerico            |
+| Choque    | Numero_heridas            | Numero de heridas totales              | Numerico            |
+| Choque    | Numero_heridas_fatales    | Numero de heridas fatales              | Numerico            |
+| Choque    | Tipo                      | Con heridas / Si requirio grua         | Categorico/booleano |
+| Choque    | Clima                     | Clima                                  | Categorico/booleano |
+| Choque    | Iluminacion               | Iluminacion                            | Categorico/booleano |
+| Choque    | Tipo_calle                | Tipo de calle                          | Categorico/booleano |
+| Choque    | Condicion_carretera       | Condicion de la superficie de la calle | Categorico/booleano |
+| Choque    | Danhos                    | Daños totales en dinero                | Categorico/booleano |
+| Choque    | Causa                     | Causa del choque                       | Categorico/booleano |
+| Choque    | Calle_nombre              | Nombre de la calle                     | Text                |
+| Choque    | Fecha_choque              | Fecha del choque                       | Timestamp           |
 | Vehiculo  | Vehiculo_id               | Identificador de vhiculo               | Text                |
 | Vehiculo  | Numero_pasajeros          | Numero de pasajeros en el vehiculo     | Numerico            | 
 | Vehiculo  | Anho                      | Año del vehiculo                       | Numerico            |
