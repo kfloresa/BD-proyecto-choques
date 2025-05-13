@@ -313,3 +313,12 @@ Para asegurar la calidad y consistencia de los registros relacionados con los ac
 ---
 
 Todas estas modificaciones fueron implementadas mediante sentencias `UPDATE` en el archivo de limpieza `scripts/limpieza.sql`, garantizando la reproducibilidad y trazabilidad del proceso.
+
+# Normalización hasta cuarta forma normal
+---
+# Análisis de datos a través de consultas SQL y creación de atributos analíticos
+---
+## Gravedad de heridas por grupo de edad
+Se realizó un análisis para entender cómo la gravedad de las heridas en accidentes de tránsito varía según la edad de las personas involucradas. Los datos provienen del conjunto persons, el cual incluye a conductores, pasajeros y peatones registrados por el Departamento de Policía de Chicago.
+La consulta SQL utilizada agrupa a las personas según rangos de edad predefinidos, y calcula cuántas personas hay en cada grupo y cuántas de ellas sufrieron heridas graves (es decir, clasificadas como FATAL o INCAPACITATING INJURY). Las personas mayores de 71 años tienen la mayor proporción de heridas graves, con un 1.75%.
+Le siguen los menores de 18 años, lo cual sugiere que los extremos de edad son más vulnerables. A pesar de que el grupo de 31 a 50 años es el más numeroso, tiene una tasa relativamente baja de heridas graves. Este análisis es clave para identificar qué grupos etarios están en mayor riesgo y podría orientar futuras políticas de prevención vial enfocadas en adultos mayores y menores de edad.
