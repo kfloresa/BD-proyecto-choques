@@ -206,9 +206,9 @@ UNION ALL
 SELECT 'exceed_speed_limit_i', COUNT(*) - COUNT(exceed_speed_limit_i) FROM limpieza.vehicles;
 
 -- Verificar si hay registros duplicados
-SELECT vehicle_id, COUNT(*)
+SELECT crash_unit_id, COUNT(*)
 FROM limpieza.vehicles
-GROUP BY vehicle_id
+GROUP BY crash_unit_id
 HAVING COUNT(*) > 1;
 
 -- Verificar inconsistencias
