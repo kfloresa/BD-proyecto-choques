@@ -98,6 +98,11 @@ El objetivo del set de datos es analizar la relación entre autos, personas y ac
 
 Es necesario tomar en cuenta la naturaleza de los datos que se están utilizando, dado que estos son registros de situaciones desafortunadas para un gran número de personas, el manejo y manipulación de estos datos conlleva una responsabilidad ética. Dicha responsabilidad incluye, pero no se limita a las siguientes pautas: utilizar los datos de manera objetiva, sin intención de fomentar discriminación o perpetuar estereotipos de cualquier índole; hacer un acto de balance entre las opiniones y puntos de vista personales de los integrantes del equipo con las realidades y hechos observados; el manejo respetuoso y profesional de la información.
 
+## Análisis exploratorio
+### a) Crashes
+
+### b) People
+### c) Vehicle
 
 ## Limpieza de datos
 
