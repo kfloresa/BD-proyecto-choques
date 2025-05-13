@@ -65,7 +65,7 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 | Set       | Nombre                    | Descripcion                            | Tipo                |
 |-----------|---------------------------|----------------------------------------|---------------------|
 | Choque    | Choque_Id                 | Identificador de choque                | Text                |
-| Choque    | Limite_velocidad          | Limite de velocidad en la calle        | Numerico            |
+| Choque    | Limite_velocidad          | Limite de velocidad en millas          | Numerico            |
 | Choque    | Numero_unidades           | Numero de autos involucrados           | Numerico            |
 | Choque    | Numero_heridas            | Numero de heridas totales              | Numerico            |
 | Choque    | Numero_heridas_fatales    | Numero de heridas fatales              | Numerico            |
@@ -100,9 +100,24 @@ Es necesario tomar en cuenta la naturaleza de los datos que se están utilizando
 
 ## Análisis exploratorio
 ### a) Crashes
+- En la columna posted_speed_limit, el valor minimo es de 0, lo cual no debeía ocurrir ya que es la máxima velocidad permitida en una calle. Mientras tanto, el máximo valor es de 99, lo cual consideramos es mucho, sobretodo porque está en millas. 
+- En la columna road_defect, 170099 tuplas sn valores null, lo cual es casi 20% de los datos.
+- En la columna prim_contributory_cause, más de un tercio de los datos están en la categoría: "UNABLE TO DETERMINE", lo cual no nos ofrecee mucha información.
+- Únicamente exist un registro en el que la fecha de notificación del policia es anterior a la fecha del choque.   
 
 ### b) People
+- En la columna edad, los rangos van desd -177 años a 110. Existn 15553 tuplas con una edad menor o igual a cero y hay medio millón de valores null.
+- En la columna no_seat hay un millón y medio de valores null.
+- En la columna ciudad, existen 14,228 ciudades diferentes, la mayoria son las mismas ciudades, pero con errores de escritura. Incluso hay una ciudad que solo es " ' " . Además, son medio millón de valores null.
+- En la columna sexo, 182445 personas fueron catalogadas en "X" y otras 33904 son valores null, lo cual es casi 10% de los datos.
+  
 ### c) Vehicle
+- En la columna vehicle_year, el maximo año es 9999. 2155 tuplas son mayores a 2025.
+- En la columna num_passengers existen un millón y medio de tuplas con valores null.
+- En la columna towed, existen un millón y medio de tuplas con valores null.
+- En la columna fire, existen un millón ochocientos tuplas con valores null.
+- En la columna exceed_speed_limit_i existen un millón ochocientos tuplas con valores null. Este tributo nos pudo haber dado mucha información
+- En la columna vehicle_id, existen 43602 tuplas con valores null. Esta columna debe de servir como identificador de un vehiculo en un accidente, no debería contener nulls.
 
 ## Limpieza de datos
 
