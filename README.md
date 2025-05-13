@@ -100,25 +100,25 @@ Es necesario tomar en cuenta la naturaleza de los datos que se están utilizando
 
 ## Análisis exploratorio
 ### a) Crashes
-- En la columna posted_speed_limit, el valor minimo es de 0, lo cual no debeía ocurrir ya que es la máxima velocidad permitida en una calle. Mientras tanto, el máximo valor es de 99, lo cual consideramos es mucho, sobretodo porque está en millas. 
-- En la columna road_defect, 170099 tuplas sn valores null, lo cual es casi 20% de los datos.
-- En la columna prim_contributory_cause, más de un tercio de los datos están en la categoría: "UNABLE TO DETERMINE", lo cual no nos ofrecee mucha información.
-- Únicamente exist un registro en el que la fecha de notificación del policia es anterior a la fecha del choque.   
+- En la columna posted_speed_limit, el valor mínimo es de 0, lo cual no debería ocurrir ya que es la máxima velocidad permitida en una calle. Mientras tanto, el máximo valor es de 99, lo cual consideramos es mucho, sobre todo porque está en millas.
+- En la columna road_defect, 170,099 tuplas son valores null, lo cual es casi 20% de los datos.
+- En la columna prim_contributory_cause, más de un tercio de los datos están en la categoría: "UNABLE TO DETERMINE", lo cual no nos ofrece mucha información.
+- Únicamente existe un registro en el que la fecha de notificación del policía es anterior a la fecha del choque.
 
 ### b) People
-- En la columna edad, los rangos van desd -177 años a 110. Existn 15553 tuplas con una edad menor o igual a cero y hay medio millón de valores null.
+- En la columna edad, los rangos van desde -177 años a 110. Existen 15,553 tuplas con una edad menor o igual a cero y hay medio millón de valores null.
 - En la columna no_seat hay un millón y medio de valores null.
-- En la columna ciudad, existen 14,228 ciudades diferentes, la mayoria son las mismas ciudades, pero con errores de escritura. Incluso hay una ciudad que solo es " ' " . Además, son medio millón de valores null.
-- En la columna sexo, 182445 personas fueron catalogadas en "X" y otras 33904 son valores null, lo cual es casi 10% de los datos.
-  
+- En la columna ciudad, existen 14,228 ciudades diferentes, la mayoría son las mismas ciudades, pero con errores de escritura. Incluso hay una ciudad que solo es " ' ". Además, son medio millón de valores null.
+- En la columna sexo, 182,445 personas fueron catalogadas en "X" y otras 33,904 son valores null, lo cual es casi 10% de los datos.
+
 ### c) Vehicle
-- En la columna vehicle_year, el maximo año es 9999. 2155 tuplas son mayores a 2025.
+- En la columna vehicle_year, el máximo año es 9999. 2,155 tuplas son mayores a 2025.
 - En la columna num_passengers existen un millón y medio de tuplas con valores null.
 - En la columna towed, existen un millón y medio de tuplas con valores null.
-- En la columna fire, existen un millón ochocientos tuplas con valores null.
-- En la columna exceed_speed_limit_i existen un millón ochocientos tuplas con valores null. Este tributo nos pudo haber dado mucha información
-- En la columna vehicle_id, existen 43602 tuplas con valores null. Esta columna debe de servir como identificador de un vehiculo en un accidente, no debería contener nulls.
-
+- En la columna fire, existen un millón ochocientas tuplas con valores null.
+- En la columna exceed_speed_limit_i existen un millón ochocientas tuplas con valores null. Este atributo nos pudo haber dado mucha información.
+- En la columna vehicle_id, existen 43,602 tuplas con valores null. Esta columna debe de servir como identificador de un vehículo en un accidente, no debería contener nulls.
+  
 ## Limpieza de datos
 
 ### a) Limpieza aplicada a la tabla `people`
