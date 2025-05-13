@@ -64,33 +64,37 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 
 | Set       | Nombre                    | Descripcion                            | Tipo                |
 |-----------|---------------------------|----------------------------------------|---------------------|
-| Choque    | Choque_Id                 | Identificador de choque                | Text                |
-| Choque    | Limite_velocidad          | Limite de velocidad en millas          | Numerico            |
-| Choque    | Numero_unidades           | Numero de autos involucrados           | Numerico            |
-| Choque    | Numero_heridas            | Numero de heridas totales              | Numerico            |
-| Choque    | Numero_heridas_fatales    | Numero de heridas fatales              | Numerico            |
-| Choque    | Tipo                      | Con heridas / Si requirio grua         | Categorico/booleano |
-| Choque    | Clima                     | Clima                                  | Categorico/booleano |
-| Choque    | Iluminacion               | Iluminacion                            | Categorico/booleano |
-| Choque    | Tipo_calle                | Tipo de calle                          | Categorico/booleano |
-| Choque    | Condicion_carretera       | Condicion de la superficie de la calle | Categorico/booleano |
-| Choque    | Danhos                    | Daños totales en dinero                | Categorico/booleano |
-| Choque    | Causa                     | Causa del choque                       | Categorico/booleano |
-| Choque    | Calle_nombre              | Nombre de la calle                     | Text                |
-| Choque    | Fecha_choque              | Fecha del choque                       | Timestamp           |
-| Vehiculo  | Vehiculo_id               | Identificador de vhiculo               | Text                |
-| Vehiculo  | Numero_pasajeros          | Numero de pasajeros en el vehiculo     | Numerico            | 
-| Vehiculo  | Anho                      | Año del vehiculo                       | Numerico            |
-| Vehiculo  | Vehiculo_tipo             | Tipo de vehiculo                       | Categorico/booleano |
-| Vehiculo  | Modelo                    | Modelo del vehiculo                    | Categorico/booleano |
-| Vehiculo  | Marca                     | Marca del vehiculo                     | Categorico/booleano |
-| Persona   | Persona_id                | Identificador de persona               | Text                |
-| Persona   | Edad                      | Edad de la persona                     | Numerico            | 
-| Persona   | Persona_tipo              | Si es peaaton, conductor o paasajero   | Categorico/booleano |
-| Persona   | Bolsa_aire                | Si se activo la bolsa de aire          | Categorico/booleano |
-| Persona   | Tipo_herida               | Tipo de herida de la persona           | Categorico/booleano |
-| Persona   | Ciudad                    | Ciudad de la que proviene la persona   | Categorico/booleano |
-| Persona   | Accion                    | Accion que realizo la persona          | Text                |
+| Crash     | Crash_record_id           | Identificador de choque                | Text                |
+| Crash     | posted_speed_limit        | Limite de velocidad en millas          | Numerico            |
+| Crash     | Num_units                 | Numero de autos involucrados           | Numerico            |
+| Crash     | Injuries_total            | Numero de heridas totales              | Numerico            |
+| Crash     | Injuries_fatal            | Numero de heridas fatales              | Numerico            |
+| Crash     | Crash_type                | Con heridas / Si requirio grua         | Categorico/booleano |
+| Crash     | Weather_condition         | Clima                                  | Categorico/booleano |
+| Crash     | lighting_condition        | Iluminacion                            | Categorico/booleano |
+| Crash     | Trafficway_type           | Tipo de calle                          | Categorico/booleano |
+| Crash     | Roadway_surface_cod       | Condicion de la superficie de la calle | Categorico/booleano |
+| Crash     | Damage                    | Daños totales en dinero                | Categorico/booleano |
+| Crash     | Prim_contributory_cause   | Causa primaria del choque              | Categorico/booleano |
+| Crash     | Sec_contributory_cause    | Causa secundaria del choque            | Categorico/booleano |
+| Crash     | Street_name               | Nombre de la calle                     | Text                |
+| Crash     | Crash_date                | Fecha del choque                       | Timestamp           |
+| Crash     | Date_police_notified      | Fecha de notificación al policía       | Timestamp           |
+| Vehicle   | Crash_unit_id             | Identificador de vhiculo               | Text                |
+| Vehicle   | Vehicle_id                | Identificador de vhiculo en un choque  | Text                |
+| Vehicle   | Num_passengers            | Numero de pasajeros en el vehiculo     | Numerico            | 
+| Vehicle   | Vehicle_year              | Año del vehiculo                       | Numerico            |
+| Vehicle   | Unit_type                 | Tipo de vehiculo                       | Categorico/booleano |
+| Vehicle   | Model                     | Modelo del vehiculo                    | Categorico/booleano |
+| Vehicle   | Make                      | Marca del vehiculo                     | Categorico/booleano |
+| Person    | Person_id                 | Identificador de persona               | Text                |
+| Person    | Age                       | Edad de la persona                     | Numerico            | 
+| Person    | Person_type               | Si es peaaton, conductor o paasajero   | Categorico/booleano |
+| Person    | Airbag_deployed           | Si se activo la bolsa de aire          | Categorico/booleano |
+| Person    | injury_classification     | Tipo de herida de la persona           | Categorico/booleano |
+| Person    | City                      | Ciudad de la que proviene la persona   | Categorico/booleano |
+| Person    | Accion                    | Accion que realizo la persona          | Text                |
+| Person    | Seat_no                   | Numero de asiento, donde 1 es conductor| Numerico            | 
 
 
 
