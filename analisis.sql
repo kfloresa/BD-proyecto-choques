@@ -211,6 +211,11 @@ FROM limpieza.vehicles
 GROUP BY vehicle_id
 HAVING COUNT(*) > 1;
 
+-- Verificar inconsistencias
+SELECT COUNT(*) AS total_mayores_2025
+FROM limpieza.vehicles
+WHERE vehicle_year >= 2025;
+
 --Analisis crashes
 -- Contar valores únicos por columna
 SELECT 'crash_record_id' AS column_name, COUNT(DISTINCT crash_record_id) AS unique_values FROM limpieza.crashes
