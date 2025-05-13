@@ -56,7 +56,7 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 2. Persona: son los datos de las personas, desde sus datos personales hasta una indicación de su relación al choque, incluyendo cómo fueron afectadas por el choque.             
 3. Choque: descripción de las circunstancias del choque, las características de la calle y su nombre, como su causa, ubicación, el número de personas involucradas, daños, fecha de notificación a la policía.
 
-|   Set       |  Choques        |  Vehículos     |  Personas   |
+|   Set       |  Crash          |  Vehicle       |  Person     |
 |-------------|-----------------|----------------|-------------|
 |  Tuplas     |  2.01 millones  |  1.86 millones |  914 mil    |
 |  Atributos  |  48             |  71            |  29         |
@@ -103,7 +103,7 @@ El objetivo del set de datos es analizar la relación entre autos, personas y ac
 Es necesario tomar en cuenta la naturaleza de los datos que se están utilizando, dado que estos son registros de situaciones desafortunadas para un gran número de personas, el manejo y manipulación de estos datos conlleva una responsabilidad ética. Dicha responsabilidad incluye, pero no se limita a las siguientes pautas: utilizar los datos de manera objetiva, sin intención de fomentar discriminación o perpetuar estereotipos de cualquier índole; hacer un acto de balance entre las opiniones y puntos de vista personales de los integrantes del equipo con las realidades y hechos observados; el manejo respetuoso y profesional de la información.
 
 ## Análisis exploratorio
-### a) Crashes
+### a) Crash
 - En la columna posted_speed_limit, el valor mínimo es de 0, lo cual no debería ocurrir ya que es la máxima velocidad permitida en una calle. Mientras tanto, el máximo valor es de 99, lo cual consideramos es mucho, sobre todo porque está en millas.
 - En la columna road_defect, 170,099 tuplas son valores null, lo cual es casi 20% de los datos.
 - En la columna prim_contributory_cause, más de un tercio de los datos están en la categoría: "UNABLE TO DETERMINE", lo cual no nos ofrece mucha información.
