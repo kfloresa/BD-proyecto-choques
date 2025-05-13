@@ -1,0 +1,70 @@
+-- Análisis de datos a través de consultas SQL y creación de atributos analíticos
+
+--Gravedad de heridas por grupo de edad
+SELECT
+    CASE --tuvimos que investigar como se hacia un switch
+        WHEN age BETWEEN 0 AND 17 THEN '0-17'
+        WHEN age BETWEEN 18 AND 30 THEN '18-30'
+        WHEN age BETWEEN 31 AND 50 THEN '31-50'
+        WHEN age BETWEEN 51 AND 70 THEN '51-70'
+        WHEN age > 70 THEN '71+'
+        ELSE 'Edad desconocida'
+    END AS grupo_edad,
+    COUNT(*) AS total_personas,
+    SUM(CASE WHEN injury_classification IN ('FATAL', 'INCAPACITATING INJURY') THEN 1 ELSE 0 END) AS heridas_graves,
+    ROUND(100.0 * SUM(CASE WHEN injury_classification IN ('FATAL', 'INCAPACITATING INJURY') THEN 1 ELSE 0 END) / COUNT(*), 2) AS porcentaje_graves
+FROM limpieza.people
+GROUP BY grupo_edad
+ORDER BY porcentaje_graves DESC;
+
+--Relación entre Condición Climática y Superficie de la Carretera
+SELECT
+    weather_condition,
+    roadway_surface_cond,
+    COUNT(*) AS total_accidents,
+    SUM(CASE 
+            WHEN crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 
+            ELSE 0 
+        END) AS serious_accidents,
+    ROUND(
+        (SUM(CASE 
+                WHEN crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 
+                ELSE 0 
+            END) * 100.0) / COUNT(*), 2
+    ) AS serious_accident_percentage
+FROM limpieza.crashes
+GROUP BY weather_condition, roadway_surface_cond
+ORDER BY serious_accident_percentage DESC;
+
+
+--  Marca del vehículo y gravedad de los accidentes 
+SELECT
+    vehicles.make AS marca,
+    COUNT(*) AS total_accidentes,
+    SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) AS accidentes_graves,
+    ROUND(
+        100.0 * SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) / COUNT(*),
+        2
+    ) AS porcentaje_graves
+FROM limpieza.vehicles 
+JOIN limpieza.crashes  ON vehicles.crash_record_id = crashes.crash_record_id
+WHERE vehicles.make IS NOT NULL 
+GROUP BY vehicles.make
+HAVING COUNT(*) > 1000
+ORDER BY porcentaje_graves DESC;
+
+-- Análisis de la gravedad de accidentes por hora del día y día de la semana
+SELECT
+    EXTRACT(DOW FROM crash_date) AS day_of_week,
+    EXTRACT(HOUR FROM crash_date) AS hour_of_day,
+    COUNT(*) AS total_crashes,
+    SUM(injuries_fatal) AS total_fatalities,
+    SUM(injuries_total) AS total_injuries,
+    ROUND(100.0 * SUM(injuries_fatal) / NULLIF(COUNT(*), 0), 2) AS fatality_rate_percent,
+    ROUND(100.0 * SUM(injuries_total) / NULLIF(COUNT(*), 0), 2) AS injury_rate_percent
+FROM limpieza.crashes
+WHERE crash_date IS NOT NULL
+GROUP BY day_of_week, hour_of_day
+ORDER BY total_fatalities DESC, total_injuries DESC;
+
+
