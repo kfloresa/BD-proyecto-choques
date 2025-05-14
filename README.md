@@ -335,8 +335,22 @@ Todas estas modificaciones fueron implementadas mediante sentencias `UPDATE` en 
 
 ## Gravedad de heridas por grupo de edad
 Se realizó un análisis para entender cómo la gravedad de las heridas en accidentes de tránsito varía según la edad de las personas involucradas. Los datos provienen del conjunto persons, el cual incluye a conductores, pasajeros y peatones registrados por el Departamento de Policía de Chicago.
-La consulta SQL utilizada agrupa a las personas según rangos de edad predefinidos, y calcula cuántas personas hay en cada grupo y cuántas de ellas sufrieron heridas graves (es decir, clasificadas como FATAL o INCAPACITATING INJURY). Las personas mayores de 71 años tienen la mayor proporción de heridas graves, con un 1.75%.
-Le siguen los menores de 18 años, lo cual sugiere que los extremos de edad son más vulnerables. A pesar de que el grupo de 31 a 50 años es el más numeroso, tiene una tasa relativamente baja de heridas graves. Este análisis es clave para identificar qué grupos etarios están en mayor riesgo y podría orientar futuras políticas de prevención vial enfocadas en adultos mayores y menores de edad.
+La consulta SQL utilizada agrupa a las personas según rangos de edad predefinidos, y calcula cuántas personas hay en cada grupo y cuántas de ellas sufrieron heridas graves (es decir, clasificadas como FATAL o INCAPACITATING INJURY).
+
+**Resultados:**
+
+| Grupo de Edad    | Total Personas | Heridas Graves | Porcentaje de Heridas Graves (%) |
+| ---------------- | -------------- | -------------- | -------------------------------- |
+| 71+              | 52,127         | 912            | 1.75                             |
+| 0-17             | 105,912        | 1,517          | 1.43                             |
+| 51-70            | 294,153        | 3,792          | 1.29                             |
+| 18-30            | 445,416        | 5,633          | 1.26                             |
+| 31-50            | 525,568        | 5,789          | 1.10                             |
+| Edad desconocida | 583,835        | 1,489          | 0.26                             |
+
+**Hallazgos:**
+El grupo de edad más afectado por accidentes graves es el de 71+, con un porcentaje del 1.75%. Esto sugiere que las personas mayores tienen un mayor riesgo de sufrir lesiones graves. En contraste, el grupo de "Edad desconocida" muestra un porcentaje mucho más bajo de 0.26%, lo que puede ser una categoría con datos incompletos o mal registrados. Esta información puede ser útil para que la ciudad de Chicago implemente campañas de prevención enfocadas en adultos mayores, como cursos de manejo defensivo, revisiones médicas para renovar licencias o mejoras en señalización y accesibilidad. Identificar a los grupos más afectados permite diseñar políticas públicas más eficaces y reducir la gravedad de los accidentes.
+
 
 ## Relación entre Condición Climática y Superficie de la Carretera
 Este análisis tuvo como objetivo evaluar el impacto de las condiciones climáticas y del estado de la superficie vial en la gravedad de los accidentes automovilísticos en la ciudad de Chicago. Para lograrlo, se utilizaron los atributos weather_condition, roadway_surface_cond y crash_type, que clasifica los incidentes en leves (NO INJURY / DRIVE AWAY) o graves (INJURY AND/OR TOW DUE TO CRASH). Se agruparon todas las combinaciones posibles de clima y superficie, contando el número total de choques y calculando la proporción de ellos que fueron graves. Este enfoque permite no solo identificar cuáles son las condiciones más comunes, sino también detectar aquellas combinaciones que presentan un mayor riesgo de causar accidentes con consecuencias serias. Los resultados revelan, por ejemplo, que en condiciones de hielo o nieve mezcladas con pavimento mojado, el porcentaje de accidentes graves supera el 50%. Estos hallazgos son fundamentales para apoyar decisiones de política pública, como alertas preventivas, restricciones de circulación o mejoras en infraestructura vial durante condiciones climáticas adversas.
@@ -352,4 +366,8 @@ Este análisis identifica las 10 calles con mayor cantidad de choques registrado
 
 ## Analisis tipo de calles mas peligrosas
 Este análisis permite identificar qué tipos de calles tienen una mayor proporción de choques fatales. Al calcular la tasa de fatalidad (número de muertes por choque), se puede detectar si ciertas configuraciones viales —como avenidas anchas, vías de doble sentido o callejones— presentan mayor riesgo de muerte. Esta información es clave para que el gobierno de Chicago rediseñe o intervenga prioritariamente esos tipos de vías con medidas como reductores de velocidad, semáforos o mejor iluminación, con el objetivo de salvar vidas.
+
+## Analisis dias del anio con mas accidentes
+Este análisis identifica los días y meses con el mayor número de accidentes en Chicago a lo largo de los años. Utilizando funciones de fecha, se extrajeron los días y meses de los choques, se contaron los accidentes por cada día y mes, y se ordenaron los resultados para encontrar el período con más incidentes. Este análisis es útil para que las autoridades puedan enfocar sus esfuerzos de seguridad vial en los días y meses con mayor riesgo, como aumentar el patrullaje o implementar campañas preventivas.
+
 
