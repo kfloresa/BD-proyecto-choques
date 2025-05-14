@@ -233,6 +233,11 @@ Con el fin de garantizar la calidad de los datos relacionados con los vehículos
 
 ---
 
+### 11. Identificador con vehículo (`vehicle_id`)
+- Los valores nulos fueron reemplazados por `-1`, lo cual permite identificar registros sin coche. El cambio permite acceso a todas las tuplas en ciertas consultas.
+- Los peatones y ciclistas tienen tuplas en vehicle con vehicle_id nulo para enlazar las entidades. Los coches estacionados a veces tienen vehicle_id y a veces no.
+---
+
 Todas estas transformaciones se encuentran implementadas y comentadas en el script `scripts/limpieza.sql`, lo que garantiza la trazabilidad y replicabilidad del proceso de limpieza.
 
 
