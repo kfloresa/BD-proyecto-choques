@@ -103,6 +103,57 @@ SELECT
     total_choques
 FROM choques_por_dia_mes
 ORDER BY total_choques DESC
-LIMIT 1;
+LIMIT 10;
 
+-- Daño por límite de velocidad
+SELECT
+    posted_speed_limit,
+    CASE
+        WHEN damage = '$500 OR LESS' THEN 'Leve'
+        WHEN damage = '$501 - $1,500' THEN 'Moderado'
+        WHEN damage = 'OVER $1,500' THEN 'Grave'
+        ELSE 'Desconocido'
+    END AS nivel_danho,
+    COUNT(*) AS total_choques
+FROM limpieza.crashes
+WHERE posted_speed_limit IS NOT NULL AND damage IS NOT NULL
+GROUP BY posted_speed_limit, nivel_danho
+ORDER BY posted_speed_limit, nivel_danho;
 
+-- Año del vehículo vs severidad del accidente
+SELECT 
+    vehicles.vehicle_year,
+    COUNT(*) AS total_accidentes,
+    SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) AS accidentes_graves,
+    ROUND(
+        100.0 * SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) / COUNT(*), 
+        2
+    ) AS porcentaje_graves
+FROM limpieza.vehicles
+JOIN limpieza.crashes 
+    ON vehicles.crash_record_id = crashes.crash_record_id
+WHERE vehicles.vehicle_year IS NOT NULL 
+  AND vehicles.vehicle_year BETWEEN 1 AND EXTRACT(YEAR FROM CURRENT_DATE)
+GROUP BY vehicles.vehicle_year
+HAVING COUNT(*) > 50
+ORDER BY porcentaje_graves DESC;
+
+-- Efctividad de la bolsa de aire en proteccion
+SELECT
+    airbag_deployed,
+    total_accidents,
+    fatalities,
+    serious_injuries,
+    ROUND(100.0 * fatalities / total_accidents, 2) AS fatality_rate,
+    ROUND(100.0 * serious_injuries / total_accidents, 2) AS serious_injury_rate
+FROM (
+    SELECT
+        airbag_deployed,
+        COUNT(*) AS total_accidents,
+        SUM(CASE WHEN injury_classification = 'FATAL' THEN 1 ELSE 0 END) AS fatalities,
+        SUM(CASE WHEN injury_classification IN ('INCAPACITATING INJURY', 'NON-INCAPACITATING INJURY') THEN 1 ELSE 0 END) AS serious_injuries
+    FROM limpieza.people
+    WHERE airbag_deployed IS NOT NULL
+    GROUP BY airbag_deployed
+) AS subconsulta
+ORDER BY serious_injury_rate DESC;
