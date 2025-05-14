@@ -68,3 +68,23 @@ GROUP BY day_of_week, hour_of_day
 ORDER BY total_fatalities DESC, total_injuries DESC;
 
 
+-- Las 10 calles con mas accidentes
+SELECT street_name, COUNT(*) AS total_crashes
+FROM limpieza.crashes
+GROUP BY street_name
+ORDER BY total_crashes DESC
+LIMIT 10;
+
+-- Analisis tipo de calles mas peligrosas
+SELECT 
+  trafficway_type,
+  COUNT(*) AS total_crashes,
+  SUM(injuries_total) AS total_injuries,
+  SUM(injuries_fatal) AS total_fatalities,
+  ROUND(SUM(injuries_fatal) * 1.0 / COUNT(*), 3) AS fatality_rate
+FROM limpieza.crashes
+WHERE trafficway_type IS NOT NULL
+GROUP BY trafficway_type
+ORDER BY fatality_rate DESC;
+
+
