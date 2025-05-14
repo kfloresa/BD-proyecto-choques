@@ -11,8 +11,7 @@ SELECT
     vehicle_id,
     make,
     model,
-    vehicle_year,
-    towed_i
+    vehicle_year
 FROM raw.vehicles;
 
 DROP TABLE IF EXISTS limpieza.people CASCADE;
@@ -149,17 +148,7 @@ UPDATE limpieza.vehicles
 SET make = 'UNKNOWN'
 WHERE make IS NULL OR TRIM(make) = '';
 
-
--- 6. Limpieza de towed_i
--- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
--- para identificar de forma clara los casos donde no se sabe si el vehículo fue remolcado.
-
-UPDATE limpieza.vehicles
-SET towed_i = 'UNKNOWN'
-WHERE towed_i IS NULL OR TRIM(towed_i) = '';
-
-
--- 7. Limpieza de vehicle_id en vehicle
+-- 6. Limpieza de vehicle_id en vehicle
 -- Reemplazamos los valores NULL en vehicle_id por -1
 -- Esto indica que no se tiene información del vehículo relacionado.
 -- Es preferible a dejar NULL para facilitar agrupaciones y evitar errores en joins.
