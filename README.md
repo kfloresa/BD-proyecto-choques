@@ -543,8 +543,6 @@ Tasa de lesiones graves: El porcentaje de accidentes con lesiones graves (incluy
 El análisis proporciona una visión clara de cómo las bolsas de aire contribuyen a la seguridad de los ocupantes del vehículo en caso de accidente. Un menor porcentaje de fatalidades y lesiones graves en los vehículos con bolsas de aire desplegadas indicaría una mayor efectividad de este sistema de seguridad.
 
 **Resultados:**
-### Efectividad de la bolsa de aire
-
 | Tipo de despliegue                         | Total accidentes | Fatalidades | Lesiones graves | % Fatalidad | % Lesiones graves |
 |-------------------------------------------|------------------|-------------|------------------|-------------|--------------------|
 | DEPLOYED, COMBINATION                     | 52,015           | 244         | 2,952            | 0.47%       | 5.68%              |
@@ -562,3 +560,18 @@ Para el gobierno de Chicago, esto puede ayudar a:
 Promover el uso de vehículos con airbags modernos y funcionales.
 Identificar qué tipos de despliegue son más efectivos y seguros.
 Diseñar políticas para inspeccionar o retirar vehículos sin sistemas de protección activos.
+
+## Dia del añio con menor promedio de edad de personas involucradas en un choque
+Al notar que el dia con mayor número de accidentes era halloween decidimos invstigar que día del año los jovenes y niños estan mas expuestos a sufrir un accidente automovilistico.
+
+**Resultados:**
+|Promedio_edad        |mes|dia|
+|---------------------|---|---|
+|34.8984680084109342	 | 7	| 4 |
+|35.7355187778485041	 | 1	| 1 |
+|36.7054704595185996	 | 12| 25|
+|37.0119047619047619	 | 5	| 19|
+|37.0842774247029566	 | 5	| 20|
+
+**Hallazgos:**
+Los días con más jovenes involucrados en accidentes fueron el 4 de julio que coincide con el festejo del día de la idependencia en EE.UU, el siguiente día es el festejo de año nuevo, seguido por navidad. Esto nos puede indicar una fuerte relación de los jóvenes y choques debido a festejos. El gobierno de Chicago, con esta información, debería tomar medidas preventivas e informar a los jovenes y niños sobre los riesgos.      
