@@ -345,7 +345,7 @@ El grupo de edad más afectado por accidentes graves es el de 71+, con un porcen
 
 
 ## Relación entre Condición Climática y Superficie de la Carretera
-Este análisis tuvo como objetivo evaluar el impacto de las condiciones climáticas y del estado de la superficie vial en la gravedad de los accidentes automovilísticos en la ciudad de Chicago. Para lograrlo, se utilizaron los atributos weather_condition, roadway_surface_cond y crash_type, que clasifica los incidentes en leves (FALSE) o graves (TRUE). Se agruparon todas las combinaciones posibles de clima y superficie, contando el número total de choques y calculando la proporción de ellos que fueron graves. Este enfoque permite no solo identificar cuáles son las condiciones más comunes, sino también detectar aquellas combinaciones que presentan un mayor riesgo de causar accidentes con consecuencias serias. Se filtraron combinaciones con al menos 20 accidentes para asegurar relevancia estadística.
+Este análisis tuvo como objetivo evaluar el impacto de las condiciones climáticas y del estado de la superficie vial en la gravedad de los accidentes automovilísticos en la ciudad de Chicago. Para lograrlo, se utilizaron los atributos weather_condition, roadway_surface_cond y is_severe, que clasifica los incidentes en leves (FALSE) o graves (TRUE). Se agruparon todas las combinaciones posibles de clima y superficie, contando el número total de choques y calculando la proporción de ellos que fueron graves. Este enfoque permite no solo identificar cuáles son las condiciones más comunes, sino también detectar aquellas combinaciones que presentan un mayor riesgo de causar accidentes con consecuencias serias. Se filtraron combinaciones con al menos 20 accidentes para asegurar relevancia estadística.
 
 **Resultados:**
 | Condición Climática | Estado del Pavimento | No. Total de Accidentes | No. Accidentes de Alta Severidad | % de Accidentes que son de Alta Severidad | 
@@ -452,7 +452,7 @@ Este análisis identifica los días y meses con el mayor número de accidentes e
 
 
 **Hallazgos:**
-Los datos muestran una concentración significativa de accidentes en los meses de octubre, noviembre y diciembre, especialmente entre los días 11 al 31 de octubre. Las fechas con mayor número de accidentes no coinciden necesariamente con festivos nacionales, lo que sugiere que otros factores como el clima otoñal, menor visibilidad y condiciones de la carretera podrían estar influyendo. Además, varios días cercanos entre sí indican posibles patrones semanales o estacionales de riesgo elevado. Permite al gobierno enfocar recursos y campañas preventivas en fechas críticas, mejorar señalización e infraestructura y aplicar medidas de control para reducir accidentes.
+Los datos muestran una concentración significativa de accidentes en los meses de octubre, noviembre y diciembre, especialmente entre los días 11 al 31 de octubre. Las fechas con mayor número de accidentes no coinciden necesariamente con festivos nacionales, lo que sugiere que otros factores como el clima otoñal, menor visibilidad y condiciones de la carretera podrían estar influyendo. Además, varios días cercanos entre sí indican posibles patrones semanales o estacionales de riesgo elevado. 
 
 ## Daño por límite de velocidad en la calle
 Este análisis identifica los límites de velocidad que presentan una mayor proporción de daños graves en accidentes de tráfico. Se agrupan los choques por velocidad publicada y se calcula el porcentaje de casos con daño superior a $1,500 dólares. Así, podemos detectar a qué velocidades los accidentes tienden a ser más costosos, lo que puede ayudar a orientar medidas de prevención o regulación vial. Se excluyen valores nulos y se filtran límites con baja cantidad de choques para asegurar representatividad.Los resultados pueden ayudar a identificar si hay una correlación entre los límites de velocidad y la gravedad de los daños, lo que podría ser útil para tomar decisiones sobre ajustes en las políticas de tráfico, como la reducción de límites de velocidad en áreas con altos accidentes graves.
@@ -490,10 +490,6 @@ Los vehículos fabricados entre 1970 y 1982 muestran los porcentajes más altos 
 * **Incentivar el retiro de vehículos antiguos**, mediante subsidios o programas de recambio.
 * **Dirigir campañas de concientización** hacia conductores con autos más viejos.
 * **Reforzar inspecciones vehiculares** que aseguren condiciones mínimas de seguridad.
-
-Esto puede reducir la severidad de los accidentes y mejorar la seguridad general en la ciudad.
-
-
 
 ##  Efctividad de la bolsa de aire en proteccion
 Este análisis evalúa la efectividad de las bolsas de aire en la reducción de muertes y lesiones graves en los accidentes de tráfico. Se compara el número de accidentes, muertes y lesiones graves entre los casos donde la bolsa de aire se desplegó y aquellos donde no se desplegó.
