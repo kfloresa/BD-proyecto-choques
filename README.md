@@ -31,6 +31,19 @@ CREATE DATABASE choques;
 ```
 \i carga.sql
 ```
+ ###Pasos a seguir para la limpieza y normalización de datos.
+1. Abrir una terminal e ingresar a 'psql':
+```
+psql -U usuario
+```
+2. Ejecutar el script de limpieza
+```
+\i limpieza.sql
+```
+3. Ejecutar el script de normalización
+```
+\i normalizacion.sql
+```
 
 # Explicación general de los datos.
 Este conjunto de datos contiene información detallada sobre los accidentes de tráfico ocurridos en Chicago. Está compuesto por tres archivos principales que registran diferentes aspectos del mismo evento:
