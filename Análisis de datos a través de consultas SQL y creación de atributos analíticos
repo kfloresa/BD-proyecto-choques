@@ -158,3 +158,14 @@ FROM (
     GROUP BY airbag_deployed
 ) AS subconsulta
 ORDER BY serious_injury_rate DESC;
+
+--Dia del anio con menor promedio de edad de personas involucradas en un choque
+SELECT AVG(age) AS prom_edad,
+       EXTRACT(MONTH FROM crash_date) AS mes,
+       EXTRACT(DAY FROM crash_date) AS dia
+FROM limpieza.people
+JOIN limpieza.vehicles ON limpieza.people.vehicle_id = limpieza.vehicles.vehicle_id
+JOIN limpieza.crashes ON limpieza.crashes.crash_record_id = limpieza.vehicles.crash_record_id
+WHERE age >0
+GROUP BY EXTRACT(MONTH FROM crash_date), EXTRACT(DAY FROM crash_date)
+ORDER BY prom_edad ;
