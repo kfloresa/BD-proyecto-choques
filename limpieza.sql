@@ -164,7 +164,7 @@ WHERE towed_i IS NULL OR TRIM(towed_i) = '';
 -- Esto indica que no se tiene información del vehículo relacionado.
 -- Es preferible a dejar NULL para facilitar agrupaciones y evitar errores en joins.
 
-UPDATE limpieza.vehicle
+UPDATE limpieza.vehicles
 SET vehicle_id = -1
 WHERE vehicle_id IS NULL;
 
