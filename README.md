@@ -339,14 +339,7 @@ La consulta SQL utilizada agrupa a las personas según rangos de edad predefinid
 
 **Resultados:**
 
-| Grupo de Edad    | Total Personas | Heridas Graves | Porcentaje de Heridas Graves (%) |
-| ---------------- | -------------- | -------------- | -------------------------------- |
-| 71+              | 52,127         | 912            | 1.75                             |
-| 0-17             | 105,912        | 1,517          | 1.43                             |
-| 51-70            | 294,153        | 3,792          | 1.29                             |
-| 18-30            | 445,416        | 5,633          | 1.26                             |
-| 31-50            | 525,568        | 5,789          | 1.10                             |
-| Edad desconocida | 583,835        | 1,489          | 0.26                             |
+
 
 **Hallazgos:**
 El grupo de edad más afectado por accidentes graves es el de 71+, con un porcentaje del 1.75%. Esto sugiere que las personas mayores tienen un mayor riesgo de sufrir lesiones graves. En contraste, el grupo de "Edad desconocida" muestra un porcentaje mucho más bajo de 0.26%, lo que puede ser una categoría con datos incompletos o mal registrados. Esta información puede ser útil para que la ciudad de Chicago implemente campañas de prevención enfocadas en adultos mayores, como cursos de manejo defensivo, revisiones médicas para renovar licencias o mejoras en señalización y accesibilidad. Identificar a los grupos más afectados permite diseñar políticas públicas más eficaces y reducir la gravedad de los accidentes.
@@ -356,13 +349,7 @@ El grupo de edad más afectado por accidentes graves es el de 71+, con un porcen
 Este análisis tuvo como objetivo evaluar el impacto de las condiciones climáticas y del estado de la superficie vial en la gravedad de los accidentes automovilísticos en la ciudad de Chicago. Para lograrlo, se utilizaron los atributos weather_condition, roadway_surface_cond y crash_type, que clasifica los incidentes en leves (FALSE) o graves (TRUE). Se agruparon todas las combinaciones posibles de clima y superficie, contando el número total de choques y calculando la proporción de ellos que fueron graves. Este enfoque permite no solo identificar cuáles son las condiciones más comunes, sino también detectar aquellas combinaciones que presentan un mayor riesgo de causar accidentes con consecuencias serias. Se filtraron combinaciones con al menos 20 accidentes para asegurar relevancia estadística.
 
 **Resultados:**
-| Condición Climática        | Superficie Vial  | Total Choques | Choques Graves | % Graves |
-|----------------------------|------------------|----------------|----------------|----------|
-| FREEZING RAIN/DRIZZLE      | SNOW OR SLUSH    | 207            | 104            | 50.24%   |
-| OTHER                      | WET              | 1060           | 526            | 49.62%   |
-| BLOWING SNOW               | WET              | 120            | 55             | 45.83%   |
-| SEVERE CROSS WIND GATE     | WET              | 38             | 17             | 44.74%   |
-| FREEZING RAIN/DRIZZLE      | WET              | 1251           | 550            | 43.96%   |
+
 
 **Hallazgos:**
 Los resultados indican que ciertas combinaciones de clima extremo y superficies mojadas o con nieve están fuertemente asociadas con choques graves. En particular, la lluvia helada (FREEZING RAIN/DRIZZLE) combinada con nieve o pavimento mojado presenta un riesgo considerable. Estos hallazgos ayudan a identificar escenarios de alto riesgo, lo cual permite orientar decisiones públicas, como emitir alertas, reforzar la infraestructura o limitar la circulación durante condiciones adversas.
@@ -371,13 +358,7 @@ Los resultados indican que ciertas combinaciones de clima extremo y superficies 
 ##  Marca del vehículo y gravedad de los accidentes 
 En este análisis se estudió la relación entre la marca del vehículo y la gravedad de los accidentes en los que estuvo involucrado. Para ello, se agruparon los registros por marca (make) y se calcularon dos métricas principales: el número total de accidentes y la proporción de aquellos considerados graves. Se excluyeron las marcas con menos de 1000 registros para evitar sesgos y se eliminaron valores desconocidos.
 **Resultados:**
-| Marca            | Total Accidentes | Accidentes Graves | % Graves |
-|------------------|------------------|--------------------|----------|
-| HARLEY-DAVIDSON  | 1135             | 672                | 59.21%   |
-| SUZUKI           | 2442             | 954                | 39.07%   |
-| SATURN           | 6893             | 2449               | 35.53%   |
-| PONTIAC          | 15988            | 5564               | 34.80%   |
-| OLDSMOBILE       | 2661             | 896                | 33.67%   | 
+
 
 **Hallazgos:**
  Los resultados revelan que ciertas marcas presentan un porcentaje significativamente más alto de choques graves, destacando Harley-Davidson con un 59.21%, seguida por Suzuki y Saturn. Este tipo de análisis permite identificar patrones relevantes para estudios de seguridad vial y puede ser útil para orientar campañas de concientización, regulaciones o incluso investigaciones sobre diseño y seguridad vehicular.
@@ -387,13 +368,7 @@ En este análisis se estudió la relación entre la marca del vehículo y la gra
 Este análisis busca identificar las horas del día y los días de la semana con mayor gravedad en los accidentes de tráfico. Para ello, se agruparon los accidentes según el día de la semana y la hora del día, y se calculó el número total de accidentes, así como el total de heridos y fallecidos. También se calcularon los porcentajes de accidentes con víctimas fatales y con heridos para cada combinación de día y hora. Los resultados obtenidos revelan qué momentos del día y qué días de la semana tienen una mayor tasa de accidentes graves, permitiendo a las autoridades de Chicago identificar patrones críticos. Estos hallazgos son clave para diseñar estrategias de prevención, como la implementación de controles de tráfico en horas específicas y el refuerzo de las medidas de seguridad vial durante los días y horas de mayor riesgo.
 
 **Resultados:**
-| Día (DOW) | Hora | Total Choques  | Fatalidades | Lesiones | % Fatalidad  | % Lesión |
-|-----------|------|----------------|-------------|----------|--------------|----------|
-| 0         | 4    | 3078           | 23          | 840      | 0.75%        | 27.29%   |
-| 0         | 2    | 4527           | 22          | 1320     | 0.49%        | 29.16%   |
-| 0         | 1    | 4962           | 21          | 1314     | 0.42%        | 26.48%   |
-| 6         | 23   | 5671           | 20          | 1345     | 0.35%        | 23.72%   |
-| 0         | 3    | 4313           | 18          | 1257     | 0.42%        | 29.14%   |
+
 
 **Hallazgos:**
 Los resultados muestran que las primeras horas de la madrugada del domingo (día 0) concentran los mayores porcentajes de fatalidad y lesión o los sabados (dia 6) a la media noche, lo cual puede estar asociado al consumo de alcohol, fatiga o menor supervisión vial. Esta información es útil para enfocar campañas preventivas, operativos viales y ajustes en los servicios de emergencia durante horarios críticos.
@@ -401,11 +376,25 @@ Los resultados muestran que las primeras horas de la madrugada del domingo (día
 
 ## Las 10 calles con mas accidentes
 Este análisis identifica las 10 calles con mayor cantidad de choques registrados. Permite detectar zonas de alto riesgo vial donde el gobierno de Chicago puede enfocar campañas de prevención, mejorar señalización o rediseñar infraestructura urbana para reducir la siniestralidad.
+**Resultados:**
+
+
+
+**Hallazgos:**
 
 ## Analisis tipo de calles mas peligrosas
 Este análisis permite identificar qué tipos de calles tienen una mayor proporción de choques fatales. Al calcular la tasa de fatalidad (número de muertes por choque), se puede detectar si ciertas configuraciones viales —como avenidas anchas, vías de doble sentido o callejones— presentan mayor riesgo de muerte. Esta información es clave para que el gobierno de Chicago rediseñe o intervenga prioritariamente esos tipos de vías con medidas como reductores de velocidad, semáforos o mejor iluminación, con el objetivo de salvar vidas.
+**Resultados:**
+
+
+
+**Hallazgos:**
 
 ## Analisis dias del anio con mas accidentes
 Este análisis identifica los días y meses con el mayor número de accidentes en Chicago a lo largo de los años. Utilizando funciones de fecha, se extrajeron los días y meses de los choques, se contaron los accidentes por cada día y mes, y se ordenaron los resultados para encontrar el período con más incidentes. Este análisis es útil para que las autoridades puedan enfocar sus esfuerzos de seguridad vial en los días y meses con mayor riesgo, como aumentar el patrullaje o implementar campañas preventivas.
+**Resultados:**
 
+
+
+**Hallazgos:**
 
