@@ -312,7 +312,7 @@ Para asegurar la calidad y consistencia de los registros relacionados con los ac
 ### d) Eliminación y/o omisión de columnas 
 | Columna | Descripcion | Razón |
 | --- | --- |--- |
-| `police_notified` | Indica si las autoridades locales fueron notificadas | La mayoría tuplas carecían de información (`UNKNOWN`) |
+| `police_notified` | Indica si las autoridades locales fueron notificadas | Demasiadas tuplas carecían de información (`UNKNOWN`) |
 | `street_direction` | Orientación (sentido) de la calle | Demasiadas tuplas carecían de información (`UNKNOWN`) |
 | `street_no` | Número de la calle | Demasiadas tuplas carecían de información (`UNKNOWN`) | 
 | `sex` | Sexo de la persona involucrada | Demasiadas tuplas carecían de información (`UNKNOWN`) |
@@ -399,7 +399,7 @@ Este análisis busca identificar las horas del día y los días de la semana con
 Los resultados muestran que las primeras horas de la madrugada del domingo (día 0) concentran los mayores porcentajes de fatalidad y lesión o los sabados (dia 6) a la media noche, lo cual puede estar asociado al consumo de alcohol, fatiga o menor supervisión vial. Esta información es útil para enfocar campañas preventivas, operativos viales y ajustes en los servicios de emergencia durante horarios críticos.
 
 
-## Las 10 calles con mas accidentes
+## Las 10 calles con más accidentes
 Este análisis identifica las 10 calles con mayor cantidad de choques registrados. Permite detectar zonas de alto riesgo vial donde el gobierno de Chicago puede enfocar campañas de prevención, mejorar señalización o rediseñar infraestructura urbana para reducir la siniestralidad.
 
 **Resultados:**
@@ -421,7 +421,7 @@ Este análisis identifica las 10 calles con mayor cantidad de choques registrado
 Las 10 calles con más accidentes en Chicago son vías muy transitadas como Western Ave, Pulaski Rd y Cicero Ave. Estos resultados sugieren que la alta densidad vehicular y la posible falta de infraestructura adecuada, señalización o control de tránsito pueden estar contribuyendo significativamente al número de choques en estas zonas. Con esta información, se pueden enfocar recursos en intervenciones específicas: rediseñar intersecciones peligrosas, instalar semáforos inteligentes, mejorar la señalización, o implementar operativos de control de velocidad. Estas acciones pueden reducir los accidentes y salvar vidas.
 
 
-## Analisis tipo de calles mas peligrosas
+## Analisis tipo de calles más peligrosas
 Este análisis permite identificar qué tipos de calles tienen una mayor proporción de choques fatales. Al calcular la tasa de fatalidad (número de muertes por choque), se puede detectar si ciertas configuraciones viales —como avenidas anchas, vías de doble sentido o callejones— presentan mayor riesgo de muerte. Esta información es clave para que el gobierno de Chicago rediseñe o intervenga prioritariamente esos tipos de vías con medidas como reductores de velocidad, semáforos o mejor iluminación, con el objetivo de salvar vidas.
 
 **Resultados:**
@@ -438,7 +438,7 @@ Este análisis permite identificar qué tipos de calles tienen una mayor proporc
 **Hallazgos:**
 Las intersecciones en L presentan la mayor tasa de fatalidad en sus accidentes, esto posiblemente atribuido a su diseño pues fácilmente permite las colisiones frontales y laterales, además de ser el punto de encuentro entre 2 calles o avenidas, donde conductores deben analizar y prestar extrema atención su entorno y un mínimo descuido puede ocasionar un accidente a gran velocidad.
 
-## Analisis dias del año con mas accidentes
+## Analisis dias del año con más accidentes
 Este análisis identifica los días y meses con el mayor número de accidentes en Chicago a lo largo de los años. Utilizando funciones de fecha, se extrajeron los días y meses de los choques, se contaron los accidentes por cada día y mes, y se ordenaron los resultados para encontrar el período con más incidentes. Este análisis es útil para que las autoridades puedan enfocar sus esfuerzos de seguridad vial en los días y meses con mayor riesgo, como aumentar el patrullaje o implementar campañas preventivas.
 
 **Resultados:**
