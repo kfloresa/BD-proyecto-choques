@@ -219,4 +219,9 @@ UPDATE limpieza.crashes
 SET injuries_fatal = 0
 WHERE injuries_fatal IS NULL;
 
-
+--10. Limpieza de crash_type
+--Reemplazar columna que solo tiene dos valores posibles, nombrados confusamente, por un boolean
+ALTER TABLE limpieza.crashes ADD COLUMN is_severe BOOL;
+UPDATE limpieza.crashes SET is_severe = TRUE WHERE crash_type = 'INJURY AND / OR TOW DUE TO CRASH';
+UPDATE limpieza.crashes SET is_severe = FALSE WHERE crash_type = 'NO INJURY / DRIVE AWAY';
+ALTER TABLE limpieza.crashes DROP COLUMN crash_type;
