@@ -147,19 +147,19 @@ Con base en el objetivo del proyecto, se identificaron inconsistencias, errores 
 - Se activó la extensión `fuzzystrmatch` y se utilizó la función `levenshtein()` para comparar y corregir nombres similares automáticamente (tolerancia ≤ 4).
 - Las ciudades sin correspondencia fueron clasificadas como `'INDEFINIDA'` y los valores nulos o vacíos fueron marcados como `'UNKNOWN'`.
 
-Esta limpieza fue necesaria para evitar duplicados, reducir la dispersión de categorías y lograr una georreferenciación precisa.
+--Esta limpieza fue necesaria para evitar duplicados, reducir la dispersión de categorías y lograr una georreferenciación precisa.
 
 ---
 
 ### 3. Sexo (`sex`)
 - Se reemplazaron los valores nulos, vacíos y etiquetas mal escritas (`UNKNOWN`, etc.) por `'X'`, para unificar todos los casos donde no se pudo determinar el sexo.
-- Esta categoría se usa como marcador de información ausente o no binaria.
+- Uniformar esta variable evita interpretaciones ambiguas y mejora los conteos categóricos. También reconoce casos de información faltante o identidades no binarias.
 
 ---
 
 ### 4. Relación con vehículo (`vehicle_id`)
 - Los valores nulos fueron reemplazados por `-1`, lo cual permite identificar registros sin asociación con un vehículo y previene errores en consultas relacionales.
-- Esta práctica evita ambigüedad en los análisis sin eliminar datos.
+- Esta práctica evita ambigüedad en los análisis sin eliminar datos y se mantienen registros útiles, aunque incompletos, en lugar de descartarlos.
 
 ---
 
@@ -193,8 +193,7 @@ Con el fin de garantizar la calidad de los datos relacionados con los vehículos
 
 ### 1. Año del vehículo (`vehicle_year`)
 - Se reemplazaron valores fuera de rango (años mayores a 2025 o menores o iguales a 1950), así como valores `NULL`, por `-1`.
-- Esto permite conservar la columna como numérica y a la vez identificar los casos con datos inválidos o faltantes.
-
+- Años no realistas comprometen la validez de análisis temporales. Usar -1 conserva la estructura numérica sin excluir datos.
 ---
 
 ### 2. Número de pasajeros (`num_passengers`)
@@ -270,7 +269,7 @@ Para asegurar la calidad y consistencia de los registros relacionados con los ac
 
 ### **3. Defecto en la vía** (`road_defect`)
 - Se unificaron los valores `'UNKNOWN'` en `'OTHER'`.
-- Esto mejora la categorización de los defectos, agrupando aquellos sin información en una etiqueta común.
+- Se mejora la categorización de los defectos, agrupando aquellos sin información en una etiqueta común.
 
 ---
 
@@ -288,6 +287,7 @@ Para asegurar la calidad y consistencia de los registros relacionados con los ac
 
 ### **6. Causa secundaria del accidente** (`sec_contributory_cause`)
 - Igual que en la causa primaria, se unificaron `'UNABLE TO DETERMINE'` y `'NOT APPLICABLE'` como `'UNDETERMINED/NOT APPLICABLE'`.
+-- Reduce ruido y ambigüedad en los registros secundarios del evento.
 
 ---
 
