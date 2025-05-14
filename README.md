@@ -341,16 +341,17 @@ Todas estas modificaciones fueron implementadas mediante sentencias `UPDATE` en 
 
 # Normalización hasta cuarta forma normal
 Se encocntraron las siguientes dependencias:
+
 En crashes:
-crash_record_id (llave) &rarr E
+- crash_record_id (llave) &rarr; E
 
 En vehicles:
-crash_unit_id (llave) &rarr E
-vehicle_id &rarr crash_unit_id (Cuando existe vehicle_id)
+- crash_unit_id (llave) &rarr; E
+- vehicle_id &rarr; crash_unit_id (Cuando existe vehicle_id)
 
 En people:
-person_id (llave) &rarr E
-vehicle_id &rarr crash_record_id (Cuando existe vehicle_id)
+- person_id (llave) &rarr; E
+- vehicle_id &rarr; crash_record_id (Cuando existe vehicle_id)
 
 No hubo dependencias multivaluadas.
 Se esperaba encontrar dependencias en cuanto a los atributos de ubicación, pero se encontró que no existían.
