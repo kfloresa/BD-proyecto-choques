@@ -95,7 +95,6 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 | People    | Person_type               | Si es peaaton, conductor o paasajero   | Categorico/booleano |
 | People    | Airbag_deployed           | Si se activo la bolsa de aire          | Categorico/booleano |
 | People    | injury_classification     | Tipo de herida de la persona           | Categorico/booleano |
-| People    | City                      | Ciudad de la que proviene la persona   | Categorico/booleano |
 | People    | Accion                    | Accion que realizo la persona          | Text                |
 | People    | Seat_no                   | Numero de asiento, donde 1 es conductor| Numerico            | 
 
@@ -141,41 +140,31 @@ Con base en el objetivo del proyecto, se identificaron inconsistencias, errores 
 
 ---
 
-### 2. Ciudad (`city`)
-- Se identificaron múltiples errores ortográficos, variantes y nombres mal escritos de ciudades.
-- Se creó una tabla auxiliar `ciudades_validas` que contiene nombres oficiales de **vecindarios y áreas comunitarias de Chicago**.
-- Se activó la extensión `fuzzystrmatch` y se utilizó la función `levenshtein()` para comparar y corregir nombres similares automáticamente (tolerancia ≤ 4).
-- Las ciudades sin correspondencia fueron clasificadas como `'INDEFINIDA'` y los valores nulos o vacíos fueron marcados como `'UNKNOWN'`.
-
---Esta limpieza fue necesaria para evitar duplicados, reducir la dispersión de categorías y lograr una georreferenciación precisa.
-
----
-
-### 3. Sexo (`sex`)
+### 2. Sexo (`sex`)
 - Se reemplazaron los valores nulos, vacíos y etiquetas mal escritas (`UNKNOWN`, etc.) por `'X'`, para unificar todos los casos donde no se pudo determinar el sexo.
 - Uniformar esta variable evita interpretaciones ambiguas y mejora los conteos categóricos. También reconoce casos de información faltante o identidades no binarias.
 
 ---
 
-### 4. Relación con vehículo (`vehicle_id`)
+### 3. Relación con vehículo (`vehicle_id`)
 - Los valores nulos fueron reemplazados por `-1`, lo cual permite identificar registros sin asociación con un vehículo y previene errores en consultas relacionales.
 - Esta práctica evita ambigüedad en los análisis sin eliminar datos y se mantienen registros útiles, aunque incompletos, en lugar de descartarlos.
 
 ---
 
-### 5. Posición en el vehículo (`seat_no`)
+### 4. Posición en el vehículo (`seat_no`)
 - También se estandarizaron los valores nulos con `-1` para representar una posición desconocida.
 - Esto garantiza que todos los registros tengan una referencia numérica válida.
 
 ---
 
-### 6. Bolsa de aire (`airbag_deployed`)
+### 5. Bolsa de aire (`airbag_deployed`)
 - Se reemplazaron los valores nulos por `'DEPLOYMENT UNKNOWN'` para mantener la integridad de la categoría y asegurar que todos los registros sean legibles en análisis categóricos.
 - Esto ayuda a visualizar de manera más clara los casos con datos faltantes.
 
 ---
 
-### 7. Clasificación de lesión (`injury_classification`)
+### 6. Clasificación de lesión (`injury_classification`)
 - Los valores nulos fueron reemplazados por `'UNKNOWN'` para asegurar que todos los registros tuvieran una categoría asignada, lo cual es fundamental para análisis de gravedad.
 
 ---
