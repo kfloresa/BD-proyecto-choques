@@ -18,41 +18,44 @@ GROUP BY grupo_edad
 ORDER BY porcentaje_graves DESC;
 
 --Relación entre Condición Climática y Superficie de la Carretera
+-- Relación entre Condición Climática y Superficie de la Carretera
 SELECT
     weather_condition,
     roadway_surface_cond,
     COUNT(*) AS total_accidents,
     SUM(CASE 
-            WHEN crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 
+            WHEN is_sever THEN 1 
             ELSE 0 
         END) AS serious_accidents,
     ROUND(
         (SUM(CASE 
-                WHEN crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 
+                WHEN is_sever THEN 1 
                 ELSE 0 
             END) * 100.0) / COUNT(*), 2
     ) AS serious_accident_percentage
 FROM limpieza.crashes
 GROUP BY weather_condition, roadway_surface_cond
-HAVING COUNT(*)>20
+HAVING COUNT(*) > 20
 ORDER BY serious_accident_percentage DESC;
 
 
---  Marca del vehículo y gravedad de los accidentes 
+
+-- Marca del vehículo y gravedad de los accidentes 
 SELECT
     vehicles.make AS marca,
     COUNT(*) AS total_accidentes,
-    SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) AS accidentes_graves,
+    SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) AS accidentes_graves,
     ROUND(
-        100.0 * SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) / COUNT(*),
+        100.0 * SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) / COUNT(*),
         2
     ) AS porcentaje_graves
 FROM limpieza.vehicles 
-JOIN limpieza.crashes  ON vehicles.crash_record_id = crashes.crash_record_id
+JOIN limpieza.crashes ON vehicles.crash_record_id = crashes.crash_record_id
 WHERE vehicles.make IS NOT NULL 
 GROUP BY vehicles.make
 HAVING COUNT(*) > 1000
 ORDER BY porcentaje_graves DESC;
+
 
 -- Análisis de la gravedad de accidentes por hora del día y día de la semana
 SELECT
@@ -124,9 +127,9 @@ ORDER BY posted_speed_limit, nivel_danho;
 SELECT 
     vehicles.vehicle_year,
     COUNT(*) AS total_accidentes,
-    SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) AS accidentes_graves,
+    SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) AS accidentes_graves,
     ROUND(
-        100.0 * SUM(CASE WHEN crashes.crash_type = 'INJURY AND / OR TOW DUE TO CRASH' THEN 1 ELSE 0 END) / COUNT(*), 
+        100.0 * SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) / COUNT(*), 
         2
     ) AS porcentaje_graves
 FROM limpieza.vehicles
