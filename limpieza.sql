@@ -1,5 +1,7 @@
+DROP SCHEMA IF EXISTS limpieza CASCADE;
 CREATE SCHEMA limpieza;
 
+DROP TABLE IF EXISTS limpieza.vehicles CASCADE;
 CREATE TABLE limpieza.vehicles AS
 SELECT 
     crash_unit_id,
@@ -13,7 +15,7 @@ SELECT
     towed_i
 FROM raw.vehicles;
 
-
+DROP TABLE IF EXISTS limpieza.people CASCADE;
 CREATE TABLE limpieza.people AS
 SELECT 
     person_id,
@@ -27,6 +29,7 @@ SELECT
     injury_classification
 FROM raw.people;
 
+DROP TABLE IF EXISTS limpieza.crashes CASCADE;
 CREATE TABLE limpieza.crashes AS
 SELECT 
     crash_record_id,
