@@ -31,7 +31,7 @@ CREATE DATABASE choques;
 ```
 \i carga.sql
 ```
- ###Pasos a seguir para la limpieza y normalización de datos.
+ ### Pasos a seguir para la limpieza y normalización de datos.
 1. Abrir una terminal e ingresar a 'psql':
 ```
 psql -U usuario
