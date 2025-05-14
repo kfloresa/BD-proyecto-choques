@@ -64,37 +64,37 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 
 | Set       | Nombre                    | Descripcion                            | Tipo                |
 |-----------|---------------------------|----------------------------------------|---------------------|
-| Crash     | Crash_record_id           | Identificador de choque                | Text                |
-| Crash     | posted_speed_limit        | Limite de velocidad en millas          | Numerico            |
-| Crash     | Num_units                 | Numero de autos involucrados           | Numerico            |
-| Crash     | Injuries_total            | Numero de heridas totales              | Numerico            |
-| Crash     | Injuries_fatal            | Numero de heridas fatales              | Numerico            |
-| Crash     | Crash_type                | Con heridas / Si requirio grua         | Categorico/booleano |
-| Crash     | Weather_condition         | Clima                                  | Categorico/booleano |
-| Crash     | lighting_condition        | Iluminacion                            | Categorico/booleano |
-| Crash     | Trafficway_type           | Tipo de calle                          | Categorico/booleano |
-| Crash     | Roadway_surface_cod       | Condicion de la superficie de la calle | Categorico/booleano |
-| Crash     | Damage                    | Daños totales en dinero                | Categorico/booleano |
-| Crash     | Prim_contributory_cause   | Causa primaria del choque              | Categorico/booleano |
-| Crash     | Sec_contributory_cause    | Causa secundaria del choque            | Categorico/booleano |
-| Crash     | Street_name               | Nombre de la calle                     | Text                |
-| Crash     | Crash_date                | Fecha del choque                       | Timestamp           |
-| Crash     | Date_police_notified      | Fecha de notificación al policía       | Timestamp           |
-| Vehicle   | Crash_unit_id             | Identificador de vhiculo               | Text                |
-| Vehicle   | Vehicle_id                | Identificador de vhiculo en un choque  | Text                |
-| Vehicle   | Num_passengers            | Numero de pasajeros en el vehiculo     | Numerico            | 
-| Vehicle   | Vehicle_year              | Año del vehiculo                       | Numerico            |
-| Vehicle   | Unit_type                 | Tipo de vehiculo                       | Categorico/booleano |
-| Vehicle   | Model                     | Modelo del vehiculo                    | Categorico/booleano |
-| Vehicle   | Make                      | Marca del vehiculo                     | Categorico/booleano |
-| Person    | Person_id                 | Identificador de persona               | Text                |
-| Person    | Age                       | Edad de la persona                     | Numerico            | 
-| Person    | Person_type               | Si es peaaton, conductor o paasajero   | Categorico/booleano |
-| Person    | Airbag_deployed           | Si se activo la bolsa de aire          | Categorico/booleano |
-| Person    | injury_classification     | Tipo de herida de la persona           | Categorico/booleano |
-| Person    | City                      | Ciudad de la que proviene la persona   | Categorico/booleano |
-| Person    | Accion                    | Accion que realizo la persona          | Text                |
-| Person    | Seat_no                   | Numero de asiento, donde 1 es conductor| Numerico            | 
+| Crashes   | Crash_record_id           | Identificador de choque                | Text                |
+| Crashes   | posted_speed_limit        | Limite de velocidad en millas          | Numerico            |
+| Crashes   | Num_units                 | Numero de autos involucrados           | Numerico            |
+| Crashes   | Injuries_total            | Numero de heridas totales              | Numerico            |
+| Crashes   | Injuries_fatal            | Numero de heridas fatales              | Numerico            |
+| Crashes   | Crash_type                | Con heridas / Si requirio grua         | Categorico/booleano |
+| Crashes   | Weather_condition         | Clima                                  | Categorico/booleano |
+| Crashes   | lighting_condition        | Iluminacion                            | Categorico/booleano |
+| Crashes   | Trafficway_type           | Tipo de calle                          | Categorico/booleano |
+| Crashes   | Roadway_surface_cod       | Condicion de la superficie de la calle | Categorico/booleano |
+| Crashes   | Damage                    | Daños totales en dinero                | Categorico/booleano |
+| Crashes   | Prim_contributory_cause   | Causa primaria del choque              | Categorico/booleano |
+| Crashes   | Sec_contributory_cause    | Causa secundaria del choque            | Categorico/booleano |
+| Crashes   | Street_name               | Nombre de la calle                     | Text                |
+| Crashes   | Crash_date                | Fecha del choque                       | Timestamp           |
+| Crashes   | Date_police_notified      | Fecha de notificación al policía       | Timestamp           |
+| Vehicles  | Crash_unit_id             | Identificador de vhiculo               | Text                |
+| Vehicles  | Vehicle_id                | Identificador de vhiculo en un choque  | Text                |
+| Vehicles  | Num_passengers            | Numero de pasajeros en el vehiculo     | Numerico            | 
+| Vehicles  | Vehicle_year              | Año del vehiculo                       | Numerico            |
+| Vehicles  | Unit_type                 | Tipo de vehiculo                       | Categorico/booleano |
+| Vehicles  | Model                     | Modelo del vehiculo                    | Categorico/booleano |
+| Vehicles  | Make                      | Marca del vehiculo                     | Categorico/booleano |
+| People    | Person_id                 | Identificador de persona               | Text                |
+| People    | Age                       | Edad de la persona                     | Numerico            | 
+| People    | Person_type               | Si es peaaton, conductor o paasajero   | Categorico/booleano |
+| People    | Airbag_deployed           | Si se activo la bolsa de aire          | Categorico/booleano |
+| People    | injury_classification     | Tipo de herida de la persona           | Categorico/booleano |
+| People    | City                      | Ciudad de la que proviene la persona   | Categorico/booleano |
+| People    | Accion                    | Accion que realizo la persona          | Text                |
+| People    | Seat_no                   | Numero de asiento, donde 1 es conductor| Numerico            | 
 
 
 
@@ -346,4 +346,10 @@ En este análisis se estudió la relación entre la marca del vehículo y la gra
 
 ## Análisis de la gravedad de accidentes por hora del día y día de la semana
 Este análisis busca identificar las horas del día y los días de la semana con mayor gravedad en los accidentes de tráfico. Para ello, se agruparon los accidentes según el día de la semana y la hora del día, y se calculó el número total de accidentes, así como el total de heridos y fallecidos. También se calcularon los porcentajes de accidentes con víctimas fatales y con heridos para cada combinación de día y hora. Los resultados obtenidos revelan qué momentos del día y qué días de la semana tienen una mayor tasa de accidentes graves, permitiendo a las autoridades de Chicago identificar patrones críticos. Estos hallazgos son clave para diseñar estrategias de prevención, como la implementación de controles de tráfico en horas específicas y el refuerzo de las medidas de seguridad vial durante los días y horas de mayor riesgo.
+
+## Las 10 calles con mas accidentes
+Este análisis identifica las 10 calles con mayor cantidad de choques registrados. Permite detectar zonas de alto riesgo vial donde el gobierno de Chicago puede enfocar campañas de prevención, mejorar señalización o rediseñar infraestructura urbana para reducir la siniestralidad.
+
+## Analisis tipo de calles mas peligrosas
+Este análisis permite identificar qué tipos de calles tienen una mayor proporción de choques fatales. Al calcular la tasa de fatalidad (número de muertes por choque), se puede detectar si ciertas configuraciones viales —como avenidas anchas, vías de doble sentido o callejones— presentan mayor riesgo de muerte. Esta información es clave para que el gobierno de Chicago rediseñe o intervenga prioritariamente esos tipos de vías con medidas como reductores de velocidad, semáforos o mejor iluminación, con el objetivo de salvar vidas.
 
