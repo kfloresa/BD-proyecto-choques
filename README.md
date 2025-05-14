@@ -2,7 +2,8 @@
  
  ### Equipo 2 😸 
  
- 
+ ![IMG_1269(1)](https://github.com/user-attachments/assets/4f9b8b54-5256-481f-97de-ceea5e86524d)
+
 
  # Instructivo para la carga de datos.
  ### Requisitos básicos para la carga.
