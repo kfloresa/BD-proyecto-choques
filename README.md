@@ -355,8 +355,13 @@ vehicle_id &rarr crash_record_id (Cuando existe vehicle_id)
 No hubo dependencias multivaluadas.
 Se esperaba encontrar dependencias en cuanto a los atributos de ubicación, pero se encontró que no existían.
 
+---
+
 En esta sección se mostró el mal diseño de la base, ya que en la tabla people el atributo vehicle hace referencia a la tabla vehicle, con una relación muchos a uno. Sin embargo, la table vehicle y la tabla people hacen referencia a la tabla crashes mediante crash_record_id, ambos con relación muchos a uno, creando una redundancia. Sin embargo, no se podía eliminar crash_record_id directamente de people, ya que en los casos en los que la persona no estaba en un coche se genera una entrada en vehicle pero con vehicle_id inválido. Esto significa que si hay varios peatones involucrados en una accidente, no hay manera de determinar cuál entrada de vehicle le pertenece a cada peatón. Además, hay inconsistencias en qué vehículos tienen vehicle_id válido. Por ejemplo, en un accidente, dos autos estacionados fueron golpeados pero solo se le asignó vehicle_id a uno.
+
 Esto se solucionó creando la columna crash_unit_id en people, y borrando crash_record_id y vehicle_id. En los casos en los que había vehicle_id válida, se les asignó directamente el crash_unit_id correspondiente. En los que no, se les asignó un crash_unit_id correspondiente a su person_type, que indicaba si no iba en un coche o si era pasajero, comparándolo con unit_type en vehicles. En el caso de varios vehículos y personas del mismo tipo sin vehicle_id, se les asignó cualquiera de las tuplas válidas, ya que en los casos en los que no hay vehicle_id, se dejan los otros atributos vacíos, haciendo las tuplas simétricas.
+
+Después de esto, las relaciones se encontraron en cuarta forma normal. Además, eliminamos la columna num_units en crashes, ya que, aunque no violaba formas normales, era un atributo determinable a partir de otras tablas, y generaba redundancias y anomalías.
 
 # Análisis de datos a través de consultas SQL y creación de atributos analíticos
 
