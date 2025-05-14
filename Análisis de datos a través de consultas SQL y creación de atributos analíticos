@@ -111,17 +111,15 @@ LIMIT 10;
 -- Daño por límite de velocidad
 SELECT
     posted_speed_limit,
-    CASE
-        WHEN damage = '$500 OR LESS' THEN 'Leve'
-        WHEN damage = '$501 - $1,500' THEN 'Moderado'
-        WHEN damage = 'OVER $1,500' THEN 'Grave'
-        ELSE 'Desconocido'
-    END AS nivel_danho,
-    COUNT(*) AS total_choques
+    COUNT(*) AS total_choques,
+    SUM(CASE WHEN damage = 'OVER $1,500' THEN 1 ELSE 0 END) AS choques_graves,
+    ROUND(100.0 * SUM(CASE WHEN damage = 'OVER $1,500' THEN 1 ELSE 0 END) / COUNT(*), 2) AS porcentaje_graves
 FROM limpieza.crashes
 WHERE posted_speed_limit IS NOT NULL AND damage IS NOT NULL
-GROUP BY posted_speed_limit, nivel_danho
-ORDER BY posted_speed_limit, nivel_danho;
+GROUP BY posted_speed_limit
+HAVING COUNT(*) > 20
+ORDER BY porcentaje_graves DESC;
+
 
 -- Año del vehículo vs severidad del accidente
 SELECT 
