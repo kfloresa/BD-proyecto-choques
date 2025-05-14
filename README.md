@@ -376,6 +376,7 @@ Los resultados muestran que las primeras horas de la madrugada del domingo (día
 
 ## Las 10 calles con mas accidentes
 Este análisis identifica las 10 calles con mayor cantidad de choques registrados. Permite detectar zonas de alto riesgo vial donde el gobierno de Chicago puede enfocar campañas de prevención, mejorar señalización o rediseñar infraestructura urbana para reducir la siniestralidad.
+
 **Resultados:**
 
 
@@ -384,6 +385,7 @@ Este análisis identifica las 10 calles con mayor cantidad de choques registrado
 
 ## Analisis tipo de calles mas peligrosas
 Este análisis permite identificar qué tipos de calles tienen una mayor proporción de choques fatales. Al calcular la tasa de fatalidad (número de muertes por choque), se puede detectar si ciertas configuraciones viales —como avenidas anchas, vías de doble sentido o callejones— presentan mayor riesgo de muerte. Esta información es clave para que el gobierno de Chicago rediseñe o intervenga prioritariamente esos tipos de vías con medidas como reductores de velocidad, semáforos o mejor iluminación, con el objetivo de salvar vidas.
+
 **Resultados:**
 
 
@@ -392,6 +394,7 @@ Este análisis permite identificar qué tipos de calles tienen una mayor proporc
 
 ## Analisis dias del anio con mas accidentes
 Este análisis identifica los días y meses con el mayor número de accidentes en Chicago a lo largo de los años. Utilizando funciones de fecha, se extrajeron los días y meses de los choques, se contaron los accidentes por cada día y mes, y se ordenaron los resultados para encontrar el período con más incidentes. Este análisis es útil para que las autoridades puedan enfocar sus esfuerzos de seguridad vial en los días y meses con mayor riesgo, como aumentar el patrullaje o implementar campañas preventivas.
+
 **Resultados:**
 
 
