@@ -3,7 +3,7 @@ CREATE SCHEMA raw;
 
 DROP TABLE IF EXISTS raw.vehicles CASCADE;
 CREATE TABLE raw.vehicles (
-	crash_unit_id BIGINT,
+	crash_unit_id BIGINT PRIMARY KEY,
 	crash_record_id TEXT,
 	crash_date TIMESTAMP,
 	unit_no BIGINT,
@@ -80,7 +80,7 @@ CREATE TABLE raw.vehicles (
 
 DROP TABLE IF EXISTS raw.people CASCADE;
 CREATE TABLE raw.people (
-	person_id TEXT,
+	person_id TEXT PRIMARY KEY,
 	person_type TEXT,
 	crash_record_id TEXT,
 	vehicle_id BIGINT,
@@ -115,7 +115,7 @@ CREATE TABLE raw.people (
 
 DROP TABLE IF EXISTS raw.crashes CASCADE;
 CREATE TABLE raw.crashes(
-	crash_record_id TEXT,
+	crash_record_id TEXT PRIMARY KEY,
 	crash_date_est_i TEXT, --No encontré datos en búsqueda preliminar del archivo
 	crash_date TIMESTAMP,
 	posted_speed_limit BIGINT,
