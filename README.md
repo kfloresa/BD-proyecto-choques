@@ -72,7 +72,7 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 | Crashes   | Num_units                 | Numero de autos involucrados           | Numerico            |
 | Crashes   | Injuries_total            | Numero de heridas totales              | Numerico            |
 | Crashes   | Injuries_fatal            | Numero de heridas fatales              | Numerico            |
-| Crashes   | Crash_type                | TRUE=grave, FALSE=leve                 | Categorico/booleano |
+| Crashes   | Crash_type                |Con heridas / Si requirio grua          | Categorico/booleano |
 | Crashes   | Weather_condition         | Clima                                  | Categorico/booleano |
 | Crashes   | lighting_condition        | Iluminacion                            | Categorico/booleano |
 | Crashes   | Trafficway_type           | Tipo de calle                          | Categorico/booleano |
@@ -463,3 +463,34 @@ Este análisis identifica los días y meses con el mayor número de accidentes e
 
 **Hallazgos:**
 Una posible explicación a la distribución desproporcional hacia los últimos 4 meses del año es el empeoramiento en las condiciones climáticas comenzando a finales de Septiembre como un aumento en la neblina y menor iluminación durante el día, el inicio de la temporada de nevadas y duras condiciones meteorológicas.
+
+
+## Daño por límite de velocidad en la calle
+Este análisis explora cómo el límite de velocidad influye en la gravedad de los daños de los accidentes. Se clasifica el daño en tres niveles: leve (daños de $500 o menos), moderado ($501 a $1,500) y grave (más de $1,500). La consulta agrupa los accidentes por límite de velocidad y evalúa la cantidad de choques en cada categoría de daño.
+
+Los resultados pueden ayudar a identificar si hay una correlación entre los límites de velocidad y la gravedad de los daños, lo que podría ser útil para tomar decisiones sobre ajustes en las políticas de tráfico, como la reducción de límites de velocidad en áreas con altos accidentes graves.
+
+**Resultados:**
+**Hallazgos:**
+
+## Año del vehículo vs severidad del accidente
+Este análisis examina la relación entre el año de fabricación del vehículo y la gravedad de los accidentes en los que está involucrado. Para cada año de vehículo, se calcula el total de accidentes y se clasifica cuántos de ellos fueron graves (definidos como aquellos con lesiones o vehículos remolcados). Se calcula el porcentaje de accidentes graves en función del total de accidentes para cada año.
+
+Los resultados de este análisis permiten observar si los vehículos más nuevos tienden a estar involucrados en accidentes más graves o si hay patrones de riesgo asociados con ciertos años de fabricación. Estos hallazgos pueden ayudar a las autoridades de tránsito a mejorar las regulaciones de seguridad vehicular o impulsar campañas de concienciación sobre vehículos de ciertos años.
+
+**Resultados:**
+**Hallazgos:**
+
+##  Efctividad de la bolsa de aire en proteccion
+Este análisis evalúa la efectividad de las bolsas de aire en la reducción de muertes y lesiones graves en los accidentes de tráfico. Se compara el número de accidentes, muertes y lesiones graves entre los casos donde la bolsa de aire se desplegó y aquellos donde no se desplegó.
+
+Para cada categoría de despliegue de bolsa de aire (airbag_deployed), se calcula:
+
+Tasa de fatalidad: El porcentaje de accidentes con víctimas fatales sobre el total de accidentes.
+
+Tasa de lesiones graves: El porcentaje de accidentes con lesiones graves (incluyendo lesiones incapacitantes o no incapacitantes) sobre el total de accidentes.
+
+El análisis proporciona una visión clara de cómo las bolsas de aire contribuyen a la seguridad de los ocupantes del vehículo en caso de accidente. Un menor porcentaje de fatalidades y lesiones graves en los vehículos con bolsas de aire desplegadas indicaría una mayor efectividad de este sistema de seguridad.
+
+**Resultados:**
+**Hallazgos:**
