@@ -34,6 +34,7 @@ SELECT
     ) AS serious_accident_percentage
 FROM limpieza.crashes
 GROUP BY weather_condition, roadway_surface_cond
+HAVING COUNT(*)>20
 ORDER BY serious_accident_percentage DESC;
 
 
@@ -86,5 +87,22 @@ FROM limpieza.crashes
 WHERE trafficway_type IS NOT NULL
 GROUP BY trafficway_type
 ORDER BY fatality_rate DESC;
+
+-- Dias del año con mas choques
+WITH choques_por_dia_mes AS (
+    SELECT 
+        EXTRACT(MONTH FROM crash_date) AS mes,
+        EXTRACT(DAY FROM crash_date) AS dia,
+        COUNT(*) AS total_choques
+    FROM limpieza.crashes
+    GROUP BY mes, dia
+)
+SELECT
+    mes,
+    dia,
+    total_choques
+FROM choques_por_dia_mes
+ORDER BY total_choques DESC
+LIMIT 1;
 
 
