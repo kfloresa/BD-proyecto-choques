@@ -23,7 +23,6 @@ SELECT
     crash_record_id,
     vehicle_id,
     seat_no,
-    city,
     age,
     airbag_deployed,
     injury_classification
@@ -69,57 +68,7 @@ SET age = ABS(age)
 WHERE age < 0;
 
 
--- 2. Limpieza de ciudades en people
-
-CREATE TABLE limpieza.ciudades_validas (
-    nombre TEXT
-);
-
-\copy limpieza.ciudades_validas(nombre) FROM 'areas_chicagoValidas.csv' WITH (FORMAT CSV, HEADER true); 
-
--- Activamos la extensión fuzzystrmatch, que proporciona funciones para comparar cadenas de texto
--- mediante medidas de similitud como la distancia de Levenshtein.
--- Esta herramienta es esencial para detectar errores ortográficos en los nombres de ciudades
--- y poder corregirlos automáticamente comparando con una lista de nombres válidos.
--- Solo se necesita ejecutar una vez por base de datos.
-
-CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
-
--- a. Reemplazar NULLs o vacíos por 'UNKNOWN'
-UPDATE limpieza.people
-SET city = 'UNKNOWN'
-WHERE city IS NULL OR TRIM(city) = '';
-
--- b. Unificar variantes de 'UNKNOWN' mal escritas
-UPDATE limpieza.people
-SET city = 'UNKNOWN'
-WHERE levenshtein(UPPER(city), 'UNKNOWN') <= 3;
-
--- c. Corregir errores ortográficos comparando con ciudades válidas
--- Solo cambiar si la ciudad actual no está en la tabla de válidas
--- y si hay una ciudad parecida con distancia Levenshtein baja, ignora los espacios
-UPDATE limpieza.people p
-SET city = v.nombre
-FROM limpieza.ciudades_validas v
-WHERE levenshtein(UPPER(TRIM(p.city)), UPPER(TRIM(v.nombre))) <= 4
-  AND TRIM(p.city) IS NOT NULL
-  AND UPPER(TRIM(p.city)) != UPPER(TRIM(v.nombre));
-
--- d. Marcar como 'INDEFINIDA' las ciudades que no coinciden con ninguna válida ni con 'UNKNOWN'
-UPDATE limpieza.people
-SET city = 'INDEFINIDA'
-WHERE city NOT IN (
-    SELECT nombre FROM limpieza.ciudades_validas
-)
-AND levenshtein(UPPER(TRIM(city)), 'UNKNOWN') > 3
-AND NOT EXISTS (
-    SELECT 1
-    FROM limpieza.ciudades_validas v
-    WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 5
-);
-
-
--- 3. Limpieza de airbag_deployed en people
+-- 2. Limpieza de airbag_deployed en people
 -- Reemplazamos los valores nulos en la columna airbag_deployed por 'DEPLOYMENT UNKNOWN'
 
 UPDATE limpieza.people
@@ -127,14 +76,14 @@ SET airbag_deployed = 'DEPLOYMENT UNKNOWN'
 WHERE airbag_deployed IS NULL;
 
 
--- 4. Limpieza de injury_classification en people
+-- 3. Limpieza de injury_classification en people
 -- Reemplazamos los valores NULL en la columna injury_classification por 'UNKNOWN'
 UPDATE limpieza.people
 SET injury_classification = 'UNKNOWN'
 WHERE injury_classification IS NULL;
 
 
--- 5. Limpieza de vehicle_id en people
+-- 4. Limpieza de vehicle_id en people
 -- Reemplazamos los valores NULL en vehicle_id por -1
 -- Esto indica que no se tiene información del vehículo relacionado.
 -- Es preferible a dejar NULL para facilitar agrupaciones y evitar errores en joins.
@@ -144,7 +93,7 @@ SET vehicle_id = -1
 WHERE vehicle_id IS NULL;
 
 
--- 6. Limpieza de seat_no en people
+-- 5. Limpieza de seat_no en people
 -- Reemplazamos los valores NULL en seat_no por -1
 -- Esto representa una posición de asiento desconocida o no registrada.
 -- Usamos -1 porque seat_no es una columna numérica de código, no texto.
