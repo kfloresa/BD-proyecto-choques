@@ -9,12 +9,8 @@ SELECT
     vehicle_id,
     make,
     model,
-    lic_plate_state,
     vehicle_year,
-    travel_direction,
-    towed_i,
-    fire_i,
-    exceed_speed_limit_i
+    towed_i
 FROM raw.vehicles;
 
 
@@ -26,7 +22,6 @@ SELECT
     vehicle_id,
     seat_no,
     city,
-    sex,
     age,
     airbag_deployed,
     injury_classification
@@ -45,11 +40,8 @@ SELECT
     road_defect,
     crash_type,
     damage,
-    date_police_notified,
     prim_contributory_cause,
     sec_contributory_cause,
-    street_no,
-    street_direction,
     street_name,
     num_units,
     injuries_total,
@@ -123,17 +115,8 @@ AND NOT EXISTS (
     WHERE levenshtein(UPPER(TRIM(limpieza.people.city)), UPPER(TRIM(v.nombre))) <= 5
 );
 
--- 3. Limpieza de sexo en people
 
--- Reemplazar valores NULL o vacíos por 'UNKNOWN' en la columna sex
-UPDATE limpieza.people
-SET sex = 'UNKNOWN'
-WHERE sex IS NULL
-   OR TRIM(sex) = '';
-
-
-
--- 4. Limpieza de airbag_deployed en people
+-- 3. Limpieza de airbag_deployed en people
 -- Reemplazamos los valores nulos en la columna airbag_deployed por 'DEPLOYMENT UNKNOWN'
 
 UPDATE limpieza.people
@@ -141,14 +124,14 @@ SET airbag_deployed = 'DEPLOYMENT UNKNOWN'
 WHERE airbag_deployed IS NULL;
 
 
--- 5. Limpieza de injury_classification en people
+-- 4. Limpieza de injury_classification en people
 -- Reemplazamos los valores NULL en la columna injury_classification por 'UNKNOWN'
 UPDATE limpieza.people
 SET injury_classification = 'UNKNOWN'
 WHERE injury_classification IS NULL;
 
 
--- 6. Limpieza de vehicle_id en people
+-- 5. Limpieza de vehicle_id en people
 -- Reemplazamos los valores NULL en vehicle_id por -1
 -- Esto indica que no se tiene información del vehículo relacionado.
 -- Es preferible a dejar NULL para facilitar agrupaciones y evitar errores en joins.
@@ -158,7 +141,7 @@ SET vehicle_id = -1
 WHERE vehicle_id IS NULL;
 
 
--- 7. Limpieza de seat_no en people
+-- 6. Limpieza de seat_no en people
 -- Reemplazamos los valores NULL en seat_no por -1
 -- Esto representa una posición de asiento desconocida o no registrada.
 -- Usamos -1 porque seat_no es una columna numérica de código, no texto.
@@ -197,26 +180,7 @@ SET unit_type = 'UNKNOWN'
 WHERE unit_type IS NULL;
 
 
--- 4. Limpieza de travel_direction
--- Reemplazamos los valores NULL por 'UNKNOWN'
--- para asegurar que todos los registros tengan una categoría válida.
-
-UPDATE limpieza.vehicles
-SET travel_direction = 'UNKNOWN'
-WHERE travel_direction IS NULL OR TRIM(travel_direction) = '';
-
-
-
--- 5. Limpieza de lic_plate_state
--- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
--- para estandarizar los estados que emiten placas.
-
-UPDATE limpieza.vehicles
-SET lic_plate_state = 'UNKNOWN'
-WHERE lic_plate_state IS NULL OR TRIM(lic_plate_state) = '';
-
-
--- 6. Limpieza de model
+-- 4. Limpieza de model
 -- Reemplazamos los valores NULL o vacíos por 'UNKNOWN'
 -- para asegurar que todos los registros tengan información consistente sobre el modelo del vehículo.
 
@@ -225,7 +189,7 @@ SET model = 'UNKNOWN'
 WHERE model IS NULL OR TRIM(model) = '';
 
 
--- 7. Limpieza de make
+-- 5. Limpieza de make
 -- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
 -- para asegurar que todos los registros tengan una marca asignada.
 
@@ -234,31 +198,13 @@ SET make = 'UNKNOWN'
 WHERE make IS NULL OR TRIM(make) = '';
 
 
--- 8. Limpieza de towed_i
+-- 6. Limpieza de towed_i
 -- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
 -- para identificar de forma clara los casos donde no se sabe si el vehículo fue remolcado.
 
 UPDATE limpieza.vehicles
 SET towed_i = 'UNKNOWN'
 WHERE towed_i IS NULL OR TRIM(towed_i) = '';
-
--- 9. Limpieza de fire_i
--- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
--- para marcar explícitamente los casos donde no se sabe si el vehículo se incendió.
-
-UPDATE limpieza.vehicles
-SET fire_i = 'UNKNOWN'
-WHERE fire_i IS NULL OR TRIM(fire_i) = '';
-
-
--- 10. Limpieza de exceed_speed_limit_i
--- Reemplazamos valores NULL o vacíos por 'UNKNOWN'
--- para estandarizar los registros donde no se sabe si se excedió el límite de velocidad.
-
-UPDATE limpieza.vehicles
-SET exceed_speed_limit_i = 'UNKNOWN'
-WHERE exceed_speed_limit_i IS NULL OR TRIM(exceed_speed_limit_i) = '';
-
 
 ------------------------------------------
 --Limpieza de la tabla limpieza.crashes
@@ -301,28 +247,21 @@ UPDATE limpieza.crashes
 SET sec_contributory_cause = 'UNDETERMINED/NOT APPLICABLE'
 WHERE sec_contributory_cause IN ('UNABLE TO DETERMINE', 'NOT APPLICABLE');
 
-
--- 7. Limpieza de street_direction
--- Reemplazamos valores NULL o vacíos por 'UNKNOWN' para indicar cuando no se tiene dirección registrada de la calle.
-UPDATE limpieza.crashes
-SET street_direction = 'UNKNOWN'
-WHERE street_direction IS NULL OR TRIM(street_direction) = '';
-
--- 8. Limpieza de street_name
+-- 7. Limpieza de street_name
 -- Reemplazamos valores NULL o vacíos por 'UNKNOWN' para estandarizar registros sin nombre de calle disponible.
 UPDATE limpieza.crashes
 SET street_name = 'UNKNOWN'
 WHERE street_name IS NULL OR TRIM(street_name) = '';
 
 
--- 9. Limpieza de injuries_total
+-- 8. Limpieza de injuries_total
 -- Reemplazar valores NULL por 0 en la columna injuries_total, permite análisis más fáciles (promedios, sumas, etc.) sin ignorar esos casos
 
 UPDATE limpieza.crashes
 SET injuries_total = 0
 WHERE injuries_total IS NULL;
 
--- 10. Limpieza de injuries_fatal
+-- 9. Limpieza de injuries_fatal
 -- Reemplazar valores NULL por 0 en la columna injuries_fatal, esto permite análisis sin problemas por valores faltantes
 UPDATE limpieza.crashes
 SET injuries_fatal = 0
