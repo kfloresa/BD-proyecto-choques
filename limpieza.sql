@@ -158,6 +158,16 @@ UPDATE limpieza.vehicles
 SET towed_i = 'UNKNOWN'
 WHERE towed_i IS NULL OR TRIM(towed_i) = '';
 
+
+-- 7. Limpieza de vehicle_id en vehicle
+-- Reemplazamos los valores NULL en vehicle_id por -1
+-- Esto indica que no se tiene información del vehículo relacionado.
+-- Es preferible a dejar NULL para facilitar agrupaciones y evitar errores en joins.
+
+UPDATE limpieza.vehicle
+SET vehicle_id = -1
+WHERE vehicle_id IS NULL;
+
 ------------------------------------------
 --Limpieza de la tabla limpieza.crashes
 
