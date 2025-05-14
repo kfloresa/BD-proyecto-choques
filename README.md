@@ -19,18 +19,18 @@
 
  ### Pasos a seguir para la carga de datos.
  1. Abrir una terminal e ingresar a 'psql':
-'''
+```
 psql -U usuario
-'''
+```
  2. Crear la base de datos y conectarse a ella.
-'''
+```
 CREATE DATABASE choques;
 \c choques
-'''
+```
  3. Ejecutar el script de carga.
-'''
+```
 \i carga.sql
-'''
+```
 
 # Explicación general de los datos.
 Este conjunto de datos contiene información detallada sobre los accidentes de tráfico ocurridos en Chicago. Está compuesto por tres archivos principales que registran diferentes aspectos del mismo evento:
