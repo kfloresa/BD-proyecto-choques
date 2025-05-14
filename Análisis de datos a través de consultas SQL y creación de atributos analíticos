@@ -3,7 +3,7 @@
 --Gravedad de heridas por grupo de edad
 SELECT
     CASE --tuvimos que investigar como se hacia un switch
-        WHEN age BETWEEN 0 AND 17 THEN '0-17'
+        WHEN age BETWEEN 1 AND 17 THEN '0-17'
         WHEN age BETWEEN 18 AND 30 THEN '18-30'
         WHEN age BETWEEN 31 AND 50 THEN '31-50'
         WHEN age BETWEEN 51 AND 70 THEN '51-70'
