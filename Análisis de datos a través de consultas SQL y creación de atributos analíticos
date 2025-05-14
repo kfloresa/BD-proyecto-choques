@@ -1,8 +1,8 @@
 -- Análisis de datos a través de consultas SQL y creación de atributos analíticos
 
---Gravedad de heridas por grupo de edad
+-- Gravedad de heridas por grupo de edad
 SELECT
-    CASE --tuvimos que investigar como se hacia un switch
+    CASE
         WHEN age BETWEEN 1 AND 17 THEN '0-17'
         WHEN age BETWEEN 18 AND 30 THEN '18-30'
         WHEN age BETWEEN 31 AND 50 THEN '31-50'
@@ -13,51 +13,36 @@ SELECT
     COUNT(*) AS total_personas,
     SUM(CASE WHEN injury_classification IN ('FATAL', 'INCAPACITATING INJURY') THEN 1 ELSE 0 END) AS heridas_graves,
     ROUND(100.0 * SUM(CASE WHEN injury_classification IN ('FATAL', 'INCAPACITATING INJURY') THEN 1 ELSE 0 END) / COUNT(*), 2) AS porcentaje_graves
-FROM limpieza.people
+FROM people
 GROUP BY grupo_edad
 ORDER BY porcentaje_graves DESC;
 
---Relación entre Condición Climática y Superficie de la Carretera
 -- Relación entre Condición Climática y Superficie de la Carretera
 SELECT
     weather_condition,
     roadway_surface_cond,
     COUNT(*) AS total_accidents,
-    SUM(CASE 
-            WHEN is_severe THEN 1 
-            ELSE 0 
-        END) AS serious_accidents,
-    ROUND(
-        (SUM(CASE 
-                WHEN is_severe THEN 1 
-                ELSE 0 
-            END) * 100.0) / COUNT(*), 2
-    ) AS serious_accident_percentage
-FROM limpieza.crashes
+    SUM(CASE WHEN is_severe THEN 1 ELSE 0 END) AS serious_accidents,
+    ROUND((SUM(CASE WHEN is_severe THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 2) AS serious_accident_percentage
+FROM crashes
 GROUP BY weather_condition, roadway_surface_cond
 HAVING COUNT(*) > 20
 ORDER BY serious_accident_percentage DESC;
-
-
 
 -- Marca del vehículo y gravedad de los accidentes 
 SELECT
     vehicles.make AS marca,
     COUNT(*) AS total_accidentes,
     SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) AS accidentes_graves,
-    ROUND(
-        100.0 * SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) / COUNT(*),
-        2
-    ) AS porcentaje_graves
-FROM limpieza.vehicles 
-JOIN limpieza.crashes ON vehicles.crash_record_id = crashes.crash_record_id
+    ROUND(100.0 * SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) / COUNT(*), 2) AS porcentaje_graves
+FROM vehicles
+JOIN crashes ON vehicles.crash_record_id = crashes.crash_record_id
 WHERE vehicles.make IS NOT NULL 
 GROUP BY vehicles.make
 HAVING COUNT(*) > 1000
 ORDER BY porcentaje_graves DESC;
 
-
--- Análisis de la gravedad de accidentes por hora del día y día de la semana
+-- Gravedad de accidentes por hora del día y día de la semana
 SELECT
     EXTRACT(DOW FROM crash_date) AS day_of_week,
     EXTRACT(HOUR FROM crash_date) AS hour_of_day,
@@ -66,38 +51,37 @@ SELECT
     SUM(injuries_total) AS total_injuries,
     ROUND(100.0 * SUM(injuries_fatal) / NULLIF(COUNT(*), 0), 2) AS fatality_rate_percent,
     ROUND(100.0 * SUM(injuries_total) / NULLIF(COUNT(*), 0), 2) AS injury_rate_percent
-FROM limpieza.crashes
+FROM crashes
 WHERE crash_date IS NOT NULL
 GROUP BY day_of_week, hour_of_day
 ORDER BY total_fatalities DESC, total_injuries DESC;
 
-
--- Las 10 calles con mas accidentes
+-- Las 10 calles con más accidentes
 SELECT street_name, COUNT(*) AS total_crashes
-FROM limpieza.crashes
+FROM crashes
 GROUP BY street_name
 ORDER BY total_crashes DESC
 LIMIT 10;
 
--- Analisis tipo de calles mas peligrosas
+-- Análisis tipo de calles más peligrosas
 SELECT 
   trafficway_type,
   COUNT(*) AS total_crashes,
   SUM(injuries_total) AS total_injuries,
   SUM(injuries_fatal) AS total_fatalities,
   ROUND(SUM(injuries_fatal) * 1.0 / COUNT(*), 3) AS fatality_rate
-FROM limpieza.crashes
+FROM crashes
 WHERE trafficway_type IS NOT NULL
 GROUP BY trafficway_type
 ORDER BY fatality_rate DESC;
 
--- Dias del año con mas choques
+-- Días del año con más choques
 WITH choques_por_dia_mes AS (
     SELECT 
         EXTRACT(MONTH FROM crash_date) AS mes,
         EXTRACT(DAY FROM crash_date) AS dia,
         COUNT(*) AS total_choques
-    FROM limpieza.crashes
+    FROM crashes
     GROUP BY mes, dia
 )
 SELECT
@@ -114,32 +98,27 @@ SELECT
     COUNT(*) AS total_choques,
     SUM(CASE WHEN damage = 'OVER $1,500' THEN 1 ELSE 0 END) AS choques_graves,
     ROUND(100.0 * SUM(CASE WHEN damage = 'OVER $1,500' THEN 1 ELSE 0 END) / COUNT(*), 2) AS porcentaje_graves
-FROM limpieza.crashes
+FROM crashes
 WHERE posted_speed_limit IS NOT NULL AND damage IS NOT NULL
 GROUP BY posted_speed_limit
 HAVING COUNT(*) > 20
 ORDER BY porcentaje_graves DESC;
-
 
 -- Año del vehículo vs severidad del accidente
 SELECT 
     vehicles.vehicle_year,
     COUNT(*) AS total_accidentes,
     SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) AS accidentes_graves,
-    ROUND(
-        100.0 * SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) / COUNT(*), 
-        2
-    ) AS porcentaje_graves
-FROM limpieza.vehicles
-JOIN limpieza.crashes 
-    ON vehicles.crash_record_id = crashes.crash_record_id
+    ROUND(100.0 * SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) / COUNT(*), 2) AS porcentaje_graves
+FROM vehicles
+JOIN crashes ON vehicles.crash_record_id = crashes.crash_record_id
 WHERE vehicles.vehicle_year IS NOT NULL 
   AND vehicles.vehicle_year BETWEEN 1 AND EXTRACT(YEAR FROM CURRENT_DATE)
 GROUP BY vehicles.vehicle_year
 HAVING COUNT(*) > 50
 ORDER BY porcentaje_graves DESC;
 
--- Efctividad de la bolsa de aire en proteccion
+-- Efectividad de la bolsa de aire en protección
 SELECT
     airbag_deployed,
     total_accidents,
@@ -153,19 +132,20 @@ FROM (
         COUNT(*) AS total_accidents,
         SUM(CASE WHEN injury_classification = 'FATAL' THEN 1 ELSE 0 END) AS fatalities,
         SUM(CASE WHEN injury_classification IN ('INCAPACITATING INJURY', 'NON-INCAPACITATING INJURY') THEN 1 ELSE 0 END) AS serious_injuries
-    FROM limpieza.people
+    FROM people
     WHERE airbag_deployed IS NOT NULL
     GROUP BY airbag_deployed
 ) AS subconsulta
 ORDER BY serious_injury_rate DESC;
 
---Dia del anio con menor promedio de edad de personas involucradas en un choque
-SELECT AVG(age) AS prom_edad,
-       EXTRACT(MONTH FROM crash_date) AS mes,
-       EXTRACT(DAY FROM crash_date) AS dia
-FROM limpieza.people
-JOIN limpieza.vehicles ON limpieza.people.vehicle_id = limpieza.vehicles.vehicle_id
-JOIN limpieza.crashes ON limpieza.crashes.crash_record_id = limpieza.vehicles.crash_record_id
-WHERE age >0
+-- Día del año con menor promedio de edad de personas involucradas en choques
+SELECT 
+    AVG(age) AS prom_edad,
+    EXTRACT(MONTH FROM crash_date) AS mes,
+    EXTRACT(DAY FROM crash_date) AS dia
+FROM people
+JOIN vehicles ON people.vehicle_id = vehicles.vehicle_id
+JOIN crashes ON crashes.crash_record_id = vehicles.crash_record_id
+WHERE age > 0
 GROUP BY EXTRACT(MONTH FROM crash_date), EXTRACT(DAY FROM crash_date)
-ORDER BY prom_edad ;
+ORDER BY prom_edad;
