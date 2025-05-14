@@ -341,7 +341,14 @@ Se realizó un análisis para entender cómo la gravedad de las heridas en accid
 La consulta SQL utilizada agrupa a las personas según rangos de edad predefinidos, y calcula cuántas personas hay en cada grupo y cuántas de ellas sufrieron heridas graves (es decir, clasificadas como FATAL o INCAPACITATING INJURY).
 
 **Resultados:**
-
+| Grupo de Edad  | No. Total de Personas | No. de Heridos de Gravedad | % de Heridos son de Gravedad |
+| -------------- | --------------------- | -------------------------- | ---------------------------- |
+| 1-17 	| 90370 	| 1336	| 1.48 | 
+| 18-30	| 445416 |	5633 |	1.26 |
+| 31-50 |	525571 |	5789 |	1.10 |
+| 51-70 |	294154 |	3792 |	1.29 |
+| 71+	  | 52127  |	912  |	1.75 |
+| Edad desconocida	| 599373 |	1670 |	0.28 |
 
 
 **Hallazgos:**
@@ -352,6 +359,14 @@ El grupo de edad más afectado por accidentes graves es el de 71+, con un porcen
 Este análisis tuvo como objetivo evaluar el impacto de las condiciones climáticas y del estado de la superficie vial en la gravedad de los accidentes automovilísticos en la ciudad de Chicago. Para lograrlo, se utilizaron los atributos weather_condition, roadway_surface_cond y crash_type, que clasifica los incidentes en leves (FALSE) o graves (TRUE). Se agruparon todas las combinaciones posibles de clima y superficie, contando el número total de choques y calculando la proporción de ellos que fueron graves. Este enfoque permite no solo identificar cuáles son las condiciones más comunes, sino también detectar aquellas combinaciones que presentan un mayor riesgo de causar accidentes con consecuencias serias. Se filtraron combinaciones con al menos 20 accidentes para asegurar relevancia estadística.
 
 **Resultados:**
+| Condición Climática | Estado del Pavimento | No. Total de Accidentes | No. Accidentes de Alta Severidad | % de Accidentes que son de Alta Severidad | 
+| - | - | - | - | - |
+| FREEZING RAIN/DRIZZLE | 	SNOW OR SLUSH | 207 |	104 |	50.24 |
+| BLOWING SNOW |	WET |	120 |	55 |	45.83 |
+|SEVERE CROSS WIND GATE |	WET |	38 |	17 |	44.74 |
+| FREEZING RAIN/DRIZZLE |	WET |	1251 |	550 |	43.96 |
+| SLEET/HAIL |	WET |	411 |	175 |	42.58 |
+
 
 
 **Hallazgos:**
@@ -361,6 +376,13 @@ Los resultados indican que ciertas combinaciones de clima extremo y superficies 
 ##  Marca del vehículo y gravedad de los accidentes 
 En este análisis se estudió la relación entre la marca del vehículo y la gravedad de los accidentes en los que estuvo involucrado. Para ello, se agruparon los registros por marca (make) y se calcularon dos métricas principales: el número total de accidentes y la proporción de aquellos considerados graves. Se excluyeron las marcas con menos de 1000 registros para evitar sesgos y se eliminaron valores desconocidos.
 **Resultados:**
+| Fabricante | No. Total de Accidentes | No. Accidentes de Gravedad  | % de Accidentes son de Gravedad |
+| - | - | - | - |
+| HARLEY-DAVIDSON |	1135 |	672 |	59.21 |
+| SUZUKI |	2442 |	954 |	39.07 |
+| SATURN |	6893 |	2449 |	35.53 |
+| PONTIAC |	15988 |	5564 |	34.80 |
+| OLDSMOBILE |	2661 |	896 |	33.67 |
 
 
 **Hallazgos:**
@@ -371,7 +393,13 @@ En este análisis se estudió la relación entre la marca del vehículo y la gra
 Este análisis busca identificar las horas del día y los días de la semana con mayor gravedad en los accidentes de tráfico. Para ello, se agruparon los accidentes según el día de la semana y la hora del día, y se calculó el número total de accidentes, así como el total de heridos y fallecidos. También se calcularon los porcentajes de accidentes con víctimas fatales y con heridos para cada combinación de día y hora. Los resultados obtenidos revelan qué momentos del día y qué días de la semana tienen una mayor tasa de accidentes graves, permitiendo a las autoridades de Chicago identificar patrones críticos. Estos hallazgos son clave para diseñar estrategias de prevención, como la implementación de controles de tráfico en horas específicas y el refuerzo de las medidas de seguridad vial durante los días y horas de mayor riesgo.
 
 **Resultados:**
-
+| Día | Hora | No. Total de Accidentes | No. Total de Fallecimientos | No. Total de Lesionados | % de Fatalidad | % de Lesión |
+| - | - | - | - | - | - | - |
+| 0 |	4 |	3078 |	23 |	840 |	0.75 |	27.29 |
+| 0 |	2 | 4527 |	22 |	1320 |	0.49 |	29.16 |
+| 0 |	1 |	4962 |	21 |	1314 |	0.42 |	26.48 |
+| 6 |	23 |	5671 |	20 |	1345 |	0.35 |	23.72 |
+| 0 |	3 |	4313 |	18 |	1257 |	0.42 |	29.14 |
 
 **Hallazgos:**
 Los resultados muestran que las primeras horas de la madrugada del domingo (día 0) concentran los mayores porcentajes de fatalidad y lesión o los sabados (dia 6) a la media noche, lo cual puede estar asociado al consumo de alcohol, fatiga o menor supervisión vial. Esta información es útil para enfocar campañas preventivas, operativos viales y ajustes en los servicios de emergencia durante horarios críticos.
@@ -381,62 +409,57 @@ Los resultados muestran que las primeras horas de la madrugada del domingo (día
 Este análisis identifica las 10 calles con mayor cantidad de choques registrados. Permite detectar zonas de alto riesgo vial donde el gobierno de Chicago puede enfocar campañas de prevención, mejorar señalización o rediseñar infraestructura urbana para reducir la siniestralidad.
 
 **Resultados:**
-
+| Nombre de la Calle | No. Total de Accidentes | 
+| - | - |
+| WESTERN AVE	| 24995 |
+| PULASKI RD |	22049 |
+| CICERO AVE |	20574 |
+| ASHLAND AVE | 19892 |
+| HALSTED ST |	17654 |
+| KEDZIE AVE |	15954 |
+| MICHIGAN AVE |	11706 |
+| NORTH AVE |	10540 |
+| STATE ST |	10353 |
+| CLARK ST |	9819 |
 
 
 **Hallazgos:**
+
 
 ## Analisis tipo de calles mas peligrosas
 Este análisis permite identificar qué tipos de calles tienen una mayor proporción de choques fatales. Al calcular la tasa de fatalidad (número de muertes por choque), se puede detectar si ciertas configuraciones viales —como avenidas anchas, vías de doble sentido o callejones— presentan mayor riesgo de muerte. Esta información es clave para que el gobierno de Chicago rediseñe o intervenga prioritariamente esos tipos de vías con medidas como reductores de velocidad, semáforos o mejor iluminación, con el objetivo de salvar vidas.
 
 **Resultados:**
+| Tipo de Calle | No. Total de Accidentes | No. Total de Lesionados | No. Total de Fallecimientos | % de Fatalidad |
+| - | - | - | - | - |
+| L-INTERSECTION |	190	| 60	| 2	| 0.011 |
+| NOT REPORTED |	702 |	365 |	3 |	0.004 |
+| DIVIDED - W/MEDIAN BARRIER |	51612 |	13820 |	139 |	0.003 |
+| FIVE POINT, OR MORE |	1418 |	592 |	3 |	0.002 | 
+| UNKNOWN INTERSECTION TYPE |	2792 |	1066 |	6 |	0.002 |
 
 
 
 **Hallazgos:**
+Las intersecciones en L presentan la mayor tasa de fatalidad en sus accidentes, esto posiblemente atribuido a su diseño pues fácilmente permite las colisiones frontales y laterales, además de ser el punto de encuentro entre 2 calles o avenidas, donde conductores deben analizar y prestar extrema atención su entorno y un mínimo descuido puede ocasionar un accidente a gran velocidad.
 
-## Analisis dias del año con mas accidentes
+## Analisis dias del anio con mas accidentes
 Este análisis identifica los días y meses con el mayor número de accidentes en Chicago a lo largo de los años. Utilizando funciones de fecha, se extrajeron los días y meses de los choques, se contaron los accidentes por cada día y mes, y se ordenaron los resultados para encontrar el período con más incidentes. Este análisis es útil para que las autoridades puedan enfocar sus esfuerzos de seguridad vial en los días y meses con mayor riesgo, como aumentar el patrullaje o implementar campañas preventivas.
 
 **Resultados:**
-
-
-
-**Hallazgos:**
-
-## Daño por límite de velocidad
-Este análisis explora cómo el límite de velocidad influye en la gravedad de los daños de los accidentes. Se clasifica el daño en tres niveles: leve (daños de $500 o menos), moderado ($501 a $1,500) y grave (más de $1,500). La consulta agrupa los accidentes por límite de velocidad y evalúa la cantidad de choques en cada categoría de daño. Los resultados pueden ayudar a identificar si hay una correlación entre los límites de velocidad y la gravedad de los daños, lo que podría ser útil para tomar decisiones sobre ajustes en las políticas de tráfico, como la reducción de límites de velocidad en áreas con altos accidentes graves.
-
-
-**Resultados:**
-
-
-
-**Hallazgos:**
-## Año del vehículo vs severidad del accidente
-Este análisis examina la relación entre el año de fabricación del vehículo y la gravedad de los accidentes en los que está involucrado. Para cada año de vehículo, se calcula el total de accidentes y se clasifica cuántos de ellos fueron graves (definidos como aquellos con lesiones o vehículos remolcados). Se calcula el porcentaje de accidentes graves en función del total de accidentes para cada año.
-
-Los resultados de este análisis permiten observar si los vehículos más nuevos tienden a estar involucrados en accidentes más graves o si hay patrones de riesgo asociados con ciertos años de fabricación. Estos hallazgos pueden ayudar a las autoridades de tránsito a mejorar las regulaciones de seguridad vehicular o impulsar campañas de concienciación sobre vehículos de ciertos años.
-
-**Resultados:**
-
+| Mes | Día | No. Total de Accidentes | 
+| - | - | - |
+| 10 |	31 |	3056 |
+| 9 |	16 |	3053 |
+| 10 |	11 |	3036 |
+| 10 |	25 |	2981 | 
+| 10 |	30 |	2967 |
+| 11 |	1 |	2943 |
+| 10 |	23 |	2937 |
+| 10 |	26 |	2937 |
+| 12 |	16 |	2934 |
+| 12 |	14 |	2927 |
 
 
 **Hallazgos:**
-## Efctividad de la bolsa de aire en proteccion
-Este análisis evalúa la efectividad de las bolsas de aire en la reducción de muertes y lesiones graves en los accidentes de tráfico. Se compara el número de accidentes, muertes y lesiones graves entre los casos donde la bolsa de aire se desplegó y aquellos donde no se desplegó.
-
-Para cada categoría de despliegue de bolsa de aire (airbag_deployed), se calcula:
-
-Tasa de fatalidad: El porcentaje de accidentes con víctimas fatales sobre el total de accidentes.
-
-Tasa de lesiones graves: El porcentaje de accidentes con lesiones graves (incluyendo lesiones incapacitantes o no incapacitantes) sobre el total de accidentes.
-
-El análisis proporciona una visión clara de cómo las bolsas de aire contribuyen a la seguridad de los ocupantes del vehículo en caso de accidente. Un menor porcentaje de fatalidades y lesiones graves en los vehículos con bolsas de aire desplegadas indicaría una mayor efectividad de este sistema de seguridad.
-
-**Resultados:**
-
-
-
-**Hallazgos:**
-
+Una posible explicación a la distribución desproporcional hacia los últimos 4 meses del año es el empeoramiento en las condiciones climáticas comenzando a finales de Septiembre como un aumento en la neblina y menor iluminación durante el día, el inicio de la temporada de nevadas y duras condiciones meteorológicas.
