@@ -24,12 +24,12 @@ SELECT
     roadway_surface_cond,
     COUNT(*) AS total_accidents,
     SUM(CASE 
-            WHEN is_sever THEN 1 
+            WHEN is_severe THEN 1 
             ELSE 0 
         END) AS serious_accidents,
     ROUND(
         (SUM(CASE 
-                WHEN is_sever THEN 1 
+                WHEN is_severe THEN 1 
                 ELSE 0 
             END) * 100.0) / COUNT(*), 2
     ) AS serious_accident_percentage
@@ -44,9 +44,9 @@ ORDER BY serious_accident_percentage DESC;
 SELECT
     vehicles.make AS marca,
     COUNT(*) AS total_accidentes,
-    SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) AS accidentes_graves,
+    SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) AS accidentes_graves,
     ROUND(
-        100.0 * SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) / COUNT(*),
+        100.0 * SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) / COUNT(*),
         2
     ) AS porcentaje_graves
 FROM limpieza.vehicles 
@@ -127,9 +127,9 @@ ORDER BY posted_speed_limit, nivel_danho;
 SELECT 
     vehicles.vehicle_year,
     COUNT(*) AS total_accidentes,
-    SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) AS accidentes_graves,
+    SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) AS accidentes_graves,
     ROUND(
-        100.0 * SUM(CASE WHEN crashes.is_sever THEN 1 ELSE 0 END) / COUNT(*), 
+        100.0 * SUM(CASE WHEN crashes.is_severe THEN 1 ELSE 0 END) / COUNT(*), 
         2
     ) AS porcentaje_graves
 FROM limpieza.vehicles
