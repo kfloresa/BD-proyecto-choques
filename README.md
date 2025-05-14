@@ -413,6 +413,7 @@ Este análisis identifica las 10 calles con mayor cantidad de choques registrado
 
 
 **Hallazgos:**
+Las 10 calles con más accidentes en Chicago son vías muy transitadas como Western Ave, Pulaski Rd y Cicero Ave. Estos resultados sugieren que la alta densidad vehicular y la posible falta de infraestructura adecuada, señalización o control de tránsito pueden estar contribuyendo significativamente al número de choques en estas zonas. Con esta información, se pueden enfocar recursos en intervenciones específicas: rediseñar intersecciones peligrosas, instalar semáforos inteligentes, mejorar la señalización, o implementar operativos de control de velocidad. Estas acciones pueden reducir los accidentes y salvar vidas.
 
 
 ## Analisis tipo de calles mas peligrosas
@@ -432,7 +433,7 @@ Este análisis permite identificar qué tipos de calles tienen una mayor proporc
 **Hallazgos:**
 Las intersecciones en L presentan la mayor tasa de fatalidad en sus accidentes, esto posiblemente atribuido a su diseño pues fácilmente permite las colisiones frontales y laterales, además de ser el punto de encuentro entre 2 calles o avenidas, donde conductores deben analizar y prestar extrema atención su entorno y un mínimo descuido puede ocasionar un accidente a gran velocidad.
 
-## Analisis dias del anio con mas accidentes
+## Analisis dias del año con mas accidentes
 Este análisis identifica los días y meses con el mayor número de accidentes en Chicago a lo largo de los años. Utilizando funciones de fecha, se extrajeron los días y meses de los choques, se contaron los accidentes por cada día y mes, y se ordenaron los resultados para encontrar el período con más incidentes. Este análisis es útil para que las autoridades puedan enfocar sus esfuerzos de seguridad vial en los días y meses con mayor riesgo, como aumentar el patrullaje o implementar campañas preventivas.
 
 **Resultados:**
@@ -451,16 +452,22 @@ Este análisis identifica los días y meses con el mayor número de accidentes e
 
 
 **Hallazgos:**
-Una posible explicación a la distribución desproporcional hacia los últimos 4 meses del año es el empeoramiento en las condiciones climáticas comenzando a finales de Septiembre como un aumento en la neblina y menor iluminación durante el día, el inicio de la temporada de nevadas y duras condiciones meteorológicas.
-
+Los datos muestran una concentración significativa de accidentes en los meses de octubre, noviembre y diciembre, especialmente entre los días 11 al 31 de octubre. Las fechas con mayor número de accidentes no coinciden necesariamente con festivos nacionales, lo que sugiere que otros factores como el clima otoñal, menor visibilidad y condiciones de la carretera podrían estar influyendo. Además, varios días cercanos entre sí indican posibles patrones semanales o estacionales de riesgo elevado. Permite al gobierno enfocar recursos y campañas preventivas en fechas críticas, mejorar señalización e infraestructura y aplicar medidas de control para reducir accidentes.
 
 ## Daño por límite de velocidad en la calle
-Este análisis explora cómo el límite de velocidad influye en la gravedad de los daños de los accidentes. Se clasifica el daño en tres niveles: leve (daños de $500 o menos), moderado ($501 a $1,500) y grave (más de $1,500). La consulta agrupa los accidentes por límite de velocidad y evalúa la cantidad de choques en cada categoría de daño.
-
-Los resultados pueden ayudar a identificar si hay una correlación entre los límites de velocidad y la gravedad de los daños, lo que podría ser útil para tomar decisiones sobre ajustes en las políticas de tráfico, como la reducción de límites de velocidad en áreas con altos accidentes graves.
+Este análisis identifica los límites de velocidad que presentan una mayor proporción de daños graves en accidentes de tráfico. Se agrupan los choques por velocidad publicada y se calcula el porcentaje de casos con daño superior a $1,500 dólares. Así, podemos detectar a qué velocidades los accidentes tienden a ser más costosos, lo que puede ayudar a orientar medidas de prevención o regulación vial. Se excluyen valores nulos y se filtran límites con baja cantidad de choques para asegurar representatividad.Los resultados pueden ayudar a identificar si hay una correlación entre los límites de velocidad y la gravedad de los daños, lo que podría ser útil para tomar decisiones sobre ajustes en las políticas de tráfico, como la reducción de límites de velocidad en áreas con altos accidentes graves.
 
 **Resultados:**
+| Límite de Velocidad (mph) | Total de Choques | Daños Graves | Porcentaje de Daños Graves (%) |
+|---------------------------|------------------|--------------|-------------------------------|
+| 20                        | 38,256           | 23,364       | 61.07                         |
+| 3                         | 226              | 136          | 60.18                         |
+| 25                        | 58,715           | 34,781       | 59.24                         |
+| 2                         | 31               | 18           | 58.06                         |
+| 15                        | 32,586           | 18,010       | 55.27                         |
+
 **Hallazgos:**
+Los resultados muestran que los límites de velocidad bajos, especialmente entre 2 y 25 mph, presentan un porcentaje notablemente alto de daños graves. Esto podría deberse a que muchos de estos accidentes ocurren en zonas urbanas densas o residenciales, donde aunque la velocidad es baja, la exposición a peatones, ciclistas y obstáculos es mayor. Esto subraya la importancia de estrategias de seguridad vial incluso en áreas de baja velocidad.
 
 ## Año del vehículo vs severidad del accidente
 Este análisis examina la relación entre el año de fabricación del vehículo y la gravedad de los accidentes en los que está involucrado. Para cada año de vehículo, se calcula el total de accidentes y se clasifica cuántos de ellos fueron graves (definidos como aquellos con lesiones o vehículos remolcados). Se calcula el porcentaje de accidentes graves en función del total de accidentes para cada año.
@@ -468,18 +475,52 @@ Este análisis examina la relación entre el año de fabricación del vehículo 
 Los resultados de este análisis permiten observar si los vehículos más nuevos tienden a estar involucrados en accidentes más graves o si hay patrones de riesgo asociados con ciertos años de fabricación. Estos hallazgos pueden ayudar a las autoridades de tránsito a mejorar las regulaciones de seguridad vehicular o impulsar campañas de concienciación sobre vehículos de ciertos años.
 
 **Resultados:**
+| Año del Vehículo | Total de Accidentes | Accidentes Graves | Porcentaje de Accidentes Graves (%) |
+|------------------|---------------------|--------------------|--------------------------------------|
+| 1980             | 63                  | 27                 | 42.86                                |
+| 1979             | 70                  | 27                 | 38.57                                |
+| 1978             | 81                  | 30                 | 37.04                                |
+| 1970             | 53                  | 19                 | 35.85                                |
+| 1982             | 78                  | 27                 | 34.62                                |
+
+
 **Hallazgos:**
+Los vehículos fabricados entre 1970 y 1982 muestran los porcentajes más altos de accidentes graves, lo que indica una menor capacidad de protección en choques. Para Chicago, este hallazgo puede guiar políticas de seguridad vial más efectivas, como:
+
+* **Incentivar el retiro de vehículos antiguos**, mediante subsidios o programas de recambio.
+* **Dirigir campañas de concientización** hacia conductores con autos más viejos.
+* **Reforzar inspecciones vehiculares** que aseguren condiciones mínimas de seguridad.
+
+Esto puede reducir la severidad de los accidentes y mejorar la seguridad general en la ciudad.
+
+
 
 ##  Efctividad de la bolsa de aire en proteccion
 Este análisis evalúa la efectividad de las bolsas de aire en la reducción de muertes y lesiones graves en los accidentes de tráfico. Se compara el número de accidentes, muertes y lesiones graves entre los casos donde la bolsa de aire se desplegó y aquellos donde no se desplegó.
 
 Para cada categoría de despliegue de bolsa de aire (airbag_deployed), se calcula:
-
 Tasa de fatalidad: El porcentaje de accidentes con víctimas fatales sobre el total de accidentes.
-
 Tasa de lesiones graves: El porcentaje de accidentes con lesiones graves (incluyendo lesiones incapacitantes o no incapacitantes) sobre el total de accidentes.
 
 El análisis proporciona una visión clara de cómo las bolsas de aire contribuyen a la seguridad de los ocupantes del vehículo en caso de accidente. Un menor porcentaje de fatalidades y lesiones graves en los vehículos con bolsas de aire desplegadas indicaría una mayor efectividad de este sistema de seguridad.
 
 **Resultados:**
+### Efectividad de la bolsa de aire
+
+| Tipo de despliegue                         | Total accidentes | Fatalidades | Lesiones graves | % Fatalidad | % Lesiones graves |
+|-------------------------------------------|------------------|-------------|------------------|-------------|--------------------|
+| DEPLOYED, COMBINATION                     | 52,015           | 244         | 2,952            | 0.47%       | 5.68%              |
+| DEPLOYED OTHER (KNEE, AIR, BELT, ETC.)    | 984              | 2           | 54               | 0.20%       | 5.49%              |
+| DEPLOYED, FRONT                           | 62,454           | 150         | 2,503            | 0.24%       | 4.01%              |
+| DEPLOYED, SIDE                            | 18,234           | 20          | 483              | 0.11%       | 2.65%              |
+| NOT APPLICABLE                            | 432,997          | 137         | 2,370            | 0.03%       | 0.55%              |
+| DID NOT DEPLOY                            | 997,514          | 116         | 3,499            | 0.01%       | 0.35%              |
+| DEPLOYMENT UNKNOWN                        | 403,186          | 99          | 953              | 0.02%       | 0.24%              |
+
 **Hallazgos:**
+Los airbags que se despliegan (especialmente los combinados o frontales) están asociados con tasas más altas de lesiones graves que los que no lo hacen, lo que sugiere que estos airbags se activan en choques más severos. Sin embargo, aún en esos escenarios, la presencia de airbags reduce la tasa de fatalidades en comparación con lo que cabría esperar en accidentes de alta severidad.
+
+Para el gobierno de Chicago, esto puede ayudar a:
+Promover el uso de vehículos con airbags modernos y funcionales.
+Identificar qué tipos de despliegue son más efectivos y seguros.
+Diseñar políticas para inspeccionar o retirar vehículos sin sistemas de protección activos.
