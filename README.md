@@ -72,7 +72,7 @@ Los datos se actualizan diariamente con nuevos registros de accidentes reportado
 | Crashes   | Num_units                 | Numero de autos involucrados           | Numerico            |
 | Crashes   | Injuries_total            | Numero de heridas totales              | Numerico            |
 | Crashes   | Injuries_fatal            | Numero de heridas fatales              | Numerico            |
-| Crashes   | Crash_type                |Con heridas / Si requirio grua          | Categorico/booleano |
+| Crashes   | is_sever                  |TRUE=grave FALSE=leve                   | Categorico/booleano |
 | Crashes   | Weather_condition         | Clima                                  | Categorico/booleano |
 | Crashes   | lighting_condition        | Iluminacion                            | Categorico/booleano |
 | Crashes   | Trafficway_type           | Tipo de calle                          | Categorico/booleano |
