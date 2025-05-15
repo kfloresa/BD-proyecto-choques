@@ -561,17 +561,17 @@ Promover el uso de vehículos con airbags modernos y funcionales.
 Identificar qué tipos de despliegue son más efectivos y seguros.
 Diseñar políticas para inspeccionar o retirar vehículos sin sistemas de protección activos.
 
-## Dia del añio con menor promedio de edad de personas involucradas en un choque
-Al notar que el dia con mayor número de accidentes era halloween decidimos invstigar que día del año los jovenes y niños estan mas expuestos a sufrir un accidente automovilistico.
+## Día del año con menor promedio de edad de personas involucradas en un choque
+Al notar que el día con mayor número de accidentes era halloween decidimos investigar que día del año los jovenes y niños estan mas expuestos a sufrir un accidente automovilístico.
 
 **Resultados:**
 |Promedio_edad        |mes|dia|
 |---------------------|---|---|
-|34.8984680084109342	 | 7	| 4 |
-|35.7355187778485041	 | 1	| 1 |
-|36.7054704595185996	 | 12| 25|
-|37.0119047619047619	 | 5	| 19|
-|37.0842774247029566	 | 5	| 20|
+|34.89              	 | 7	| 4 |
+|35.73	               | 1	| 1 |
+|36.70	               | 12| 25|
+|37.01	               | 5	| 19|
+|37.08	               | 5	| 20|
 
 **Hallazgos:**
-Los días con más jovenes involucrados en accidentes fueron el 4 de julio que coincide con el festejo del día de la idependencia en EE.UU, el siguiente día es el festejo de año nuevo, seguido por navidad. Esto nos puede indicar una fuerte relación de los jóvenes y choques debido a festejos. El gobierno de Chicago, con esta información, debería tomar medidas preventivas e informar a los jovenes y niños sobre los riesgos.      
+Los días con más jovenes involucrados en accidentes fueron el 4 de julio que coincide con el festejo del día de la idependencia en EE.UU, el siguiente día es el festejo de año nuevo, seguido por navidad. Esto nos puede indicar una fuerte relación de los jóvenes y choques debido a festejos. El gobierno de Chicago, con esta información, debería tomar medidas preventivas y poner una atención especial a grupos vulnerables durante estas fechas.      
